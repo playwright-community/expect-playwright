@@ -1,5 +1,5 @@
-import toHaveTextContent from './toHaveTextContent'
+import toContainTextContent from './toContainTextContent'
 
 export default {
-  toHaveTextContent
+  toContainTextContent
 }

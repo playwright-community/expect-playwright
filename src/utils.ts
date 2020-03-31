@@ -39,3 +39,5 @@ export const getElement = async (value: ExpectInputType, selector: string): Prom
     wasElement: false
   }
 }
+
+export const quote = (val: string | null) => `'${val}'`
