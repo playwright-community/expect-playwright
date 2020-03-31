@@ -8,9 +8,7 @@ describe("toContainTextContent", () => {
   let page: Page
   let browser: Browser;
   beforeAll(async () => {
-    browser = await playwright.chromium.launch({
-      headless: false
-    })
+    browser = await playwright.chromium.launch()
   })
   afterAll(async () => {
     await browser.close()
