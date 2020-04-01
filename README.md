@@ -74,7 +74,29 @@ describe("GitHub Playwright project", () => {
 })
 ```
 
-## Usage with TypeScript
+## Installation
+
+Via NPM
+
+```txt
+npm install -D expect-playwright
+```
+
+Or Yarn
+
+```txt
+yarn add -D expect-playwright
+```
+
+To activate it in your Jest environment you have to include it like that in your configuration.
+
+```json
+{
+    "setupFilesAfterEnv": ["expect-playwright"]
+}
+```
+
+## TypeScript support
 
 There are typings available. For that just import
 
@@ -82,7 +104,7 @@ There are typings available. For that just import
 import "expect-playwright"
 ```
 
-at the top of your test or include it in your `tsconfig.js`.
+at the top of your test or include it in your `tsconfig.json`.
 
 ## Inspired by
 

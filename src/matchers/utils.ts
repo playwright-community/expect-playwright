@@ -1,4 +1,4 @@
-import { Page, HTMLOrSVGElementHandle } from "playwright-core"
+import { Page, HTMLOrSVGElementHandle, PageWaitForSelectorOptions, WaitForSelectorOptionsNotHidden } from "playwright-core"
 
 const ExpectTypePage = "Page"
 const ExpectTypeElementHandle = "ElementHandle"
@@ -25,7 +25,12 @@ interface getElementTextReturn {
   expectedValue: string
 }
 
-export type InputArguments = [Page | HTMLOrSVGElementHandle, string?, string?]
+export type InputArguments = [Page | HTMLOrSVGElementHandle, string?, (string | PageWaitForSelectorOptions)?, PageWaitForSelectorOptions?]
+
+export const getDefaultWaitForSelectorOptions = (options: PageWaitForSelectorOptions = {}): PageWaitForSelectorOptions => ({
+  timeout: 1 * 1000,
+  ...options
+})
 
 export const getElementText = async (...args: InputArguments): Promise<getElementTextReturn> => {
   /**
@@ -52,9 +57,16 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
    * - expect(page).foo("#foo", "bar")
    */
   if (args.length === 3) {
-    const selector = args[1]
+    const selector = args[1] as string
+    const page = args[0] as Page
+    const options = getDefaultWaitForSelectorOptions(args[3] as WaitForSelectorOptionsNotHidden)
+    try {
+      await page.waitForSelector(selector, options)
+    } catch (err) {
+      throw new Error(`Timeout exceed for element ${quote(selector)}`)
+    }
     return {
-      elementHandle: await args[0].$(selector as string) as HTMLOrSVGElementHandle,
+      elementHandle: await page.$(selector) as HTMLOrSVGElementHandle,
       expectedValue: args[2] as string,
       selector
     }

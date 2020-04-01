@@ -3,3 +3,4 @@ coverage/
 jest.config.js
 tsconfig.json
 .github/
+*.test.js

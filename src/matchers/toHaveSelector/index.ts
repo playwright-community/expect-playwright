@@ -1,9 +1,10 @@
 import { AsyncExpectationResult } from 'expect/build/types'
-import { quote } from '../utils'
+import { quote, getDefaultWaitForSelectorOptions } from '../utils'
 import { Page, PageWaitForSelectorOptions } from 'playwright-core'
 
-const toHaveSelector = async (page: Page, selector: string, options: PageWaitForSelectorOptions = { timeout: 1 * 1000 }): AsyncExpectationResult => {
+const toHaveSelector = async (page: Page, selector: string, _options?: PageWaitForSelectorOptions): AsyncExpectationResult => {
   try {
+    const options = getDefaultWaitForSelectorOptions(_options)
     await page.waitForSelector(selector, options)
     return {
       pass: true,
