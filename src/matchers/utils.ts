@@ -22,7 +22,7 @@ export const detectExpectType = (value: ExpectInputType): ExpectType => {
 interface getElementTextReturn {
   elementHandle: HTMLOrSVGElementHandle
   selector?: string
-  value: string
+  expectedValue: string
 }
 
 export type InputArguments = [Page | HTMLOrSVGElementHandle, string?, string?]
@@ -38,13 +38,13 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
     if (type === ExpectTypeElementHandle) {
       return {
         elementHandle: args[0] as HTMLOrSVGElementHandle,
-        value: args[1] as string
+        expectedValue: args[1] as string
       }
     }
     const page = args[0] as Page
     return {
       elementHandle: await page.$("body") as HTMLOrSVGElementHandle,
-      value: args[1] as string
+      expectedValue: args[1] as string
     }
   }
   /**
@@ -55,7 +55,7 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
     const selector = args[1]
     return {
       elementHandle: await args[0].$(selector as string) as HTMLOrSVGElementHandle,
-      value: args[2] as string,
+      expectedValue: args[2] as string,
       selector
     }
   }

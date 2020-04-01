@@ -2,14 +2,14 @@ import { testWrapper } from "../tests/utils"
 
 import toHaveText from '.'
 
-describe("toHaveText", () => {
+describe("toEqualText", () => {
   afterEach(async () => {
     await page.evaluate(() => document.body.innerHTML = "")
   })
   describe("selector", () => {
     it("positive", async () => {
       await page.evaluate(() => {
-        document.write(`<div id="foobar">zzzBarzzz</div>`)
+        document.write(`<div id="foobar">Bar</div>`)
       })
       expect(testWrapper(await toHaveText(page, "#foobar", "Bar"))).toBe(true)
     })
@@ -23,7 +23,7 @@ describe("toHaveText", () => {
   describe("element", () => {
     it("positive", async () => {
       await page.evaluate(() => {
-        document.write(`<div id="foobar">zzzBarzzz</div>`)
+        document.write(`<div id="foobar">Bar</div>`)
       })
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
@@ -47,7 +47,7 @@ describe("toHaveText", () => {
   describe("page", () => {
     it("positive", async () => {
       await page.evaluate(() => {
-        document.write(`<body><div>zzzBarzzz</div></body>`)
+        document.write(`<body><div>Bar</div></body>`)
       })
       expect(testWrapper(await toHaveText(page, "Bar"))).toBe(true)
     })
