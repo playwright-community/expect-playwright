@@ -5,9 +5,11 @@ export { };
 declare global {
   namespace jest {
     interface Matchers<R> {
-      toHaveText(selectorOrValue: string, value?: string): Promise<R>;
-      toEqualText(selectorOrValue: string, value?: string): Promise<R>;
-      toHaveSelector(selector: string, options: PageWaitForSelectorOptions): Promise<R>;
+      toHaveText(selector: string, value: string, options?: PageWaitForSelectorOptions): Promise<R>;
+      toHaveText(value: string, options?: PageWaitForSelectorOptions): Promise<R>;
+      toEqualText(selector: string, value: string, options?: PageWaitForSelectorOptions): Promise<R>;
+      toEqualText(value: string, options?: PageWaitForSelectorOptions): Promise<R>;
+      toHaveSelector(selector: string, options?: PageWaitForSelectorOptions): Promise<R>;
     }
   }
 }

@@ -19,6 +19,22 @@ describe("toEqualText", () => {
       })
       expect(testWrapper(await toEqualText(page, "#foobar", "not-existing"))).toThrowError()
     })
+    describe("timeout", () => {
+      it("positive: should have a timeout of 1 second per default", async () => {
+        setTimeout(async () => {
+          await page.evaluate(() => {
+            document.write(`<div id="foobar">Bar</div>`)
+          })
+        }, 500)
+        expect(testWrapper(await toEqualText(page, "#foobar", "Bar"))).toBe(true)
+      })
+      it("should throw an error after the timeout exceeds", async () => {
+        const start = new Date().getTime()
+        expect(testWrapper(await toEqualText(page, "#foobar", "Bar"))).toThrowError()
+        const duration = new Date().getTime() - start
+        expect(duration).toBeLessThan(1500)
+      })
+    })
   })
   describe("element", () => {
     it("positive", async () => {
