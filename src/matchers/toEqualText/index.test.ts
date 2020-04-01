@@ -1,6 +1,6 @@
 import { testWrapper } from "../tests/utils"
 
-import toHaveText from '.'
+import toEqualText from '.'
 
 describe("toEqualText", () => {
   afterEach(async () => {
@@ -11,13 +11,13 @@ describe("toEqualText", () => {
       await page.evaluate(() => {
         document.write(`<div id="foobar">Bar</div>`)
       })
-      expect(testWrapper(await toHaveText(page, "#foobar", "Bar"))).toBe(true)
+      expect(testWrapper(await toEqualText(page, "#foobar", "Bar"))).toBe(true)
     })
     it("negative", async () => {
       await page.evaluate(() => {
         document.write(`<div id="foobar">zzzBarzzz</div>`)
       })
-      expect(testWrapper(await toHaveText(page, "#foobar", "not-existing"))).toThrowError()
+      expect(testWrapper(await toEqualText(page, "#foobar", "not-existing"))).toThrowError()
     })
   })
   describe("element", () => {
@@ -30,7 +30,7 @@ describe("toEqualText", () => {
       if (!element) {
         return
       }
-      expect(testWrapper(await toHaveText(element, "Bar"))).toBe(true)
+      expect(testWrapper(await toEqualText(element, "Bar"))).toBe(true)
     })
     it("negative", async () => {
       await page.evaluate(() => {
@@ -41,7 +41,7 @@ describe("toEqualText", () => {
       if (!element) {
         return
       }
-      expect(testWrapper(await toHaveText(element, "not-existing"))).toThrowError()
+      expect(testWrapper(await toEqualText(element, "not-existing"))).toThrowError()
     })
   })
   describe("page", () => {
@@ -49,13 +49,13 @@ describe("toEqualText", () => {
       await page.evaluate(() => {
         document.write(`<body><div>Bar</div></body>`)
       })
-      expect(testWrapper(await toHaveText(page, "Bar"))).toBe(true)
+      expect(testWrapper(await toEqualText(page, "Bar"))).toBe(true)
     })
     it("negative", async () => {
       await page.evaluate(() => {
         document.write(`<body><div>zzzBarzzz</div></body>`)
       })
-      expect(testWrapper(await toHaveText(page, "not-existing"))).toThrowError()
+      expect(testWrapper(await toEqualText(page, "not-existing"))).toThrowError()
     })
   })
 })
