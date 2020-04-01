@@ -124,13 +124,13 @@ By default it waits 1 second for the element which you can overwrite via the opt
 import playwright from 'playwright-chromium'
 
 describe("GitHub Playwright project", () => {
-  it("should should have Playwright as a heading", async () => {
+  it("should should have Playwright in the README heading", async () => {
     const browser = await playwright.chromium.launch()
     const page = await browser.newPage()
     await page.goto("https://github.com/microsoft/playwright")
     await expect(page).toHaveText("#readme h1", "Playwright")
     // or also all of them via the not property
-    await expect(page).not.toHaveText("Google")
+    await expect(page).not.toHaveText("this-is-no-anywhere")
     await browser.close()
   })
 })
