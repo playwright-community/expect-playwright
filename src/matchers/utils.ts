@@ -30,8 +30,8 @@ export type InputArguments = [Page | HTMLOrSVGElementHandle, string?, string?]
 export const getElementText = async (...args: InputArguments): Promise<getElementTextReturn> => {
   /**
   * Handle the following cases:
-  * - expect(page, "bar")
-  * - expect(element, "bar")
+  * - expect(page).foo("bar")
+  * - expect(element).foo("bar")
   */
   if (args.length === 2) {
     const type = detectExpectType(args[0])
@@ -49,7 +49,7 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
   }
   /**
    * Handle the following case:
-   * - expect(page, "#foo", "bar")
+   * - expect(page).foo("#foo", "bar")
    */
   if (args.length === 3) {
     const selector = args[1]
