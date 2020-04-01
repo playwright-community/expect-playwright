@@ -1,60 +1,120 @@
-# Expect Playwright
+# expect-playwright
 
 ![Node.js CI](https://github.com/mxschmitt/expect-playwright/workflows/Node.js%20CI/badge.svg)
 [![codecov](https://codecov.io/gh/mxschmitt/expect-playwright/branch/master/graph/badge.svg?token=Eay491HC49)](https://codecov.io/gh/mxschmitt/expect-playwright)
+[![NPM](https://img.shields.io/npm/v/expect-playwright)](https://www.npmjs.com/package/expect-playwright)
 
-This library provides utility matchers for the Jest testing framework in combination with [Playwright]. All of them are exposed on the `expect` object. You can use them either directly or invert them via the `.not` property like shown below in the examples.
+This library provides utility matchers for Jest in combination with [Playwright]. All of them are exposed on the `expect` object. You can use them either directly or invert them via the `.not` property like shown in a example below.
+
+```txt
+npm install -D expect-playwright
+```
 
 ## Usage
 
+To activate it in your Jest environment you have to include it in your configuration.
+
+```json
+{
+    "setupFilesAfterEnv": ["expect-playwright"]
+}
+```
+
+## Why do I need it
+
+The [Playwright] API is great, but it is low level and not designed for integration testing. So this package tries to provide a bunch of utility functions to perform the common checks easier.
+
+Example which should wait and compare the text content of a paragraph on the page.
+
+```javascript
+// before
+await page.waitForSelector("#foo")
+const textContent = await page.$eval("#foo", el => el.textContent)
+expect(textContent).stringContaining("my text")
+
+// after by using expect-playwright
+await expect(page).toHaveText("#foo", "my text")
+```
+
+## API documentation
+
+### Table of Contents
+
+- [toHaveSelector](#toHaveSelector)
+- [toHaveText](#toHaveText)
+- [toEqualText](#toEqualText)
+
 ### toHaveSelector
 
-**expect(page: [Page]).toHaveSelector(selector: string, options: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toHaveSelector(selector: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
 
-This helper function waits as a maximum as the timeout exceeds for a given selector once it appears on the screen. It has a default timeout of 1 second, which you can overwrite via the options.
+This function waits as a maximum as the timeout exceeds for a given selector once it appears on the page. It has a default timeout of 1 second, which you can overwrite via the options.
 
 ```js
-await expect(page).toHaveSelector("Playwright")
+await expect(page).toHaveSelector("#foobar")
 // or via not
-await expect(page).not.toHaveSelector("Playwright")
+await expect(page).not.toHaveSelector("#foobar")
 ```
 
 ### toHaveText
 
-**expect(page: [Page]).toHaveText(selector: string, value: string, options: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+This function checks if the the `textContent` of a given element contains the provided value.
 
-**expect(page: [Page]).toHaveText(value: string, options: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+You can do this via a selector on the whole page:
 
-**expect(page: [ElementHandle]).toHaveText(value: string, options: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toHaveText(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
 
-This helper function checks if the the `textContent` of a given element (either by a [ElementHandle] or selector) or the whole Page contains the provided value.
+```javascript
+await expect(page).toHaveText("#my-element", "MyValue")
+```
+
+Or without a selector which will use the `body` element:
+
+**expect(page: [Page]).toHaveText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+
+```javascript
+await expect(page).toHaveText("Playwright")
+```
+
+Or by passing an Playwright [ElementHandle]:
+
+**expect(page: [ElementHandle]).toHaveText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+
+```javascript
+const element = await page.$('#my-element');
+await expect(element).toHaveText("Playwright")
+```
 
 By default it waits 1 second for the element which you can overwrite via the options.
 
-```js
-// specific selector
-await expect(page).toHaveText("#my-element", "MyValue")
-
-// whole page
-await expect(page).toHaveText("Playwright")
-
-// specific element
-const element = await page.$('#my-element');
-await expect(element).toHaveText("Playwright")
-
-// or also all of them via the not property
-await expect(page).not.toHaveText("Playwright")
-```
-
 ### toEqualText
 
-**expect(page: [Page]).toEqualText(selector: string, value: string, options: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+This function checks if the `textContent` of a given element is the same as the provided value.
 
-**expect(page: [Page]).toEqualText(value: string, options: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+You can do this via a selector on the whole page:
 
-**expect(page: [ElementHandle]).toEqualText(value: string, options: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toEqualText(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
 
-This helper function checks if the `textContent` of a given element (either by a [ElementHandle] or selector) or the whole Page is the same as the provided value.
+```javascript
+await expect(page).toEqualText("#my-element", "Playwright")
+```
+
+Or without a selector which will use the `body` element:
+
+**expect(page: [Page]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+
+```javascript
+await expect(page).toEqualText("Playwright")
+```
+
+Or by passing an Playwright [ElementHandle]:
+
+**expect(page: [ElementHandle]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+
+```javascript
+const element = await page.$('#my-element');
+await expect(element).toEqualText("Playwright")
+```
 
 By default it waits 1 second for the element which you can overwrite via the options.
 
@@ -64,39 +124,19 @@ By default it waits 1 second for the element which you can overwrite via the opt
 import playwright from 'playwright-chromium'
 
 describe("GitHub Playwright project", () => {
-  it("should should have Playwright as a heading", async () => {
+  it("should should have Playwright in the README heading", async () => {
     const browser = await playwright.chromium.launch()
     const page = await browser.newPage()
     await page.goto("https://github.com/microsoft/playwright")
     await expect(page).toHaveText("#readme h1", "Playwright")
+    // or also all of them via the not property
+    await expect(page).not.toHaveText("this-is-no-anywhere")
     await browser.close()
   })
 })
 ```
 
-## Installation
-
-Via NPM
-
-```txt
-npm install -D expect-playwright
-```
-
-Or Yarn
-
-```txt
-yarn add -D expect-playwright
-```
-
-To activate it in your Jest environment you have to include it like that in your configuration.
-
-```json
-{
-    "setupFilesAfterEnv": ["expect-playwright"]
-}
-```
-
-## TypeScript support
+## TypeScript
 
 There are typings available. For that just import
 
@@ -104,7 +144,7 @@ There are typings available. For that just import
 import "expect-playwright"
 ```
 
-at the top of your test or include it in your `tsconfig.json`.
+at the top of your test file or include it globally in your `tsconfig.json`.
 
 ## Inspired by
 
