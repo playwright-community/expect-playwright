@@ -11,7 +11,9 @@ describe("toEqualText", () => {
       await page.evaluate(() => {
         document.write(`<div id="foobar">Bar</div>`)
       })
-      expect(testWrapper(await toEqualText(page, "#foobar", "Bar"))).toBe(true)
+      const result = await toEqualText(page, "#foobar", "Bar")
+      expect(testWrapper(result)).toBe(true)
+      expect(result.message()).toMatchSnapshot()
     })
     it("negative", async () => {
       await page.evaluate(() => {

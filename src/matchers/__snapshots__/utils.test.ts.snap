@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`utils.getElementText should throw an error if the input length was not in range 1`] = `"Invalid input length: 0"`;
+
+exports[`utils.getElementText should throw an error if the specified expect element was not recognized 1`] = `"could not recognize type: Test123"`;
