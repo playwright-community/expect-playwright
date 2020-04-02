@@ -1,12 +1,12 @@
 import matchers from './matchers';
-import { Page, ElementHandle } from 'playwright-core';
+import type { Page, ElementHandle } from 'playwright-core';
 import type { PlaywrightMatchers } from '../global'
 
 // @ts-ignore
-const jestExpect = global.expect;
-
-jestExpect.extend(matchers);
-
+if (typeof global.expect !== 'undefined') {
+  // @ts-ignore
+  global.expect.extend(matchers);
+}
 
 const expectWrapper = (pageOrElement: Page | ElementHandle): PlaywrightMatchers<boolean> =>
   Object.entries(matchers).reduce((acc, [name, matcher]) => ({

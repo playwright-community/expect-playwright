@@ -1,4 +1,4 @@
-import { Page, HTMLOrSVGElementHandle, PageWaitForSelectorOptions, WaitForSelectorOptionsNotHidden } from "playwright-core"
+import type { Page, HTMLOrSVGElementHandle, PageWaitForSelectorOptions, WaitForSelectorOptionsNotHidden } from "playwright-core"
 
 const ExpectTypePage = "Page"
 const ExpectTypeElementHandle = "ElementHandle"
