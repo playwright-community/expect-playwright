@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toHaveText element negative 1`] = `"'not-existing' is not included in 'zzzBarzzz'."`;
+
+exports[`toHaveText page negative 1`] = `"'not-existing' is not included in 'zzzBarzzz'."`;
+
+exports[`toHaveText selector negative 1`] = `"'not-existing' is not included in 'zzzBarzzz' of '#foobar'."`;

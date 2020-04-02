@@ -40,6 +40,6 @@ describe("expectPlaywright", () => {
     await page.evaluate(() => {
       document.write(`<div id="foobar">zzzzz</div>`)
     })
-    expect(expectPlaywright(page).toHaveText("zzzBarzzz")).rejects.toThrowError()
+    await expect(expectPlaywright(page).toHaveText("zzzBarzzz")).rejects.toThrowErrorMatchingSnapshot()
   })
 })

@@ -17,7 +17,7 @@ describe("toEqualText", () => {
       await page.evaluate(() => {
         document.write(`<div id="foobar">zzzBarzzz</div>`)
       })
-      expect(testWrapper(await toEqualText(page, "#foobar", "not-existing"))).toThrowError()
+      expect(testWrapper(await toEqualText(page, "#foobar", "not-existing"))).toThrowErrorMatchingSnapshot()
     })
     describe("timeout", () => {
       it("positive: should have a timeout of 1 second per default", async () => {
@@ -30,7 +30,7 @@ describe("toEqualText", () => {
       })
       it("should throw an error after the timeout exceeds", async () => {
         const start = new Date().getTime()
-        expect(testWrapper(await toEqualText(page, "#foobar", "Bar"))).toThrowError()
+        expect(testWrapper(await toEqualText(page, "#foobar", "Bar"))).toThrowErrorMatchingSnapshot()
         const duration = new Date().getTime() - start
         expect(duration).toBeLessThan(1500)
       })

@@ -17,7 +17,7 @@ describe("toHaveText", () => {
       await page.evaluate(() => {
         document.write(`<div id="foobar">zzzBarzzz</div>`)
       })
-      expect(testWrapper(await toHaveText(page, "#foobar", "not-existing"))).toThrowError()
+      expect(testWrapper(await toHaveText(page, "#foobar", "not-existing"))).toThrowErrorMatchingSnapshot()
     })
   })
   describe("element", () => {
@@ -41,7 +41,7 @@ describe("toHaveText", () => {
       if (!element) {
         return
       }
-      expect(testWrapper(await toHaveText(element, "not-existing"))).toThrowError()
+      expect(testWrapper(await toHaveText(element, "not-existing"))).toThrowErrorMatchingSnapshot()
     })
   })
   describe("page", () => {
@@ -55,7 +55,7 @@ describe("toHaveText", () => {
       await page.evaluate(() => {
         document.write(`<body><div>zzzBarzzz</div></body>`)
       })
-      expect(testWrapper(await toHaveText(page, "not-existing"))).toThrowError()
+      expect(testWrapper(await toHaveText(page, "not-existing"))).toThrowErrorMatchingSnapshot()
     })
   })
 })
