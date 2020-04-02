@@ -21,4 +21,4 @@ const expectWrapper = (pageOrElement: Page | ElementHandle): PlaywrightMatchers<
     }
   }), {} as PlaywrightMatchers<boolean>)
 
-export default expectWrapper
+export = expectWrapper
