@@ -11,7 +11,9 @@ describe("toHaveText", () => {
       await page.evaluate(() => {
         document.write(`<div id="foobar">zzzBarzzz</div>`)
       })
-      expect(testWrapper(await toHaveText(page, "#foobar", "Bar"))).toBe(true)
+      const result = await toHaveText(page, "#foobar", "Bar")
+      expect(testWrapper(result)).toBe(true)
+      expect(result.message()).toMatchSnapshot()
     })
     it("negative", async () => {
       await page.evaluate(() => {
@@ -56,6 +58,14 @@ describe("toHaveText", () => {
         document.write(`<body><div>zzzBarzzz</div></body>`)
       })
       expect(testWrapper(await toHaveText(page, "not-existing"))).toThrowErrorMatchingSnapshot()
+    })
+  })
+  describe("timeout", () => {
+    it("should throw an error after the timeout exceeds", async () => {
+      const start = new Date().getTime()
+      expect(testWrapper(await toHaveText(page, "#foobar", "bar"))).toThrowErrorMatchingSnapshot()
+      const duration = new Date().getTime() - start
+      expect(duration).toBeLessThan(1500)
     })
   })
 })

@@ -10,7 +10,9 @@ describe("toHaveSelector", () => {
     await page.evaluate(() => {
       document.write(`<div id="foobar">Bar</div>`)
     })
-    expect(testWrapper(await toHaveSelector(page, "#foobar"))).toBe(true)
+    const result = await toHaveSelector(page, "#foobar")
+    expect(testWrapper(result)).toBe(true)
+    expect(result.message()).toMatchSnapshot()
   })
   it("negative", async () => {
     expect(testWrapper(await toHaveSelector(page, "#foobar"))).toThrowError()
