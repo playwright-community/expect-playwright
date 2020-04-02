@@ -1,8 +1,8 @@
-import { AsyncExpectationResult } from 'expect/build/types'
+import { SyncExpectationResult } from 'expect/build/types'
 import { quote, getDefaultWaitForSelectorOptions } from '../utils'
 import { Page, PageWaitForSelectorOptions } from 'playwright-core'
 
-const toHaveSelector = async (page: Page, selector: string, _options?: PageWaitForSelectorOptions): AsyncExpectationResult => {
+const toHaveSelector = async (page: Page, selector: string, _options?: PageWaitForSelectorOptions): Promise<SyncExpectationResult> => {
   try {
     const options = getDefaultWaitForSelectorOptions(_options)
     await page.waitForSelector(selector, options)

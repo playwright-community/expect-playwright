@@ -12,12 +12,22 @@ npm install -D expect-playwright
 
 ## Usage
 
+### With Jest
+
 To activate it in your Jest environment you have to include it in your configuration.
 
 ```json
 {
     "setupFilesAfterEnv": ["expect-playwright"]
 }
+```
+
+### Without Jest
+
+```javascript
+import expect from "expect-playwright"
+
+await expect(page).toHaveText("#foo", "my text")
 ```
 
 ## Why do I need it
