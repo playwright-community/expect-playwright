@@ -1,3 +1,5 @@
+/// <reference types="jest-playwright-preset" />
+
 import { testWrapper } from "../tests/utils"
 
 import toHaveText from '.'

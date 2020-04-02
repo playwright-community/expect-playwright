@@ -21,7 +21,7 @@ jobs:
     - run: npm ci
     - name: Lint
       run: |
-        yarn run tsc --noEmit
+        yarn run tsc --noEmit src/**/*.ts
     - run: npm run build
     - run: npm test
       env:

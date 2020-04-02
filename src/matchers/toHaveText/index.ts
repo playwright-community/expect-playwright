@@ -1,7 +1,7 @@
-import { AsyncExpectationResult } from 'expect/build/types'
+import { SyncExpectationResult } from 'expect/build/types'
 import { getElementText, quote, InputArguments } from '../utils'
 
-const toHaveText = async (...args: InputArguments): AsyncExpectationResult => {
+const toHaveText = async (...args: InputArguments): Promise<SyncExpectationResult> => {
   const { elementHandle, selector, expectedValue } = await getElementText(...args)
   /* istanbul ignore next */
   const actualTextContent = await elementHandle.evaluate((el) => el.textContent)
