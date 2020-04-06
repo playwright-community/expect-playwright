@@ -2,6 +2,6 @@
 
 exports[`toEqualText selector negative 1`] = `"'not-existing' does not equal 'zzzBarzzz' of '#foobar'."`;
 
-exports[`toEqualText selector positive 1`] = `"'Bar' does not equal 'Bar'."`;
+exports[`toEqualText selector positive 1`] = `"'Bar' does equal 'Bar'."`;
 
 exports[`toEqualText selector timeout should throw an error after the timeout exceeds 1`] = `"Error: Timeout exceed for element '#foobar'"`;

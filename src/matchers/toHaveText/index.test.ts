@@ -12,7 +12,7 @@ describe("toHaveText", () => {
         document.write(`<div id="foobar">zzzBarzzz</div>`)
       })
       const result = await toHaveText(page, "#foobar", "Bar")
-      expect(testWrapper(result)).toBe(true)
+      expect(result.pass).toBe(true)
       expect(result.message()).toMatchSnapshot()
     })
     it("negative", async () => {
@@ -29,10 +29,7 @@ describe("toHaveText", () => {
       })
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
-      if (!element) {
-        return
-      }
-      expect(testWrapper(await toHaveText(element, "Bar"))).toBe(true)
+      expect(testWrapper(await toHaveText(element!, "Bar"))).toBe(true)
     })
     it("negative", async () => {
       await page.evaluate(() => {
@@ -40,10 +37,7 @@ describe("toHaveText", () => {
       })
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
-      if (!element) {
-        return
-      }
-      expect(testWrapper(await toHaveText(element, "not-existing"))).toThrowErrorMatchingSnapshot()
+      expect(testWrapper(await toHaveText(element!, "not-existing"))).toThrowErrorMatchingSnapshot()
     })
   })
   describe("page", () => {

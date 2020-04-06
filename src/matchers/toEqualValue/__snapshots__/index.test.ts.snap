@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toEqualValue element negative 1`] = `"'not-existing' does not equal 'bar'."`;
+
+exports[`toEqualValue selector negative 1`] = `"'not-existing' does not equal 'bar' of '#foobar'."`;
+
+exports[`toEqualValue selector positive 1`] = `"'bar' does equal 'bar'."`;
+
+exports[`toEqualValue timeout should throw an error after the timeout exceeds 1`] = `"Error: Timeout exceed for element '#foobar'"`;

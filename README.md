@@ -53,6 +53,7 @@ await expect(page).toHaveText("#foo", "my text")
 - [toHaveSelector](#toHaveSelector)
 - [toHaveText](#toHaveText)
 - [toEqualText](#toEqualText)
+- [toEqualValue](#toEqualValue)
 
 ### toHaveSelector
 
@@ -86,7 +87,7 @@ Or without a selector which will use the `body` element:
 await expect(page).toHaveText("Playwright")
 ```
 
-Or by passing an Playwright [ElementHandle]:
+Or by passing a Playwright [ElementHandle]:
 
 **expect(page: [ElementHandle]).toHaveText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
 
@@ -117,13 +118,36 @@ Or without a selector which will use the `body` element:
 await expect(page).toEqualText("Playwright")
 ```
 
-Or by passing an Playwright [ElementHandle]:
+Or by passing a Playwright [ElementHandle]:
 
 **expect(page: [ElementHandle]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
 
 ```javascript
 const element = await page.$('#my-element');
 await expect(element).toEqualText("Playwright")
+```
+
+By default it waits 1 second for the element which you can overwrite via the options.
+
+### toEqualValue
+
+This function checks if the `value` of a given element is the same as the provided value.
+
+You can do this via a selector or the element directly:
+
+**expect(page: [Page]).toEqualValue(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+
+```javascript
+await expect(page).toEqualValue("#my-element", "Playwright")
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+**expect(page: [ElementHandle]).toEqualValue(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+
+```javascript
+const element = await page.$('#my-element');
+await expect(element).toEqualValue("Playwright")
 ```
 
 By default it waits 1 second for the element which you can overwrite via the options.

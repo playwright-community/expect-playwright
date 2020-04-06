@@ -12,7 +12,7 @@ describe("toEqualText", () => {
         document.write(`<div id="foobar">Bar</div>`)
       })
       const result = await toEqualText(page, "#foobar", "Bar")
-      expect(testWrapper(result)).toBe(true)
+      expect(result.pass).toBe(true)
       expect(result.message()).toMatchSnapshot()
     })
     it("negative", async () => {
@@ -45,10 +45,7 @@ describe("toEqualText", () => {
       })
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
-      if (!element) {
-        return
-      }
-      expect(testWrapper(await toEqualText(element, "Bar"))).toBe(true)
+      expect(testWrapper(await toEqualText(element!, "Bar"))).toBe(true)
     })
     it("negative", async () => {
       await page.evaluate(() => {
@@ -56,10 +53,7 @@ describe("toEqualText", () => {
       })
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
-      if (!element) {
-        return
-      }
-      expect(testWrapper(await toEqualText(element, "not-existing"))).toThrowError()
+      expect(testWrapper(await toEqualText(element!, "not-existing"))).toThrowError()
     })
   })
   describe("page", () => {
