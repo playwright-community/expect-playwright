@@ -53,6 +53,7 @@ await expect(page).toHaveText("#foo", "my text")
 - [toHaveSelector](#toHaveSelector)
 - [toHaveText](#toHaveText)
 - [toEqualText](#toEqualText)
+- [toEqualValue](#toEqualValue)
 
 ### toHaveSelector
 
@@ -124,6 +125,29 @@ Or by passing an Playwright [ElementHandle]:
 ```javascript
 const element = await page.$('#my-element');
 await expect(element).toEqualText("Playwright")
+```
+
+By default it waits 1 second for the element which you can overwrite via the options.
+
+### toEqualValue
+
+This function checks if the `value` of a given element is the same as the provided value.
+
+You can do this via a selector or the element directly:
+
+**expect(page: [Page]).toEqualValue(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+
+```javascript
+await expect(page).toEqualValue("#my-element", "Playwright")
+```
+
+Or by passing an Playwright [ElementHandle]:
+
+**expect(page: [ElementHandle]).toEqualValue(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+
+```javascript
+const element = await page.$('#my-element');
+await expect(element).toEqualValue("Playwright")
 ```
 
 By default it waits 1 second for the element which you can overwrite via the options.

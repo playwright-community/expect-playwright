@@ -45,10 +45,7 @@ describe("toEqualText", () => {
       })
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
-      if (!element) {
-        return
-      }
-      expect(testWrapper(await toEqualText(element, "Bar"))).toBe(true)
+      expect(testWrapper(await toEqualText(element!, "Bar"))).toBe(true)
     })
     it("negative", async () => {
       await page.evaluate(() => {
@@ -56,10 +53,7 @@ describe("toEqualText", () => {
       })
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
-      if (!element) {
-        return
-      }
-      expect(testWrapper(await toEqualText(element, "not-existing"))).toThrowError()
+      expect(testWrapper(await toEqualText(element!, "not-existing"))).toThrowError()
     })
   })
   describe("page", () => {
