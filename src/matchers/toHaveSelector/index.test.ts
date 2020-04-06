@@ -11,7 +11,7 @@ describe("toHaveSelector", () => {
       document.write(`<div id="foobar">Bar</div>`)
     })
     const result = await toHaveSelector(page, "#foobar")
-    expect(testWrapper(result)).toBe(true)
+    expect(result.pass).toBe(true)
     expect(result.message()).toMatchSnapshot()
   })
   it("negative", async () => {

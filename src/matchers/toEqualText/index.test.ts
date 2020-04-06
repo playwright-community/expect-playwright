@@ -12,7 +12,7 @@ describe("toEqualText", () => {
         document.write(`<div id="foobar">Bar</div>`)
       })
       const result = await toEqualText(page, "#foobar", "Bar")
-      expect(testWrapper(result)).toBe(true)
+      expect(result.pass).toBe(true)
       expect(result.message()).toMatchSnapshot()
     })
     it("negative", async () => {

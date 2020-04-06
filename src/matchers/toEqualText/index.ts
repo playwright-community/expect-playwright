@@ -9,7 +9,7 @@ const toEqualText = async (...args: InputArguments): Promise<SyncExpectationResu
     if (actualTextContent === expectedValue) {
       return {
         pass: true,
-        message: () => `${quote(expectedValue)} does not equal ${quote(actualTextContent)}.`
+        message: () => `${quote(expectedValue)} does equal ${quote(actualTextContent)}.`
       }
     }
     return {

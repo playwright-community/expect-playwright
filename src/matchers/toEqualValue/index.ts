@@ -9,12 +9,12 @@ const toEqualValue = async (...args: InputArguments): Promise<SyncExpectationRes
     if (actualTextContent?.includes(expectedValue)) {
       return {
         pass: true,
-        message: () => `${quote(expectedValue)} is included in ${quote(actualTextContent)}.`
+        message: () => `${quote(expectedValue)} does equal ${quote(actualTextContent)}.`
       }
     }
     return {
       pass: false,
-      message: () => `${quote(expectedValue)} is not included in ${quote(actualTextContent)}${selector ? ' of ' + quote(selector) + "." : '.'}`
+      message: () => `${quote(expectedValue)} does not equal ${quote(actualTextContent)}${selector ? ' of ' + quote(selector) + "." : '.'}`
     }
   } catch (err) {
     return {

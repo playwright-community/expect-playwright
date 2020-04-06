@@ -12,7 +12,7 @@ describe("toHaveText", () => {
         document.write(`<div id="foobar">zzzBarzzz</div>`)
       })
       const result = await toHaveText(page, "#foobar", "Bar")
-      expect(testWrapper(result)).toBe(true)
+      expect(result.pass).toBe(true)
       expect(result.message()).toMatchSnapshot()
     })
     it("negative", async () => {

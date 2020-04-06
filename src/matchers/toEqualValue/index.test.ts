@@ -12,7 +12,7 @@ describe("toEqualValue", () => {
         document.write(`<input id="foobar" value="bar"/>`)
       })
       const result = await toEqualValue(page, "#foobar", "bar")
-      expect(testWrapper(result)).toBe(true)
+      expect(result.pass).toBe(true)
       expect(result.message()).toMatchSnapshot()
     })
     it("negative", async () => {
