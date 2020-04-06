@@ -87,7 +87,7 @@ Or without a selector which will use the `body` element:
 await expect(page).toHaveText("Playwright")
 ```
 
-Or by passing an Playwright [ElementHandle]:
+Or by passing a Playwright [ElementHandle]:
 
 **expect(page: [ElementHandle]).toHaveText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
 
@@ -118,7 +118,7 @@ Or without a selector which will use the `body` element:
 await expect(page).toEqualText("Playwright")
 ```
 
-Or by passing an Playwright [ElementHandle]:
+Or by passing a Playwright [ElementHandle]:
 
 **expect(page: [ElementHandle]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
 
@@ -141,7 +141,7 @@ You can do this via a selector or the element directly:
 await expect(page).toEqualValue("#my-element", "Playwright")
 ```
 
-Or by passing an Playwright [ElementHandle]:
+Or by passing a Playwright [ElementHandle]:
 
 **expect(page: [ElementHandle]).toEqualValue(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
 
