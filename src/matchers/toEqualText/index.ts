@@ -5,7 +5,7 @@ const toEqualText = async (...args: InputArguments): Promise<SyncExpectationResu
   try {
     const { elementHandle, selector, expectedValue } = await getElementText(...args)
     /* istanbul ignore next */
-    const actualTextContent = await elementHandle.evaluate((el) => el.textContent)
+    const actualTextContent = await elementHandle.evaluate<string | null>((el) => el.textContent)
     if (actualTextContent === expectedValue) {
       return {
         pass: true,

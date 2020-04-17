@@ -43,7 +43,9 @@ describe("toEqualValue", () => {
   describe("timeout", () => {
     it("should throw an error after the timeout exceeds", async () => {
       const start = new Date().getTime()
-      expect(testWrapper(await toEqualValue(page, "#foobar", "bar"))).toThrowErrorMatchingSnapshot()
+      expect(testWrapper(await toEqualValue(page, "#foobar", "bar", {
+        timeout: 1 * 1000
+      }))).toThrowErrorMatchingSnapshot()
       const duration = new Date().getTime() - start
       expect(duration).toBeLessThan(1500)
     })

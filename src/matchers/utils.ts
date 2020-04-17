@@ -1,11 +1,12 @@
-import type { Page, HTMLOrSVGElementHandle, PageWaitForSelectorOptions, WaitForSelectorOptionsNotHidden } from "playwright-core"
+import type { Page, ElementHandle } from "playwright-core"
+import { PageWaitForSelectorOptions } from "../../global"
 
 const ExpectTypePage = "Page"
 const ExpectTypeElementHandle = "ElementHandle"
 
 type ExpectType = typeof ExpectTypePage | typeof ExpectTypeElementHandle
 
-export type ExpectInputType = Page | HTMLOrSVGElementHandle
+export type ExpectInputType = Page | ElementHandle
 
 export const detectExpectType = (value: ExpectInputType): ExpectType => {
   const className = value.constructor.name
@@ -20,17 +21,14 @@ export const detectExpectType = (value: ExpectInputType): ExpectType => {
 }
 
 interface getElementTextReturn {
-  elementHandle: HTMLOrSVGElementHandle
+  elementHandle: ElementHandle
   selector?: string
   expectedValue: string
 }
 
-export type InputArguments = [Page | HTMLOrSVGElementHandle, string?, (string | PageWaitForSelectorOptions)?, PageWaitForSelectorOptions?]
+export type InputArguments = [Page | ElementHandle, string?, (string | PageWaitForSelectorOptions)?, PageWaitForSelectorOptions?]
 
-export const getDefaultWaitForSelectorOptions = (options: PageWaitForSelectorOptions = {}): PageWaitForSelectorOptions => ({
-  timeout: 1 * 1000,
-  ...options
-})
+const lastElementHasType = (args: InputArguments, type: "string" | "object"): boolean => typeof args[args.length - 1] === type
 
 export const getElementText = async (...args: InputArguments): Promise<getElementTextReturn> => {
   /**
@@ -42,13 +40,13 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
     const type = detectExpectType(args[0])
     if (type === ExpectTypeElementHandle) {
       return {
-        elementHandle: args[0] as HTMLOrSVGElementHandle,
+        elementHandle: args[0] as ElementHandle,
         expectedValue: args[1] as string
       }
     }
     const page = args[0] as Page
     return {
-      elementHandle: await page.$("body") as HTMLOrSVGElementHandle,
+      elementHandle: await page.$("body") as ElementHandle,
       expectedValue: args[1] as string
     }
   }
@@ -56,17 +54,16 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
    * Handle the following case:
    * - expect(page).foo("#foo", "bar")
    */
-  if (args.length === 3) {
+  if (args.length === 3 && lastElementHasType(args, "string") || args.length === 4 && lastElementHasType(args, "object")) {
     const selector = args[1] as string
     const page = args[0] as Page
-    const options = getDefaultWaitForSelectorOptions(args[3] as WaitForSelectorOptionsNotHidden)
     try {
-      await page.waitForSelector(selector, options)
+      await page.waitForSelector(selector, args[3] as PageWaitForSelectorOptions)
     } catch (err) {
       throw new Error(`Timeout exceed for element ${quote(selector)}`)
     }
     return {
-      elementHandle: await page.$(selector) as HTMLOrSVGElementHandle,
+      elementHandle: await page.$(selector) as ElementHandle,
       expectedValue: args[2] as string,
       selector
     }

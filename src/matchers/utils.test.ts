@@ -1,4 +1,4 @@
-import { getElementText, InputArguments} from './utils'
+import { getElementText } from './utils'
 
 describe("utils.getElementText", () => {
   it("should throw an error if the specified expect element was not recognized", async () => {
