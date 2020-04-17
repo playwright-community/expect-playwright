@@ -1,4 +1,15 @@
-import { PageWaitForSelectorOptions } from "playwright-core";
+// copied into our codebase for autocompletion purposes
+interface PageWaitForSelectorOptions {
+  /**
+   * Wait for element to become visible (`visible`), hidden (`hidden`), present in dom (`attached`) or not present in dom (`detached`). Defaults to `attached`.
+   */
+  waitFor?: "attached" | "detached" | "visible" | "hidden";
+
+  /**
+   * Maximum time in milliseconds, defaults to 30 seconds, pass `0` to disable timeout. The default value can be changed by using the browserContext.setDefaultTimeout(timeout) or page.setDefaultTimeout(timeout) methods.
+   */
+  timeout?: number;
+}
 
 export interface PlaywrightMatchers<R> {
   /**

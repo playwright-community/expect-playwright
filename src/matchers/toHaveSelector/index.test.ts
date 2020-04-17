@@ -15,20 +15,26 @@ describe("toHaveSelector", () => {
     expect(result.message()).toMatchSnapshot()
   })
   it("negative", async () => {
-    expect(testWrapper(await toHaveSelector(page, "#foobar"))).toThrowError()
+    expect(testWrapper(await toHaveSelector(page, "#foobar", {
+      timeout: 1 * 1000
+    }))).toThrowError()
   })
   describe("timeout", () => {
-    it("positive: should have a timeout of 1 second per default", async () => {
+    it("positive: should be able to use a custom timeout", async () => {
       setTimeout(async () => {
         await page.evaluate(() => {
           document.write(`<div id="foobar">Bar</div>`)
         })
       }, 500)
-      expect(testWrapper(await toHaveSelector(page, "#foobar"))).toBe(true)
+      expect(testWrapper(await toHaveSelector(page, "#foobar", {
+        timeout: 1 * 1000
+      }))).toBe(true)
     })
     it("should throw an error after the timeout exceeds", async () => {
       const start = new Date().getTime()
-      expect(testWrapper(await toHaveSelector(page, "#foobar"))).toThrowError()
+      expect(testWrapper(await toHaveSelector(page, "#foobar", {
+        timeout: 1 * 1000
+      }))).toThrowError()
       const duration = new Date().getTime() - start
       expect(duration).toBeLessThan(1500)
     })
