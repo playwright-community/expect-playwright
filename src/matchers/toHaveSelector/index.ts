@@ -13,7 +13,7 @@ const toHaveSelector = async (page: Page, selector: string, options: PageWaitFor
   } catch (err) {
     return {
       pass: false,
-      message: () => `${quote(selector)} could not be found on the page.'}`
+      message: () => `${quote(selector)} could not be found on the page.`
     }
   }
 }
