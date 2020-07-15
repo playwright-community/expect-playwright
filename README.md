@@ -59,12 +59,14 @@ await expect(page).toHaveText("#foo", "my text")
 
 **expect(page: [Page]).toHaveSelector(selector: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
 
-This function waits as a maximum as the timeout exceeds for a given selector once it appears on the page. It has a default timeout of 1 second, which you can overwrite via the options.
+This function waits as a maximum as the timeout exceeds for a given selector once it appears on the page.
 
 ```js
 await expect(page).toHaveSelector("#foobar")
-// or via not
-await expect(page).not.toHaveSelector("#foobar")
+// or via not, useful to only wait 1 second instead of for the default timeout by Playwright which is 30 seconds.
+await expect(page).not.toHaveSelector("#foobar", {
+  timeout: 1 * 1000
+})
 ```
 
 ### toHaveText
@@ -164,7 +166,7 @@ describe("GitHub Playwright project", () => {
     await page.goto("https://github.com/microsoft/playwright")
     await expect(page).toHaveText("#readme h1", "Playwright")
     // or also all of them via the not property
-    await expect(page).not.toHaveText("this-is-no-anywhere")
+    await expect(page).not.toHaveText("this-is-no-anywhere", { timeout: 1 * 1000 })
     await browser.close()
   })
 })
