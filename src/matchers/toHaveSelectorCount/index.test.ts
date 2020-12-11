@@ -25,9 +25,7 @@ describe("toHaveSelectorCount", () => {
   describe("timeout", () => {
     it("should throw an error after the timeout exceeds", async () => {
       const start = new Date().getTime()
-      expect(testWrapper(await toHaveSelectorCount(page, ".foobar", 1, {
-        timeout: 1 * 1000
-      }))).toThrowErrorMatchingSnapshot()
+      expect(testWrapper(await toHaveSelectorCount(page, ".foobar", 1))).toThrowErrorMatchingSnapshot()
       const duration = new Date().getTime() - start
       expect(duration).toBeLessThan(1500)
     })
