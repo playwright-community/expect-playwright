@@ -1,9 +1,11 @@
 import { SyncExpectationResult } from 'expect/build/types'
 import { quote } from '../utils'
 import { Page } from 'playwright-core'
+import {PageWaitForSelectorOptions} from "../../../global";
 
-const toHaveSelectorCount = async (page: Page, selector: string, expectedValue: number): Promise<SyncExpectationResult> => {
+const toHaveSelectorCount = async (page: Page, selector: string, expectedValue: number, options: PageWaitForSelectorOptions = {}): Promise<SyncExpectationResult> => {
   try {
+    await page.waitForSelector(selector, {...options, state: 'attached'})
     const actualCount = (await page.$$(selector)).length
     if (actualCount === 0) {
       throw new Error('Element not found')
