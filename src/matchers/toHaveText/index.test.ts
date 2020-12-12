@@ -7,6 +7,24 @@ describe("toHaveText", () => {
     await page.evaluate(() => document.body.innerHTML = "")
   })
   describe("selector", () => {
+    it("empty positive with page element", async () => {
+      await page.evaluate(() => {
+        document.write(`<div id="foobar"></div>`)
+      })
+      const result = await toHaveText(page, "#foobar", "", {state: 'attached'})
+      expect(result.pass).toBe(true)
+      expect(result.message()).toMatchSnapshot()
+    })
+    it("empty positive with custom element", async () => {
+      await page.evaluate(() => {
+        document.write(`<div id="foobar"></div>`)
+      })
+      const element = await page.$("#foobar")
+      expect(element).not.toBe(null)
+      const result = await toHaveText(element!, "")
+      expect(result.pass).toBe(true)
+      expect(result.message()).toMatchSnapshot()
+    })
     it("positive", async () => {
       await page.evaluate(() => {
         document.write(`<div id="foobar">zzzBarzzz</div>`)
