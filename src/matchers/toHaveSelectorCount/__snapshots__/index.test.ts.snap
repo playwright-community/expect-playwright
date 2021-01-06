@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toHaveSelectorCount selector negative 1`] = `"'2' does not equal '1' of '.foobar'."`;
+
+exports[`toHaveSelectorCount selector positive 1`] = `"'2' does equal '2'."`;
+
+exports[`toHaveSelectorCount timeout should throw an error after the timeout exceeds 1`] = `"'.foobar' could not be found on the page."`;
