@@ -9,5 +9,5 @@ export default {
   toEqualText,
   toHaveSelector,
   toEqualValue,
-  toHaveSelectorCount
+  toHaveSelectorCount,
 }
