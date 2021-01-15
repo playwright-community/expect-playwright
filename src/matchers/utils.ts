@@ -31,36 +31,50 @@ export type InputArguments = [Page | ElementHandle, string?, (string | PageWaitF
 const lastElementHasType = (args: InputArguments, type: "string" | "object"): boolean => typeof args[args.length - 1] === type
 
 export const getElementText = async (...args: InputArguments): Promise<getElementTextReturn> => {
-  const type = detectExpectType(args[0])
-  /**
-  * Handle the following cases:
-  * - expect(page).foo("bar")
-  * - expect(element).foo("bar")
-  */
-  if (args.length === 2) {
-    if (type === ExpectTypeElementHandle) {
+  if (args.length > 1) {
+    const type = detectExpectType(args[0])
+    /**
+     * Handle the following cases:
+     * - expect(page).foo("bar")
+     * - expect(element).foo("bar")
+     */
+    if (args.length === 2) {
+      if (type === ExpectTypeElementHandle) {
+        return {
+          elementHandle: args[0] as ElementHandle,
+          expectedValue: args[1] as string
+        }
+      }
+      const page = args[0] as Page
       return {
-        elementHandle: args[0] as ElementHandle,
+        elementHandle: await page.$("body") as ElementHandle,
         expectedValue: args[1] as string
       }
     }
-    const page = args[0] as Page
-    return {
-      elementHandle: await page.$("body") as ElementHandle,
-      expectedValue: args[1] as string
-    }
-  }
-  /**
-   * Handle the following case:
-   * - expect(page).foo("#foo", "bar")
-   */
-  if (type === ExpectTypePage) {
-    const page = args[0] as Page
-    const selector = args[1] as string
-    if (args.length === 3) {
-      if (lastElementHasType(args, "string")) {
+    /**
+     * Handle the following case:
+     * - expect(page).foo("#foo", "bar")
+     */
+    if (type === ExpectTypePage) {
+      const page = args[0] as Page
+      const selector = args[1] as string
+      if (args.length === 3) {
+        if (lastElementHasType(args, "string")) {
+          try {
+            await page.waitForSelector(selector)
+          } catch (err) {
+            throw new Error(`Timeout exceed for element ${quote(selector)}`)
+          }
+          return {
+            elementHandle: await page.$(selector) as ElementHandle,
+            expectedValue: args[2] as string,
+            selector
+          }
+        }
+      }
+      if (args.length === 4 && lastElementHasType(args, "object")) {
         try {
-          await page.waitForSelector(selector)
+          await page.waitForSelector(selector, args[3] as PageWaitForSelectorOptions)
         } catch (err) {
           throw new Error(`Timeout exceed for element ${quote(selector)}`)
         }
@@ -69,18 +83,6 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
           expectedValue: args[2] as string,
           selector
         }
-      }
-    }
-    if (args.length === 4 && lastElementHasType(args, "object")) {
-      try {
-        await page.waitForSelector(selector, args[3] as PageWaitForSelectorOptions)
-      } catch (err) {
-        throw new Error(`Timeout exceed for element ${quote(selector)}`)
-      }
-      return {
-        elementHandle: await page.$(selector) as ElementHandle,
-        expectedValue: args[2] as string,
-        selector
       }
     }
   }
