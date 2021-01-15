@@ -57,7 +57,7 @@ await expect(page).toHaveText("#foo", "my text")
 
 ### toHaveSelector
 
-**expect(page: [Page]).toHaveSelector(selector: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/?_highlight=aitforselector#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toHaveSelector(selector: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 This function waits as a maximum as the timeout exceeds for a given selector once it appears on the page.
 
@@ -75,7 +75,7 @@ This function checks if the the `textContent` of a given element contains the pr
 
 You can do this via a selector on the whole page:
 
-**expect(page: [Page]).toHaveText(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/?_highlight=aitforselector#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toHaveText(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
 await expect(page).toHaveText("#my-element", "MyValue")
@@ -106,7 +106,7 @@ This function checks if the `textContent` of a given element is the same as the 
 
 You can do this via a selector on the whole page:
 
-**expect(page: [Page]).toEqualText(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/?_highlight=aitforselector#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toEqualText(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
 await expect(page).toEqualText("#my-element", "Playwright")
@@ -114,7 +114,7 @@ await expect(page).toEqualText("#my-element", "Playwright")
 
 Or without a selector which will use the `body` element:
 
-**expect(page: [Page]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/?_highlight=aitforselector#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
 await expect(page).toEqualText("Playwright")
@@ -122,7 +122,7 @@ await expect(page).toEqualText("Playwright")
 
 Or by passing a Playwright [ElementHandle]:
 
-**expect(page: [ElementHandle]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/?_highlight=aitforselector#pagewaitforselectorselector-options))**
+**expect(page: [ElementHandle]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
 const element = await page.$('#my-element');
@@ -137,7 +137,7 @@ This function checks if the `value` of a given element is the same as the provid
 
 You can do this via a selector or the element directly:
 
-**expect(page: [Page]).toEqualValue(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/?_highlight=aitforselector#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toEqualValue(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
 await expect(page).toEqualValue("#my-element", "Playwright")
