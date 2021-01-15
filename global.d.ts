@@ -19,7 +19,7 @@ export interface PlaywrightMatchers<R> {
   /**
   * Will check if the element's value includes the given text.
   */
-  toHaveText(value: string, options?: PageWaitForSelectorOptions): Promise<R>;
+  toHaveText(value: string): Promise<R>;
   /**
   * Will compare the element's textContent on the page determined by the selector with the given text.
   */
