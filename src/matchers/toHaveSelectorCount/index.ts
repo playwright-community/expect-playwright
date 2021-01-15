@@ -7,9 +7,6 @@ const toHaveSelectorCount = async (page: Page, selector: string, expectedValue: 
   try {
     await page.waitForSelector(selector, {...options, state: 'attached'})
     const actualCount = (await page.$$(selector)).length
-    if (actualCount === 0) {
-      throw new Error('Element not found')
-    }
     if (actualCount === expectedValue) {
       return {
         pass: true,

@@ -83,7 +83,7 @@ await expect(page).toHaveText("#my-element", "MyValue")
 
 Or without a selector which will use the `body` element:
 
-**expect(page: [Page]).toHaveText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toHaveText(value: string)**
 
 ```javascript
 await expect(page).toHaveText("Playwright")
@@ -91,7 +91,7 @@ await expect(page).toHaveText("Playwright")
 
 Or by passing a Playwright [ElementHandle]:
 
-**expect(page: [ElementHandle]).toHaveText(value: string, options?: [PageWaitForSelectorOptions](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagewaitforselectorselector-options))**
+**expect(page: [ElementHandle]).toHaveText(value: string)**
 
 ```javascript
 const element = await page.$('#my-element');
