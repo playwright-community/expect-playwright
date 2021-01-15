@@ -145,7 +145,7 @@ await expect(page).toEqualValue("#my-element", "Playwright")
 
 Or by passing a Playwright [ElementHandle]:
 
-**expect(page: [ElementHandle]).toEqualValue(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/?_highlight=aitforselector#pagewaitforselectorselector-options))**
+**expect(page: [ElementHandle]).toEqualValue(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
 const element = await page.$('#my-element');
