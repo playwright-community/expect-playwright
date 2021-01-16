@@ -4,7 +4,7 @@ import { PageWaitForSelectorOptions } from "../../global"
 const ExpectTypePage = "Page"
 const ExpectTypeElementHandle = "ElementHandle"
 
-type ExpectType = typeof ExpectTypePage | typeof ExpectTypeElementHandle
+export type ExpectType = typeof ExpectTypePage | typeof ExpectTypeElementHandle
 
 export type ExpectInputType = Page | ElementHandle
 
@@ -22,6 +22,7 @@ export const detectExpectType = (value: ExpectInputType): ExpectType => {
 
 interface getElementTextReturn {
   elementHandle: ElementHandle
+  type: ExpectType
   selector?: string
   expectedValue: string
 }
@@ -42,13 +43,15 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
       if (type === ExpectTypeElementHandle) {
         return {
           elementHandle: args[0] as ElementHandle,
-          expectedValue: args[1] as string
+          expectedValue: args[1] as string,
+          type
         }
       }
       const page = args[0] as Page
       return {
         elementHandle: await page.$("body") as ElementHandle,
-        expectedValue: args[1] as string
+        expectedValue: args[1] as string,
+        type
       }
     }
     /**
@@ -68,7 +71,8 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
           return {
             elementHandle: await page.$(selector) as ElementHandle,
             expectedValue: args[2] as string,
-            selector
+            selector,
+            type
           }
         }
       }
@@ -81,7 +85,8 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
         return {
           elementHandle: await page.$(selector) as ElementHandle,
           expectedValue: args[2] as string,
-          selector
+          selector,
+          type
         }
       }
     }

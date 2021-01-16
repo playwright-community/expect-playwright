@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toHaveText element negative 1`] = `"'not-existing' is not included in 'zzzBarzzz'."`;
+exports[`toHaveText element negative 1`] = `"'not-existing' is not included in element content"`;
 
-exports[`toHaveText page negative 1`] = `"'not-existing' is not included in 'zzzBarzzz'."`;
+exports[`toHaveText page negative 1`] = `"'not-existing' is not included in page content"`;
 
-exports[`toHaveText selector empty positive with custom element 1`] = `"'' is included in ''."`;
+exports[`toHaveText selector empty positive with custom element 1`] = `"'' is included in element content."`;
 
-exports[`toHaveText selector empty positive with page element 1`] = `"'' is included in ''."`;
+exports[`toHaveText selector empty positive with page element 1`] = `"'' is included in '' of '#foobar' selector."`;
 
-exports[`toHaveText selector negative 1`] = `"'not-existing' is not included in 'zzzBarzzz' of '#foobar'."`;
+exports[`toHaveText selector negative 1`] = `"'not-existing' is not included in 'zzzBarzzz' of '#foobar' selector"`;
 
-exports[`toHaveText selector positive 1`] = `"'Bar' is included in 'zzzBarzzz'."`;
+exports[`toHaveText selector positive 1`] = `"'Bar' is included in 'zzzBarzzz' of '#foobar' selector."`;
 
 exports[`toHaveText timeout should throw an error after the timeout exceeds 1`] = `"Error: Timeout exceed for element '#foobar'"`;
