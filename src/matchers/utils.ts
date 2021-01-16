@@ -26,7 +26,7 @@ interface getElementTextReturn {
   expectedValue: string
 }
 
-export type InputArguments = [Page | ElementHandle, string?, (string | PageWaitForSelectorOptions)?, PageWaitForSelectorOptions?]
+export type InputArguments = [Page | ElementHandle, string?, string?, PageWaitForSelectorOptions?]
 
 const lastElementHasType = (args: InputArguments, type: "string" | "object"): boolean => typeof args[args.length - 1] === type
 
