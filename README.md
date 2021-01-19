@@ -51,6 +51,7 @@ await expect(page).toHaveText("#foo", "my text")
 ### Table of Contents
 
 - [toHaveSelector](#toHaveSelector)
+- [toHaveSelectorCount](#toHaveSelectorCount)
 - [toHaveText](#toHaveText)
 - [toEqualText](#toEqualText)
 - [toEqualValue](#toEqualValue)
@@ -69,9 +70,20 @@ await expect(page).not.toHaveSelector("#foobar", {
 })
 ```
 
+### toHaveSelectorCount
+
+**expect(page: [Page]).toHaveSelector(selector: string, value: number, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
+
+This function checks if the count of a given selector is the same as the provided value.
+
+```javascript
+await expect(page).toHaveSelectorCount(".my-element", 3)
+```
+
+
 ### toHaveText
 
-This function checks if the the `textContent` of a given element contains the provided value.
+This function checks if the `textContent` of a given element contains the provided value.
 
 You can do this via a selector on the whole page:
 
