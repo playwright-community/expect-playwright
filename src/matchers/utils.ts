@@ -58,10 +58,10 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
     if (type === ExpectTypePage) {
       const page = args[0] as Page
       const selector = args[1] as string
-      if (args.length === 3) {
-        if (lastElementHasType(args, "string")) {
+      if (args.length === 3 && lastElementHasType(args, "string") ||
+          args.length === 4 && lastElementHasType(args, "object")) {
           try {
-            await page.waitForSelector(selector)
+            await page.waitForSelector(selector, args[3] as PageWaitForSelectorOptions)
           } catch (err) {
             throw new Error(`Timeout exceed for element ${quote(selector)}`)
           }
@@ -70,19 +70,6 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
             expectedValue: args[2] as string,
             selector
           }
-        }
-      }
-      if (args.length === 4 && lastElementHasType(args, "object")) {
-        try {
-          await page.waitForSelector(selector, args[3] as PageWaitForSelectorOptions)
-        } catch (err) {
-          throw new Error(`Timeout exceed for element ${quote(selector)}`)
-        }
-        return {
-          elementHandle: await page.$(selector) as ElementHandle,
-          expectedValue: args[2] as string,
-          selector
-        }
       }
     }
   }
