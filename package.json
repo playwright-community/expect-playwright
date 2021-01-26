@@ -3,7 +3,7 @@
   "version": "0.3.2",
   "main": "lib/index.js",
   "types": "./global.d.ts",
-  "repository": "https://github.com/mxschmitt/expect-playwright.git",
+  "repository": "https://github.com/playwright-community/expect-playwright",
   "author": "Max Schmitt <max@schmitt.mx>",
   "license": "MIT",
   "scripts": {
