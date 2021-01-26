@@ -33,7 +33,7 @@ export interface PlaywrightMatchers<R> {
   */
   toHaveSelector(selector: string, options?: PageWaitForSelectorOptions): Promise<R>;
   
-  toHaveSelectorCount(selector: string, count:number, options?: PageWaitForSelectorOptions): Promise<R>;
+  toHaveSelectorCount(selector: string, count: number, options?: PageWaitForSelectorOptions): Promise<R>;
   /**
   * Will compare the element's value on the page determined by the selector with the given value.
   */
@@ -49,4 +49,3 @@ declare global {
     interface Matchers<R> extends PlaywrightMatchers<R> { }
   }
 }
-
