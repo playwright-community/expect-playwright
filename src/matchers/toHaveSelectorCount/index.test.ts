@@ -4,21 +4,17 @@ import toHaveSelectorCount from '.'
 
 describe("toHaveSelectorCount", () => {
   afterEach(async () => {
-    await page.evaluate(() => document.body.innerHTML = "")
+    await page.setContent('')
   })
   describe("selector", () => {
     it("positive", async () => {
-      await page.evaluate(() => {
-        document.write(`<div class="foobar"></div><div class="foobar">Bar</div>`)
-      })
+      await page.setContent(`<div class="foobar"></div><div class="foobar">Bar</div>`)
       const result = await toHaveSelectorCount(page, ".foobar", 2)
       expect(result.pass).toBe(true)
       expect(result.message()).toMatchSnapshot()
     })
     it("negative", async () => {
-      await page.evaluate(() => {
-        document.write(`<div class="foobar">Bar</div>`)
-      })
+      await page.setContent(`<div class="foobar">Bar</div>`)
       expect(testWrapper(await toHaveSelectorCount(page, ".foobar", 2))).toThrowErrorMatchingSnapshot()
     })
   })
