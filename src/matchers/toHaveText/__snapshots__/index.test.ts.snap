@@ -4,6 +4,8 @@ exports[`toHaveText element negative 1`] = `"'not-existing' is not included in '
 
 exports[`toHaveText page negative 1`] = `"'not-existing' is not included in 'zzzBarzzz'."`;
 
+exports[`toHaveText page should be able to overwrite timeout 1`] = `"Error: Timeout exceed for element 'not-existing'"`;
+
 exports[`toHaveText selector empty positive with custom element 1`] = `"'' is included in ''."`;
 
 exports[`toHaveText selector empty positive with page element 1`] = `"'' is included in ''."`;

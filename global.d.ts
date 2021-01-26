@@ -9,7 +9,7 @@ interface PageWaitForSelectorOptions {
    * - `'hidden'` - wait for element to be either detached from DOM, or have an empty bounding box or `visibility:hidden`.
    *   This is opposite to the `'visible'` option.
    */
-  state?: "attached"|"detached"|"visible"|"hidden";
+  state?: "attached" | "detached" | "visible" | "hidden";
 
   /**
    * Maximum time in milliseconds, defaults to 30 seconds, pass `0` to disable timeout. The default value can be changed by
@@ -43,6 +43,10 @@ export interface PlaywrightMatchers<R> {
   */
   toHaveSelector(selector: string, options?: PageWaitForSelectorOptions): Promise<R>;
 
+  /**
+   * Will assert that N elements with the given selector are on the page and wait for it by default.
+   * If its 0 elements, then it will throw since the element can't be found.
+   */
   toHaveSelectorCount(selector: string, count: number, options?: PageWaitForSelectorOptions): Promise<R>;
   /**
   * Will compare the element's value on the page determined by the selector with the given value.

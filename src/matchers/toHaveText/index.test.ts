@@ -9,7 +9,7 @@ describe("toHaveText", () => {
   describe("selector", () => {
     it("empty positive with page element", async () => {
       await page.setContent(`<div id="foobar"></div>`)
-      const result = await toHaveText(page, "#foobar", "", {state: 'attached'})
+      const result = await toHaveText(page, "#foobar", "", { state: 'attached' })
       expect(result.pass).toBe(true)
       expect(result.message()).toMatchSnapshot()
     })
@@ -54,6 +54,15 @@ describe("toHaveText", () => {
     it("negative", async () => {
       await page.setContent(`<body><div>zzzBarzzz</div></body>`)
       expect(testWrapper(await toHaveText(page, "not-existing"))).toThrowErrorMatchingSnapshot()
+    })
+    it("should be able to overwrite timeout", async () => {
+      await page.setContent(`<body><div>zzzBarzzz</div></body>`)
+      const start = new Date().getTime()
+      expect(testWrapper(await toHaveText(page, "not-existing", {
+        timeout: 2000
+      }))).toThrowErrorMatchingSnapshot()
+      const duration = new Date().getTime() - start
+      expect(duration).toBeGreaterThan(2000)
     })
   })
   describe("timeout", () => {
