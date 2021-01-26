@@ -5,8 +5,9 @@ import {PageWaitForSelectorOptions} from "../../../global";
 
 const toHaveSelectorCount = async (page: Page, selector: string, expectedValue: number, options: PageWaitForSelectorOptions = {}): Promise<SyncExpectationResult> => {
   try {
-    await page.waitForSelector(selector, {...options, state: 'attached'})
-    const actualCount = (await page.$$(selector)).length
+    await page.waitForSelector(selector, {state: 'attached', ...options})
+    /* istanbul ignore next */
+    const actualCount = await page.$$eval(selector, el => el.length)
     if (actualCount === expectedValue) {
       return {
         pass: true,

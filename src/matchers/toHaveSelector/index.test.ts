@@ -4,12 +4,10 @@ import toHaveSelector from '.'
 
 describe("toHaveSelector", () => {
   afterEach(async () => {
-    await page.evaluate(() => document.body.innerHTML = "")
+    await page.setContent('')
   })
   it("positive", async () => {
-    await page.evaluate(() => {
-      document.write(`<div id="foobar">Bar</div>`)
-    })
+    await page.setContent(`<div id="foobar">Bar</div>`)
     const result = await toHaveSelector(page, "#foobar")
     expect(result.pass).toBe(true)
     expect(result.message()).toMatchSnapshot()
@@ -22,9 +20,7 @@ describe("toHaveSelector", () => {
   describe("timeout", () => {
     it("positive: should be able to use a custom timeout", async () => {
       setTimeout(async () => {
-        await page.evaluate(() => {
-          document.write(`<div id="foobar">Bar</div>`)
-        })
+        await page.setContent(`<div id="foobar">Bar</div>`)
       }, 500)
       expect(testWrapper(await toHaveSelector(page, "#foobar", {
         timeout: 1 * 1000

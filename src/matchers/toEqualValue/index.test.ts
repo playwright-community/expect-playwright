@@ -4,37 +4,29 @@ import toEqualValue from '.'
 
 describe("toEqualValue", () => {
   afterEach(async () => {
-    await page.evaluate(() => document.body.innerHTML = "")
+    await page.setContent('')
   })
   describe("selector", () => {
     it("positive", async () => {
-      await page.evaluate(() => {
-        document.write(`<input id="foobar" value="bar"/>`)
-      })
+      await page.setContent(`<input id="foobar" value="bar"/>`)
       const result = await toEqualValue(page, "#foobar", "bar")
       expect(result.pass).toBe(true)
       expect(result.message()).toMatchSnapshot()
     })
     it("negative", async () => {
-      await page.evaluate(() => {
-        document.write(`<input id="foobar" value="bar"/>`)
-      })
+      await page.setContent(`<input id="foobar" value="bar"/>`)
       expect(testWrapper(await toEqualValue(page, "#foobar", "not-existing"))).toThrowErrorMatchingSnapshot()
     })
   })
   describe("element", () => {
     it("positive", async () => {
-      await page.evaluate(() => {
-        document.write(`<input id="foobar" value="bar"/>`)
-      })
+      await page.setContent(`<input id="foobar" value="bar"/>`)
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
       expect(testWrapper(await toEqualValue(element!, "bar"))).toBe(true)
     })
     it("negative", async () => {
-      await page.evaluate(() => {
-        document.write(`<input id="foobar" value="bar"/>`)
-      })
+      await page.setContent(`<input id="foobar" value="bar"/>`)
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
       expect(testWrapper(await toEqualValue(element!, "not-existing"))).toThrowErrorMatchingSnapshot()
