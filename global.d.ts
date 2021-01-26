@@ -32,6 +32,8 @@ export interface PlaywrightMatchers<R> {
   * Will ensure that the element is one the page in a given timeout (default 1 second).
   */
   toHaveSelector(selector: string, options?: PageWaitForSelectorOptions): Promise<R>;
+  
+  toHaveSelectorCount(selector: string, count: number, options?: PageWaitForSelectorOptions): Promise<R>;
   /**
   * Will compare the element's value on the page determined by the selector with the given value.
   */
