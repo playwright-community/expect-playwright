@@ -16,7 +16,7 @@ const toHaveFocus = async (page: Page, selector: string, options: PageWaitForSel
     }
     return {
       pass: false,
-      message: () => `${quote(selector)} has not focus on it.`
+      message: () => `${quote(selector)} has no focus on it.`
     }
   } catch (err) {
     return {
