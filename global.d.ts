@@ -43,7 +43,7 @@ export interface PlaywrightMatchers<R> {
   */
   toHaveSelector(selector: string, options?: PageWaitForSelectorOptions): Promise<R>;
   /**
-   * Will ensure that the element is in focus.
+   * Will ensure that the element has focus.
    */
   toHaveFocus(selector: string, options?: PageWaitForSelectorOptions): Promise<R>;
   /**
@@ -70,4 +70,3 @@ declare global {
     interface Matchers<R> extends PlaywrightMatchers<R> { }
   }
 }
-
