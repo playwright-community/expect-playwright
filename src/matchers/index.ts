@@ -4,6 +4,7 @@ import toHaveSelector from './toHaveSelector'
 import toEqualValue from './toEqualValue'
 import toHaveSelectorCount from './toHaveSelectorCount'
 import toEqualUrl from './toEqualUrl'
+import toHaveFocus from './toHaveFocus'
 
 export default {
   toHaveText,
@@ -12,4 +13,5 @@ export default {
   toEqualValue,
   toHaveSelectorCount,
   toEqualUrl,
+  toHaveFocus,
 }

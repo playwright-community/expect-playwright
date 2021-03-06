@@ -39,10 +39,13 @@ export interface PlaywrightMatchers<R> {
   */
   toEqualText(value: string, options?: PageWaitForSelectorOptions): Promise<R>;
   /**
-  * Will ensure that the element is one the page in a given timeout (default 1 second).
+  * Will ensure that the element is on the page.
   */
   toHaveSelector(selector: string, options?: PageWaitForSelectorOptions): Promise<R>;
-
+  /**
+   * Will ensure that the element has focus.
+   */
+  toHaveFocus(selector: string, options?: PageWaitForSelectorOptions): Promise<R>;
   /**
    * Will assert that N elements with the given selector are on the page and wait for it by default.
    * If its 0 elements, then it will throw since the element can't be found.
@@ -67,4 +70,3 @@ declare global {
     interface Matchers<R> extends PlaywrightMatchers<R> { }
   }
 }
-

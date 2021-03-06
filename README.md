@@ -55,6 +55,8 @@ await expect(page).toHaveText("#foo", "my text")
 - [toHaveText](#toHaveText)
 - [toEqualText](#toEqualText)
 - [toEqualValue](#toEqualValue)
+- [toEqualUrl](#toEqualUrl)
+- [toHaveFocus](#toHaveFocus)
 
 ### toHaveSelector
 
@@ -66,6 +68,20 @@ This function waits as a maximum as the timeout exceeds for a given selector onc
 await expect(page).toHaveSelector("#foobar")
 // or via not, useful to only wait 1 second instead of for the default timeout by Playwright which is 30 seconds.
 await expect(page).not.toHaveSelector("#foobar", {
+  timeout: 1 * 1000
+})
+```
+
+### toHaveFocus
+
+**expect(page: [Page]).toHaveFocus(selector: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
+
+This function checks if the given selector has focus.
+
+```js
+await expect(page).toHaveFocus("#foobar")
+// or via not, useful to only wait 1 second instead of for the default timeout by Playwright which is 30 seconds.
+await expect(page).not.toHaveFocus("#foobar", {
   timeout: 1 * 1000
 })
 ```
@@ -119,8 +135,6 @@ const element = await page.$('#my-element');
 await expect(element).toHaveText("Playwright")
 ```
 
-By default it waits 1 second for the element which you can overwrite via the options.
-
 ### toEqualText
 
 This function checks if the `textContent` of a given element is the same as the provided value.
@@ -150,8 +164,6 @@ const element = await page.$('#my-element');
 await expect(element).toEqualText("Playwright")
 ```
 
-By default it waits 1 second for the element which you can overwrite via the options.
-
 ### toEqualValue
 
 This function checks if the `value` of a given element is the same as the provided value.
@@ -172,8 +184,6 @@ Or by passing a Playwright [ElementHandle]:
 const element = await page.$('#my-element');
 await expect(element).toEqualValue("Playwright")
 ```
-
-By default it waits 1 second for the element which you can overwrite via the options.
 
 ## Examples
 
