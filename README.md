@@ -135,8 +135,6 @@ const element = await page.$('#my-element');
 await expect(element).toHaveText("Playwright")
 ```
 
-By default it waits 1 second for the element which you can overwrite via the options.
-
 ### toEqualText
 
 This function checks if the `textContent` of a given element is the same as the provided value.
@@ -166,8 +164,6 @@ const element = await page.$('#my-element');
 await expect(element).toEqualText("Playwright")
 ```
 
-By default it waits 1 second for the element which you can overwrite via the options.
-
 ### toEqualValue
 
 This function checks if the `value` of a given element is the same as the provided value.
@@ -188,8 +184,6 @@ Or by passing a Playwright [ElementHandle]:
 const element = await page.$('#my-element');
 await expect(element).toEqualValue("Playwright")
 ```
-
-By default it waits 1 second for the element which you can overwrite via the options.
 
 ## Examples
 

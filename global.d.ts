@@ -39,7 +39,7 @@ export interface PlaywrightMatchers<R> {
   */
   toEqualText(value: string, options?: PageWaitForSelectorOptions): Promise<R>;
   /**
-  * Will ensure that the element is on the page in a given timeout (default 1 second).
+  * Will ensure that the element is on the page.
   */
   toHaveSelector(selector: string, options?: PageWaitForSelectorOptions): Promise<R>;
   /**
