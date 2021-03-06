@@ -56,6 +56,10 @@ export interface PlaywrightMatchers<R> {
   * Will compare element's value with the given value.
   */
   toEqualValue(value: string, options?: PageWaitForSelectorOptions): Promise<R>;
+  /**
+  * Will assert the given URL with the page's URL
+  */
+  toEqualUrl(value: string): Promise<R>;
 }
 
 declare global {

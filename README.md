@@ -70,6 +70,16 @@ await expect(page).not.toHaveSelector("#foobar", {
 })
 ```
 
+### toEqualUrl
+
+**expect(page: [Page]).toHaveSelector(value: string)**
+
+This function checks if the given URL matches the current page's URL
+
+```javascript
+await expect(page).toEqualUrl("https://github.com")
+```
+
 ### toHaveSelectorCount
 
 **expect(page: [Page]).toHaveSelector(selector: string, value: number, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
@@ -79,7 +89,6 @@ This function checks if the count of a given selector is the same as the provide
 ```javascript
 await expect(page).toHaveSelectorCount(".my-element", 3)
 ```
-
 
 ### toHaveText
 
