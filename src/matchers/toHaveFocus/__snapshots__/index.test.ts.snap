@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toHaveFocus negative: target element don't have focus 1`] = `"'#bar' has not focus on it."`;
+exports[`toHaveFocus negative: target element don't have focus 1`] = `"'#bar' has no focus on it."`;
 
 exports[`toHaveFocus negative: target element not found 1`] = `"'#bar' could not be found on the page."`;
 
