@@ -76,7 +76,7 @@ await expect(page).not.toHaveSelector("#foobar", {
 
 **expect(page: [Page]).toHaveFocus(selector: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
-This function if the given selector has focus.
+This function checks if the given selector has focus.
 
 ```js
 await expect(page).toHaveFocus("#foobar")
