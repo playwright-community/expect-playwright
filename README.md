@@ -128,7 +128,7 @@ await expect(page).toHaveText("Playwright")
 
 Or by passing a Playwright [ElementHandle]:
 
-**expect(page: [ElementHandle]).toHaveText(value: string)**
+**expect(element: [ElementHandle]).toHaveText(value: string)**
 
 ```javascript
 const element = await page.$('#my-element');
@@ -157,7 +157,7 @@ await expect(page).toEqualText("Playwright")
 
 Or by passing a Playwright [ElementHandle]:
 
-**expect(page: [ElementHandle]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
+**expect(element: [ElementHandle]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
 const element = await page.$('#my-element');
@@ -178,7 +178,7 @@ await expect(page).toEqualValue("#my-element", "Playwright")
 
 Or by passing a Playwright [ElementHandle]:
 
-**expect(page: [ElementHandle]).toEqualValue(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
+**expect(element: [ElementHandle]).toEqualValue(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
 const element = await page.$('#my-element');
