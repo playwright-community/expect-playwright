@@ -7,6 +7,13 @@ describe("toHaveText", () => {
     await page.setContent('')
   })
   describe("selector", () => {
+    it("positive frame", async () => {
+      await page.setContent(`<iframe src="https://example.com"></iframe>`)
+      const iframe = await page.$("iframe")
+      const result = await toHaveText(iframe!, "Example")
+      expect(result.pass).toBe(true)
+      expect(result.message()).toMatchSnapshot()
+    })
     it("empty positive with page element", async () => {
       await page.setContent(`<div id="foobar"></div>`)
       const result = await toHaveText(page, "#foobar", "", { state: 'attached' })

@@ -40,8 +40,11 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
      */
     if (args.length === 2) {
       if (type === ExpectTypeElementHandle) {
+        const iframe = await (args[0] as ElementHandle).contentFrame()
+        const elem = iframe ? await iframe.$("body") : args[0]
+
         return {
-          elementHandle: args[0] as ElementHandle,
+          elementHandle: elem as ElementHandle,
           expectedValue: args[1] as string
         }
       }
@@ -72,6 +75,28 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
       }
       return {
         elementHandle: await page.$(selector) as ElementHandle,
+        expectedValue: args[2] as string,
+        selector
+      }
+    }
+    if (type === ExpectTypeElementHandle) {
+      const iframe = await (args[0] as ElementHandle).contentFrame()
+      const elem = iframe ? await iframe.$("body") : args[0]
+      const selector = args[1] as string
+      let selectorOptions: PageWaitForSelectorOptions | undefined = undefined
+      if (args.length === 3 && lastElementHasType(args, "object")) {
+        selectorOptions = args[2] as PageWaitForSelectorOptions
+      }
+      if (args.length === 4 && lastElementHasType(args, "object")) {
+        selectorOptions = args[3] as PageWaitForSelectorOptions
+      }
+      try {
+        await elem!.waitForSelector(selector, selectorOptions!)
+      } catch (err) {
+        throw new Error(`Timeout exceed for element ${quote(selector)}`)
+      }
+      return {
+        elementHandle: await elem!.$(selector) as ElementHandle,
         expectedValue: args[2] as string,
         selector
       }

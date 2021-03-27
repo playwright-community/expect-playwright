@@ -14,4 +14,17 @@ exports[`toHaveText selector negative 1`] = `"'not-existing' is not included in 
 
 exports[`toHaveText selector positive 1`] = `"'Bar' is included in 'zzzBarzzz'."`;
 
+exports[`toHaveText selector positive frame 1`] = `
+"'Example' is included in '
+
+    Example Domain
+    This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.
+    More information...
+
+
+
+'."
+`;
+
 exports[`toHaveText timeout should throw an error after the timeout exceeds 1`] = `"Error: Timeout exceed for element '#foobar'"`;
