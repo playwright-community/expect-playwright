@@ -30,6 +30,17 @@ export type InputArguments = [Page | ElementHandle, string?, (string | PageWaitF
 
 const lastElementHasType = (args: InputArguments, type: "string" | "object"): boolean => typeof args[args.length - 1] === type
 
+const getSelectorOptions = (args: InputArguments) => {
+  let selectorOptions: PageWaitForSelectorOptions | undefined = undefined
+  if (args.length === 3 && lastElementHasType(args, "object")) {
+    selectorOptions = args[2] as PageWaitForSelectorOptions
+  }
+  if (args.length === 4 && lastElementHasType(args, "object")) {
+    selectorOptions = args[3] as PageWaitForSelectorOptions
+  }
+  return selectorOptions
+}
+
 export const getElementText = async (...args: InputArguments): Promise<getElementTextReturn> => {
   if (args.length > 1) {
     const type = detectExpectType(args[0])
@@ -58,16 +69,10 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
      * Handle the following case:
      * - expect(page).foo("#foo", "bar")
      */
+    const selector = args[1] as string
     if (type === ExpectTypePage) {
       const page = args[0] as Page
-      const selector = args[1] as string
-      let selectorOptions: PageWaitForSelectorOptions | undefined = undefined
-      if (args.length === 3 && lastElementHasType(args, "object")) {
-        selectorOptions = args[2] as PageWaitForSelectorOptions
-      }
-      if (args.length === 4 && lastElementHasType(args, "object")) {
-        selectorOptions = args[3] as PageWaitForSelectorOptions
-      }
+      const selectorOptions = getSelectorOptions(args)
       try {
         await page.waitForSelector(selector, selectorOptions!)
       } catch (err) {
@@ -82,14 +87,7 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
     if (type === ExpectTypeElementHandle) {
       const iframe = await (args[0] as ElementHandle).contentFrame()
       const elem = iframe ? await iframe.$("body") : args[0]
-      const selector = args[1] as string
-      let selectorOptions: PageWaitForSelectorOptions | undefined = undefined
-      if (args.length === 3 && lastElementHasType(args, "object")) {
-        selectorOptions = args[2] as PageWaitForSelectorOptions
-      }
-      if (args.length === 4 && lastElementHasType(args, "object")) {
-        selectorOptions = args[3] as PageWaitForSelectorOptions
-      }
+      const selectorOptions = getSelectorOptions(args)
       try {
         await elem!.waitForSelector(selector, selectorOptions!)
       } catch (err) {
