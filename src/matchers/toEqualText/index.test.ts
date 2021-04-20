@@ -7,6 +7,13 @@ describe("toEqualText", () => {
     await page.setContent('')
   })
   describe("selector", () => {
+    it("positive frame", async () => {
+      await page.setContent(`<iframe src="https://example.com"></iframe>`)
+      const iframe = await page.$("iframe")
+      const result = await toEqualText(iframe!, "h1", "Example Domain")
+      expect(result.pass).toBe(true)
+      expect(result.message()).toMatchSnapshot()
+    })
     it("positive", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
       const result = await toEqualText(page, "#foobar", "Bar")
