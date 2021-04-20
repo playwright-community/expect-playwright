@@ -1,6 +1,6 @@
 {
   "name": "expect-playwright",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "main": "lib/index.js",
   "types": "./global.d.ts",
   "repository": "https://github.com/playwright-community/expect-playwright",
@@ -12,16 +12,16 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "playwright-core": "^1.9.1"
+    "playwright-core": "^1.10.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.31",
+    "@types/jest": "^26.0.22",
+    "@types/node": "^14.14.41",
     "jest": "^26.6.3",
-    "jest-playwright-preset": "^1.4.7",
-    "playwright-chromium": "^1.9.1",
-    "playwright-core": "^1.9.1",
-    "ts-jest": "^26.5.2",
-    "typescript": "^4.2.2"
+    "jest-playwright-preset": "^1.5.1",
+    "playwright-chromium": "^1.10.0",
+    "playwright-core": "^1.10.0",
+    "ts-jest": "^26.5.5",
+    "typescript": "^4.2.4"
   }
 }
