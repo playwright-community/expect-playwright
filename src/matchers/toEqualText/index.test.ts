@@ -2,40 +2,38 @@ import { testWrapper } from "../tests/utils"
 
 import toEqualText from '.'
 
+expect.extend({ toEqualText })
+
 describe("toEqualText", () => {
   afterEach(async () => {
     await page.setContent('')
   })
-  describe("selector", () => {
+  describe.only("selector", () => {
     it("positive frame", async () => {
       await page.setContent(`<iframe src="https://example.com"></iframe>`)
       const iframe = await page.$("iframe")
-      const result = await toEqualText(iframe!, "h1", "Example Domain")
-      expect(result.pass).toBe(true)
-      expect(result.message()).toMatchSnapshot()
+      await expect(iframe!).toEqualText('h1', 'Example Domain')
     })
     it("positive", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
-      const result = await toEqualText(page, "#foobar", "Bar")
-      expect(result.pass).toBe(true)
-      expect(result.message()).toMatchSnapshot()
+      await expect(page).toEqualText("#foobar", "Bar")
     })
     it("negative", async () => {
       await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
-      expect(testWrapper(await toEqualText(page, "#foobar", "not-existing"))).toThrowErrorMatchingSnapshot()
+      await expect(() => expect(page).toEqualText("#foobar", "not-existing")).rejects.toThrowErrorMatchingSnapshot()
     })
     describe("timeout", () => {
       it("positive: should be able to use a custom timeout", async () => {
         setTimeout(async () => {
           await page.setContent(`<div id="foobar">Bar</div>`)
         }, 500)
-        expect(testWrapper(await toEqualText(page, "#foobar", "Bar"))).toBe(true)
+        await expect(page).toEqualText("#foobar", "Bar")
       })
       it("should throw an error after the timeout exceeds", async () => {
         const start = new Date().getTime()
-        expect(testWrapper(await toEqualText(page, "#foobar", "Bar", {
+        await expect(() => expect(page).toEqualText("#foobar", "Bar", {
           timeout: 1 * 1000
-        }))).toThrowErrorMatchingSnapshot()
+        })).rejects.toThrowErrorMatchingSnapshot()
         const duration = new Date().getTime() - start
         expect(duration).toBeLessThan(1500)
       })
@@ -45,24 +43,24 @@ describe("toEqualText", () => {
     it("positive", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
       const element = await page.$("#foobar")
-      expect(element).not.toBe(null)
-      expect(testWrapper(await toEqualText(element!, "Bar"))).toBe(true)
+      expect(element).not.toBeNull()
+      await expect(element!).toEqualText("Bar")
     })
     it("negative", async () => {
       await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
       const element = await page.$("#foobar")
-      expect(element).not.toBe(null)
-      expect(testWrapper(await toEqualText(element!, "not-existing"))).toThrowError()
+      expect(element).not.toBeNull()
+      await expect(() => expect(element!).toEqualText("not-existing")).rejects.toThrowError()
     })
   })
   describe("page", () => {
     it("positive", async () => {
       await page.setContent(`<body><div>Bar</div></body>`)
-      expect(testWrapper(await toEqualText(page, "Bar"))).toBe(true)
+      await expect(page).toEqualText("Bar")
     })
     it("negative", async () => {
       await page.setContent(`<body><div>zzzBarzzz</div></body>`)
-      expect(testWrapper(await toEqualText(page, "not-existing"))).toThrowError()
+      await expect(() => expect(page).toEqualText("not-existing")).rejects.toThrowError()
     })
   })
 })
