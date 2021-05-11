@@ -103,4 +103,24 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
   throw new Error(`Invalid input length: ${args.length}`)
 }
 
-export const quote = (val: string | null) => `'${val}'`
+export const quote = (val: string | null) =>
+  val === null ? 'null' : `'${val}'`
+
+export const getMessage = (
+  ctx: jest.MatcherContext,
+  matcher: string,
+  expected: string,
+  received: string
+) => {
+  const not = ctx.isNot ? 'not ' : ''
+  const matcherHint = ctx.utils.matcherHint(matcher, undefined, undefined, {
+    isNot: ctx.isNot,
+    promise: ctx.promise,
+  })
+
+  return () =>
+    matcherHint +
+    '\n\n' +
+    `Expected: ${not}${ctx.utils.printExpected(expected)}\n` +
+    `Received: ${ctx.utils.printReceived(received)}`
+}
