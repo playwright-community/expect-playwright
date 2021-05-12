@@ -3,8 +3,8 @@ import { getElementText } from "./utils"
 describe("utils.getElementText", () => {
   it("should throw an error if the specified expect element was not recognized", async () => {
     class Test123 {}
-    // @ts-ignore
     await expect(
+      // @ts-ignore
       getElementText(new Test123(), "")
     ).rejects.toThrowErrorMatchingSnapshot()
   })
