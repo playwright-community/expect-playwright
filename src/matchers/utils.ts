@@ -114,24 +114,25 @@ export const getElementText = async (
 }
 
 export const quote = (val: string | null) =>
-  val === null ? 'null' : `'${val}'`
+  val === null ? "null" : `'${val}'`
 
 export const getMessage = (
-  ctx: jest.MatcherContext,
+  { isNot, promise, utils }: jest.MatcherContext,
   matcher: string,
   expected: string | null,
   received: string | null
-) => () => {
-  const matcherHint = ctx.utils.matcherHint(matcher, undefined, undefined, {
-    isNot: ctx.isNot,
-    promise: ctx.promise,
-  }) + '\n\n'
+) => {
+  const matcherHint =
+    utils.matcherHint(matcher, undefined, undefined, { isNot, promise }) +
+    "\n\n"
 
-  if (ctx.isNot) {
-    return matcherHint + `Expected: not ${ctx.utils.printExpected(expected)}\n`
+  if (isNot) {
+    return matcherHint + `Expected: not ${utils.printExpected(expected)}`
   } else {
-    return matcherHint +
-      `Expected: ${ctx.utils.printExpected(expected)}\n` +
-      `Received: ${ctx.utils.printReceived(received)}`
+    return (
+      matcherHint +
+      `Expected: ${utils.printExpected(expected)}\n` +
+      `Received: ${utils.printReceived(received)}`
+    )
   }
 }

@@ -13,12 +13,8 @@ const toEqualText: jest.CustomMatcher = async function (
 
     return {
       pass: actualTextContent === expectedValue,
-      message: getMessage(
-        this,
-        "toEqualText",
-        expectedValue,
-        actualTextContent
-      ),
+      message: () =>
+        getMessage(this, "toEqualText", expectedValue, actualTextContent),
     }
   } catch (err) {
     return {
