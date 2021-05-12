@@ -109,18 +109,19 @@ export const quote = (val: string | null) =>
 export const getMessage = (
   ctx: jest.MatcherContext,
   matcher: string,
-  expected: string,
-  received: string
-) => {
-  const not = ctx.isNot ? 'not ' : ''
+  expected: string | null,
+  received: string | null
+) => () => {
   const matcherHint = ctx.utils.matcherHint(matcher, undefined, undefined, {
     isNot: ctx.isNot,
     promise: ctx.promise,
-  })
+  }) + '\n\n'
 
-  return () =>
-    matcherHint +
-    '\n\n' +
-    `Expected: ${not}${ctx.utils.printExpected(expected)}\n` +
-    `Received: ${ctx.utils.printReceived(received)}`
+  if (ctx.isNot) {
+    return matcherHint + `Expected: not ${ctx.utils.printExpected(expected)}\n`
+  } else {
+    return matcherHint +
+      `Expected: ${ctx.utils.printExpected(expected)}\n` +
+      `Received: ${ctx.utils.printReceived(received)}`
+  }
 }

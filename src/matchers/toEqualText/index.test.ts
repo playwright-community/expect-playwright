@@ -1,5 +1,3 @@
-import { testWrapper } from "../tests/utils"
-
 import toEqualText from '.'
 
 expect.extend({ toEqualText })
@@ -8,7 +6,7 @@ describe("toEqualText", () => {
   afterEach(async () => {
     await page.setContent('')
   })
-  describe.only("selector", () => {
+  describe("selector", () => {
     it("positive frame", async () => {
       await page.setContent(`<iframe src="https://example.com"></iframe>`)
       const iframe = await page.$("iframe")
@@ -22,6 +20,23 @@ describe("toEqualText", () => {
       await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
       await expect(() => expect(page).toEqualText("#foobar", "not-existing")).rejects.toThrowErrorMatchingSnapshot()
     })
+
+    describe('not', () => {
+      it("success in frame", async () => {
+        await page.setContent(`<iframe src="https://example.com"></iframe>`)
+        const iframe = await page.$("iframe")
+        await expect(iframe!).not.toEqualText('h1', 'Foo')
+      })
+      it("success", async () => {
+        await page.setContent(`<div id="foobar">Bar</div>`)
+        await expect(page).not.toEqualText("#foobar", "Foo")
+      })
+      it("failure", async () => {
+        await page.setContent(`<div id="foobar">Bar</div>`)
+        await expect(() => expect(page).not.toEqualText("#foobar", "Bar")).rejects.toThrowErrorMatchingSnapshot()
+      })
+    })
+
     describe("timeout", () => {
       it("positive: should be able to use a custom timeout", async () => {
         setTimeout(async () => {
