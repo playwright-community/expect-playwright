@@ -8,6 +8,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "format:apply": "prettier --write .",
+    "format:check": "prettier --check .",
     "start": "tsc --watch",
     "test": "jest"
   },
@@ -21,6 +23,7 @@
     "jest-playwright-preset": "^1.5.1",
     "playwright-chromium": "^1.10.0",
     "playwright-core": "^1.10.0",
+    "prettier": "^2.3.0",
     "ts-jest": "^26.5.5",
     "typescript": "^4.2.4"
   }
