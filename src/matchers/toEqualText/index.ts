@@ -6,6 +6,7 @@ const toEqualText: jest.CustomMatcher = async function (
 ): Promise<SyncExpectationResult> {
   try {
     const { elementHandle, expectedValue } = await getElementText(...args)
+    /* istanbul ignore next */
     const actualTextContent = await elementHandle.evaluate(
       (el) => el.textContent
     )
