@@ -1,4 +1,4 @@
-import { SyncExpectationResult } from 'expect/build/types'
+import { SyncExpectationResult } from "expect/build/types"
 
 export const testWrapper = (result: SyncExpectationResult) => {
   if (result.pass) {
@@ -7,4 +7,8 @@ export const testWrapper = (result: SyncExpectationResult) => {
   return () => {
     throw new Error(result.message())
   }
+}
+
+export const assertSnapshot = async (fn: () => Promise<void>) => {
+  await expect(fn).rejects.toThrowErrorMatchingSnapshot()
 }

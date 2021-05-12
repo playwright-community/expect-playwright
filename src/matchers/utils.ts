@@ -26,9 +26,17 @@ interface getElementTextReturn {
   expectedValue: string
 }
 
-export type InputArguments = [Page | ElementHandle, string?, (string | PageWaitForSelectorOptions)?, PageWaitForSelectorOptions?]
+export type InputArguments = [
+  Page | ElementHandle,
+  string?,
+  (string | PageWaitForSelectorOptions)?,
+  PageWaitForSelectorOptions?
+]
 
-const lastElementHasType = (args: InputArguments, type: "string" | "object"): boolean => typeof args[args.length - 1] === type
+const lastElementHasType = (
+  args: InputArguments,
+  type: "string" | "object"
+): boolean => typeof args[args.length - 1] === type
 
 const getSelectorOptions = (args: InputArguments) => {
   let selectorOptions: PageWaitForSelectorOptions | undefined = undefined
@@ -41,7 +49,9 @@ const getSelectorOptions = (args: InputArguments) => {
   return selectorOptions
 }
 
-export const getElementText = async (...args: InputArguments): Promise<getElementTextReturn> => {
+export const getElementText = async (
+  ...args: InputArguments
+): Promise<getElementTextReturn> => {
   if (args.length > 1) {
     const type = detectExpectType(args[0])
     /**
@@ -56,13 +66,13 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
 
         return {
           elementHandle: elem as ElementHandle,
-          expectedValue: args[1] as string
+          expectedValue: args[1] as string,
         }
       }
       const page = args[0] as Page
       return {
-        elementHandle: await page.$("body") as ElementHandle,
-        expectedValue: args[1] as string
+        elementHandle: (await page.$("body")) as ElementHandle,
+        expectedValue: args[1] as string,
       }
     }
     /**
@@ -79,9 +89,9 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
         throw new Error(`Timeout exceed for element ${quote(selector)}`)
       }
       return {
-        elementHandle: await page.$(selector) as ElementHandle,
+        elementHandle: (await page.$(selector)) as ElementHandle,
         expectedValue: args[2] as string,
-        selector
+        selector,
       }
     }
     if (type === ExpectTypeElementHandle) {
@@ -94,9 +104,9 @@ export const getElementText = async (...args: InputArguments): Promise<getElemen
         throw new Error(`Timeout exceed for element ${quote(selector)}`)
       }
       return {
-        elementHandle: await elem!.$(selector) as ElementHandle,
+        elementHandle: (await elem!.$(selector)) as ElementHandle,
         expectedValue: args[2] as string,
-        selector
+        selector,
       }
     }
   }
