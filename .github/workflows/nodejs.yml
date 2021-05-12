@@ -25,6 +25,10 @@ jobs:
           npx prettier --check .
       - run: npm run build
       - run: npm test
+        env:
+          # Used by chalk. Ensures output from Jest includes ANSI escape
+          # characters that are needed to match test snapshots.
+          FORCE_COLOR: true
       - run: npx codecov
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
