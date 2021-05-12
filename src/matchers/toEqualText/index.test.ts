@@ -38,7 +38,7 @@ describe("toEqualText", () => {
     })
 
     describe("timeout", () => {
-      it("positive: should be able to use a custom timeout", async () => {
+      it("success with a custom timeout", async () => {
         setTimeout(async () => {
           await page.setContent(`<div id="foobar">Bar</div>`)
         }, 500)
@@ -55,13 +55,13 @@ describe("toEqualText", () => {
     })
   })
   describe("element", () => {
-    it("positive", async () => {
+    it("success", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
       const element = await page.$("#foobar")
       expect(element).not.toBeNull()
       await expect(element!).toEqualText("Bar")
     })
-    it("negative", async () => {
+    it("failure", async () => {
       await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
       const element = await page.$("#foobar")
       expect(element).not.toBeNull()
@@ -69,11 +69,11 @@ describe("toEqualText", () => {
     })
   })
   describe("page", () => {
-    it("positive", async () => {
+    it("success", async () => {
       await page.setContent(`<body><div>Bar</div></body>`)
       await expect(page).toEqualText("Bar")
     })
-    it("negative", async () => {
+    it("failure", async () => {
       await page.setContent(`<body><div>zzzBarzzz</div></body>`)
       await expect(() => expect(page).toEqualText("not-existing")).rejects.toThrowError()
     })
