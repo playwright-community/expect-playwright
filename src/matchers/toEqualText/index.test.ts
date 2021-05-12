@@ -1,10 +1,10 @@
 import { testWrapper } from "../tests/utils"
 
-import toEqualText from '.'
+import toEqualText from "."
 
 describe("toEqualText", () => {
   afterEach(async () => {
-    await page.setContent('')
+    await page.setContent("")
   })
   describe("selector", () => {
     it("positive frame", async () => {
@@ -22,20 +22,28 @@ describe("toEqualText", () => {
     })
     it("negative", async () => {
       await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
-      expect(testWrapper(await toEqualText(page, "#foobar", "not-existing"))).toThrowErrorMatchingSnapshot()
+      expect(
+        testWrapper(await toEqualText(page, "#foobar", "not-existing"))
+      ).toThrowErrorMatchingSnapshot()
     })
     describe("timeout", () => {
       it("positive: should be able to use a custom timeout", async () => {
         setTimeout(async () => {
           await page.setContent(`<div id="foobar">Bar</div>`)
         }, 500)
-        expect(testWrapper(await toEqualText(page, "#foobar", "Bar"))).toBe(true)
+        expect(testWrapper(await toEqualText(page, "#foobar", "Bar"))).toBe(
+          true
+        )
       })
       it("should throw an error after the timeout exceeds", async () => {
         const start = new Date().getTime()
-        expect(testWrapper(await toEqualText(page, "#foobar", "Bar", {
-          timeout: 1 * 1000
-        }))).toThrowErrorMatchingSnapshot()
+        expect(
+          testWrapper(
+            await toEqualText(page, "#foobar", "Bar", {
+              timeout: 1 * 1000,
+            })
+          )
+        ).toThrowErrorMatchingSnapshot()
         const duration = new Date().getTime() - start
         expect(duration).toBeLessThan(1500)
       })
@@ -52,7 +60,9 @@ describe("toEqualText", () => {
       await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
       const element = await page.$("#foobar")
       expect(element).not.toBe(null)
-      expect(testWrapper(await toEqualText(element!, "not-existing"))).toThrowError()
+      expect(
+        testWrapper(await toEqualText(element!, "not-existing"))
+      ).toThrowError()
     })
   })
   describe("page", () => {
@@ -62,7 +72,9 @@ describe("toEqualText", () => {
     })
     it("negative", async () => {
       await page.setContent(`<body><div>zzzBarzzz</div></body>`)
-      expect(testWrapper(await toEqualText(page, "not-existing"))).toThrowError()
+      expect(
+        testWrapper(await toEqualText(page, "not-existing"))
+      ).toThrowError()
     })
   })
 })

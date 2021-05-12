@@ -1,4 +1,4 @@
-import { SyncExpectationResult } from 'expect/build/types'
+import { SyncExpectationResult } from "expect/build/types"
 
 export const testWrapper = (result: SyncExpectationResult) => {
   if (result.pass) {

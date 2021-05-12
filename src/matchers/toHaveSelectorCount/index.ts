@@ -1,27 +1,36 @@
-import { SyncExpectationResult } from 'expect/build/types'
-import { quote } from '../utils'
-import { Page } from 'playwright-core'
-import {PageWaitForSelectorOptions} from "../../../global";
+import { SyncExpectationResult } from "expect/build/types"
+import { quote } from "../utils"
+import { Page } from "playwright-core"
+import { PageWaitForSelectorOptions } from "../../../global"
 
-const toHaveSelectorCount = async (page: Page, selector: string, expectedValue: number, options: PageWaitForSelectorOptions = {}): Promise<SyncExpectationResult> => {
+const toHaveSelectorCount = async (
+  page: Page,
+  selector: string,
+  expectedValue: number,
+  options: PageWaitForSelectorOptions = {}
+): Promise<SyncExpectationResult> => {
   try {
-    await page.waitForSelector(selector, {state: 'attached', ...options})
+    await page.waitForSelector(selector, { state: "attached", ...options })
     /* istanbul ignore next */
-    const actualCount = await page.$$eval(selector, el => el.length)
+    const actualCount = await page.$$eval(selector, (el) => el.length)
     if (actualCount === expectedValue) {
       return {
         pass: true,
-        message: () => `${quote(`${expectedValue}`)} does equal ${quote(`${actualCount}`)}.`
+        message: () =>
+          `${quote(`${expectedValue}`)} does equal ${quote(`${actualCount}`)}.`,
       }
     }
     return {
       pass: false,
-      message: () => `${quote(`${expectedValue}`)} does not equal ${quote(`${actualCount}`)}${selector ? ' of ' + quote(selector) + "." : '.'}`
+      message: () =>
+        `${quote(`${expectedValue}`)} does not equal ${quote(
+          `${actualCount}`
+        )}${selector ? " of " + quote(selector) + "." : "."}`,
     }
   } catch (err) {
     return {
       pass: false,
-      message: () => `${quote(selector)} could not be found on the page.`
+      message: () => `${quote(selector)} could not be found on the page.`,
     }
   }
 }

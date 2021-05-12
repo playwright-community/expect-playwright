@@ -18,7 +18,7 @@ To activate it in your Jest environment you have to include it in your configura
 
 ```json
 {
-    "setupFilesAfterEnv": ["expect-playwright"]
+  "setupFilesAfterEnv": ["expect-playwright"]
 }
 ```
 
@@ -39,7 +39,7 @@ Example which should wait and compare the text content of a paragraph on the pag
 ```javascript
 // before
 await page.waitForSelector("#foo")
-const textContent = await page.$eval("#foo", el => el.textContent)
+const textContent = await page.$eval("#foo", (el) => el.textContent)
 expect(textContent).stringContaining("my text")
 
 // after by using expect-playwright
@@ -68,7 +68,7 @@ This function waits as a maximum as the timeout exceeds for a given selector onc
 await expect(page).toHaveSelector("#foobar")
 // or via not, useful to only wait 1 second instead of for the default timeout by Playwright which is 30 seconds.
 await expect(page).not.toHaveSelector("#foobar", {
-  timeout: 1 * 1000
+  timeout: 1 * 1000,
 })
 ```
 
@@ -82,7 +82,7 @@ This function checks if the given selector has focus.
 await expect(page).toHaveFocus("#foobar")
 // or via not, useful to only wait 1 second instead of for the default timeout by Playwright which is 30 seconds.
 await expect(page).not.toHaveFocus("#foobar", {
-  timeout: 1 * 1000
+  timeout: 1 * 1000,
 })
 ```
 
@@ -131,7 +131,7 @@ Or by passing a Playwright [ElementHandle]:
 **expect(element: [ElementHandle]).toHaveText(value: string)**
 
 ```javascript
-const element = await page.$('#my-element');
+const element = await page.$("#my-element")
 await expect(element).toHaveText("Playwright")
 ```
 
@@ -160,7 +160,7 @@ Or by passing a Playwright [ElementHandle]:
 **expect(element: [ElementHandle]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
-const element = await page.$('#my-element');
+const element = await page.$("#my-element")
 await expect(element).toEqualText("Playwright")
 ```
 
@@ -181,14 +181,14 @@ Or by passing a Playwright [ElementHandle]:
 **expect(element: [ElementHandle]).toEqualValue(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
-const element = await page.$('#my-element');
+const element = await page.$("#my-element")
 await expect(element).toEqualValue("Playwright")
 ```
 
 ## Examples
 
 ```typescript
-import playwright from 'playwright-chromium'
+import playwright from "playwright-chromium"
 
 describe("GitHub Playwright project", () => {
   it("should should have Playwright in the README heading", async () => {
@@ -197,7 +197,9 @@ describe("GitHub Playwright project", () => {
     await page.goto("https://github.com/microsoft/playwright")
     await expect(page).toHaveText("#readme h1", "Playwright")
     // or also all of them via the not property
-    await expect(page).not.toHaveText("this-is-no-anywhere", { timeout: 1 * 1000 })
+    await expect(page).not.toHaveText("this-is-no-anywhere", {
+      timeout: 1 * 1000,
+    })
     await browser.close()
   })
 })
@@ -217,6 +219,6 @@ at the top of your test file or include it globally in your `tsconfig.json`.
 
 - [expect-puppeteer](https://github.com/smooth-code/jest-puppeteer/tree/master/packages/expect-puppeteer)
 
-[ElementHandle]: https://github.com/microsoft/playwright/blob/master/docs/api.md#class-elementhandle
-[Page]: https://github.com/microsoft/playwright/blob/master/docs/api.md#class-page
-[Playwright]: https://github.com/microsoft/Playwright
+[elementhandle]: https://github.com/microsoft/playwright/blob/master/docs/api.md#class-elementhandle
+[page]: https://github.com/microsoft/playwright/blob/master/docs/api.md#class-page
+[playwright]: https://github.com/microsoft/Playwright
