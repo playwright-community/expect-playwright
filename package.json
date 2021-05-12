@@ -8,8 +8,6 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "format:apply": "prettier --write .",
-    "format:check": "prettier --check .",
     "start": "tsc --watch",
     "test": "jest"
   },

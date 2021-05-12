@@ -21,7 +21,8 @@ jobs:
       - run: npm ci
       - name: Lint
         run: |
-          yarn run tsc --noEmit
+          npx tsc --noEmit
+          npx prettier --check .
       - run: npm run build
       - run: npm test
       - run: npx codecov
