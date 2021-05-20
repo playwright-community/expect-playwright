@@ -22,12 +22,16 @@ To activate it in your Jest environment you have to include it in your configura
 }
 ```
 
-### Without Jest
+### With Playwright test runner
 
-```javascript
-import expect from "expect-playwright"
+To activate with the Playwright test runner, use `expect.extend` to add the `expect-playwright` matchers.
 
-await expect(page).toHaveText("#foo", "my text")
+```js
+// folio.config.ts
+import { expect } from "@playwright/test"
+import matchers from "expect-playwright"
+
+expect.extend(matchers)
 ```
 
 ## Why do I need it
