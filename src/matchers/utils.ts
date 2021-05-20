@@ -113,8 +113,7 @@ export const getElementText = async (
   throw new Error(`Invalid input length: ${args.length}`)
 }
 
-export const quote = (val: string | null) =>
-  val === null ? "null" : `'${val}'`
+export const quote = (val: string | null) => (val === null ? "" : `'${val}'`)
 
 export const getMessage = (
   { isNot, promise, utils }: jest.MatcherContext,
