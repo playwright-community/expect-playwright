@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`expectPlaywright should be able to handle negative cases return right result for page and 2 arguments 1`] = `"'zzzBarzzz' is not included in 'zzzzz'."`;
-
-exports[`expectPlaywright should be able to handle negative cases return right result for page and 4 arguments 1`] = `"Error: Timeout exceed for element '#bar'"`;
