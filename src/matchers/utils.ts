@@ -121,17 +121,14 @@ export const getMessage = (
   expected: string | null,
   received: string | null
 ) => {
-  const matcherHint =
-    utils.matcherHint(matcher, undefined, undefined, { isNot, promise }) +
-    "\n\n"
-
-  if (isNot) {
-    return matcherHint + `Expected: not ${utils.printExpected(expected)}`
-  } else {
-    return (
-      matcherHint +
-      `Expected: ${utils.printExpected(expected)}\n` +
+  const message = isNot
+    ? `Expected: not ${utils.printExpected(expected)}`
+    : `Expected: ${utils.printExpected(expected)}\n` +
       `Received: ${utils.printReceived(received)}`
-    )
-  }
+
+  return (
+    utils.matcherHint(matcher, undefined, undefined, { isNot, promise }) +
+    "\n\n" +
+    message
+  )
 }
