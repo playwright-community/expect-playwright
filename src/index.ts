@@ -6,4 +6,4 @@ if (typeof global.expect !== "undefined") {
   global.expect.extend(matchers)
 }
 
-export default matchers
+export { matchers }

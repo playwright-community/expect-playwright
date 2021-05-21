@@ -29,7 +29,7 @@ To activate with the Playwright test runner, use `expect.extend` to add the `exp
 ```js
 // folio.config.ts
 import { expect } from "@playwright/test"
-import matchers from "expect-playwright"
+import { matchers } from "expect-playwright"
 
 expect.extend(matchers)
 ```
