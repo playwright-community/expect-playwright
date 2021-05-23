@@ -8,3 +8,7 @@ export const testWrapper = (result: SyncExpectationResult) => {
     throw new Error(result.message())
   }
 }
+
+export const assertSnapshot = async (fn: () => Promise<void>) => {
+  await expect(fn).rejects.toThrowErrorMatchingSnapshot()
+}

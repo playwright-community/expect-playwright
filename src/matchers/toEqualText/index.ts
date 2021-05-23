@@ -1,30 +1,20 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { getElementText, quote, InputArguments } from "../utils"
+import { getElementText, getMessage, InputArguments } from "../utils"
 
-const toEqualText = async (
+const toEqualText: jest.CustomMatcher = async function (
   ...args: InputArguments
-): Promise<SyncExpectationResult> => {
+): Promise<SyncExpectationResult> {
   try {
-    const { elementHandle, selector, expectedValue } = await getElementText(
-      ...args
-    )
+    const { elementHandle, expectedValue } = await getElementText(...args)
     /* istanbul ignore next */
-    const actualTextContent = await elementHandle.evaluate<string | null>(
+    const actualTextContent = await elementHandle.evaluate(
       (el) => el.textContent
     )
-    if (actualTextContent === expectedValue) {
-      return {
-        pass: true,
-        message: () =>
-          `${quote(expectedValue)} does equal ${quote(actualTextContent)}.`,
-      }
-    }
+
     return {
-      pass: false,
+      pass: actualTextContent === expectedValue,
       message: () =>
-        `${quote(expectedValue)} does not equal ${quote(actualTextContent)}${
-          selector ? " of " + quote(selector) + "." : "."
-        }`,
+        getMessage(this, "toEqualText", expectedValue, actualTextContent),
     }
   } catch (err) {
     return {
