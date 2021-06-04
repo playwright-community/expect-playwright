@@ -1,31 +1,23 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { quote } from "../utils"
+import { getMessage, quote } from "../utils"
 import { Page } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../../global"
 
-const toHaveSelectorCount = async (
+const toHaveSelectorCount: jest.CustomMatcher = async function (
   page: Page,
   selector: string,
   expectedValue: number,
   options: PageWaitForSelectorOptions = {}
-): Promise<SyncExpectationResult> => {
+): Promise<SyncExpectationResult> {
   try {
     await page.waitForSelector(selector, { state: "attached", ...options })
     /* istanbul ignore next */
     const actualCount = await page.$$eval(selector, (el) => el.length)
-    if (actualCount === expectedValue) {
-      return {
-        pass: true,
-        message: () =>
-          `${quote(`${expectedValue}`)} does equal ${quote(`${actualCount}`)}.`,
-      }
-    }
+
     return {
-      pass: false,
+      pass: actualCount === expectedValue,
       message: () =>
-        `${quote(`${expectedValue}`)} does not equal ${quote(
-          `${actualCount}`
-        )}${selector ? " of " + quote(selector) + "." : "."}`,
+        getMessage(this, "toHaveSelectorCount", expectedValue, actualCount),
     }
   } catch (err) {
     return {

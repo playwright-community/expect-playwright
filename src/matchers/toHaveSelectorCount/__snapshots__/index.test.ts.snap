@@ -1,7 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toHaveSelectorCount selector negative 1`] = `"'2' does not equal '1' of '.foobar'."`;
+exports[`toHaveSelectorCount selector negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoHaveSelectorCount[2m([22m[32mexpected[39m[2m)[22m
 
-exports[`toHaveSelectorCount selector with 'not' usage negative 1`] = `"'1' does equal '1'."`;
+Expected: [32m2[39m
+Received: [31m1[39m"
+`;
+
+exports[`toHaveSelectorCount selector with 'not' usage negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoHaveSelectorCount[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: not [32m1[39m"
+`;
 
 exports[`toHaveSelectorCount timeout should throw an error after the timeout exceeds 1`] = `"'.foobar' could not be found on the page."`;
