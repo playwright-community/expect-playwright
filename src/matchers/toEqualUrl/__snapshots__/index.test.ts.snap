@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toEqualUrl should return false if it does not match the Url 1`] = `"'http://i-do-not-exist.com/2.html' expects not the current Url: 'http://i-do-not-exist.com/1.html'"`;
+exports[`toEqualUrl negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoEqualUrl[2m([22m[32mexpected[39m[2m)[22m
 
-exports[`toEqualUrl should return true if it matches the Url 1`] = `"'http://i-do-not-exist.com/1.html' matches the given Url."`;
+Expected: [32m\\"http://i-do-not-exist.com/2.html\\"[39m
+Received: [31m\\"http://i-do-not-exist.com/1.html\\"[39m"
+`;
+
+exports[`toEqualUrl with 'not' usage negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoEqualUrl[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: not [32m\\"http://i-do-not-exist.com/1.html\\"[39m"
+`;

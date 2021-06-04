@@ -1,22 +1,16 @@
 import { SyncExpectationResult } from "expect/build/types"
 import { Page } from "playwright-core"
-import { getElementText, quote } from "../utils"
+import { getMessage } from "../utils"
 
-const toEqualUrl = async (
+const toEqualUrl: jest.CustomMatcher = async function (
   page: Page,
   expectedUrl: string
-): Promise<SyncExpectationResult> => {
+): Promise<SyncExpectationResult> {
   const actualUrl = page.url()
-  if (actualUrl === expectedUrl) {
-    return {
-      pass: true,
-      message: () => `${quote(expectedUrl)} matches the given Url.`,
-    }
-  }
+
   return {
-    pass: false,
-    message: () =>
-      `${quote(expectedUrl)} expects not the current Url: ${quote(actualUrl)}`,
+    pass: actualUrl === expectedUrl,
+    message: () => getMessage(this, "toEqualUrl", expectedUrl, actualUrl),
   }
 }
 
