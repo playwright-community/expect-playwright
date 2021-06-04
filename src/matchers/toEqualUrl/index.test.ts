@@ -1,7 +1,12 @@
 import toEqualUrl from "."
+import { assertSnapshot } from "../tests/utils"
+
+expect.extend({ toEqualUrl })
 
 describe("toEqualUrl", () => {
-  it("should return true if it matches the Url", async () => {
+  const urlPrefix = "http://i-do-not-exist.com"
+
+  it("positive", async () => {
     await page.route("**/1.html", (route) => {
       route.fulfill({
         body: "123",
@@ -10,13 +15,11 @@ describe("toEqualUrl", () => {
         },
       })
     })
-    const myUrl = "http://i-do-not-exist.com/1.html"
+    const myUrl = `${urlPrefix}/1.html`
     await page.goto(myUrl)
-    const result = await toEqualUrl(page, myUrl)
-    expect(result.pass).toBe(true)
-    expect(result.message()).toMatchSnapshot()
+    expect(page).toEqualUrl(myUrl)
   })
-  it("should return false if it does not match the Url", async () => {
+  it("negative", async () => {
     await page.route("**/1.html", (route) => {
       route.fulfill({
         body: "123",
@@ -25,9 +28,7 @@ describe("toEqualUrl", () => {
         },
       })
     })
-    await page.goto("http://i-do-not-exist.com/1.html")
-    const result = await toEqualUrl(page, "http://i-do-not-exist.com/2.html")
-    expect(result.pass).toBe(false)
-    expect(result.message()).toMatchSnapshot()
+    await page.goto(`${urlPrefix}/1.html`)
+    await assertSnapshot(() => expect(page).toEqualUrl(`${urlPrefix}/2.html`))
   })
 })
