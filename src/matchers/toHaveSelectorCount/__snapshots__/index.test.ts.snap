@@ -2,6 +2,6 @@
 
 exports[`toHaveSelectorCount selector negative 1`] = `"'2' does not equal '1' of '.foobar'."`;
 
-exports[`toHaveSelectorCount selector positive 1`] = `"'2' does equal '2'."`;
+exports[`toHaveSelectorCount selector with 'not' usage negative 1`] = `"'1' does equal '1'."`;
 
 exports[`toHaveSelectorCount timeout should throw an error after the timeout exceeds 1`] = `"'.foobar' could not be found on the page."`;
