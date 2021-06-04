@@ -1,6 +1,7 @@
-import { testWrapper } from "../tests/utils"
-
+import { assertSnapshot, testWrapper } from "../tests/utils"
 import toHaveSelector from "."
+
+expect.extend({ toHaveSelector })
 
 describe("toHaveSelector", () => {
   afterEach(async () => {
@@ -8,41 +9,37 @@ describe("toHaveSelector", () => {
   })
   it("positive", async () => {
     await page.setContent(`<div id="foobar">Bar</div>`)
-    const result = await toHaveSelector(page, "#foobar")
-    expect(result.pass).toBe(true)
-    expect(result.message()).toMatchSnapshot()
+    await expect(page).toHaveSelector("#foobar")
   })
   it("negative", async () => {
-    expect(
-      testWrapper(
-        await toHaveSelector(page, "#foobar", {
-          timeout: 1 * 1000,
-        })
-      )
-    ).toThrowError()
+    await assertSnapshot(() =>
+      expect(page).toHaveSelector("#foobar", { timeout: 1000 })
+    )
   })
+
+  describe("with 'not' usage", () => {
+    it("positive", async () => {
+      await expect(page).not.toHaveSelector("#foobar", { timeout: 1000 })
+    })
+
+    it("negative", async () => {
+      await page.setContent(`<div id="foobar">Bar</div>`)
+      await assertSnapshot(() => expect(page).not.toHaveSelector("#foobar"))
+    })
+  })
+
   describe("timeout", () => {
     it("positive: should be able to use a custom timeout", async () => {
       setTimeout(async () => {
         await page.setContent(`<div id="foobar">Bar</div>`)
       }, 500)
-      expect(
-        testWrapper(
-          await toHaveSelector(page, "#foobar", {
-            timeout: 1 * 1000,
-          })
-        )
-      ).toBe(true)
+      await expect(page).toHaveSelector("#foobar", { timeout: 1000 })
     })
     it("should throw an error after the timeout exceeds", async () => {
       const start = new Date().getTime()
-      expect(
-        testWrapper(
-          await toHaveSelector(page, "#foobar", {
-            timeout: 1 * 1000,
-          })
-        )
-      ).toThrowError()
+      await assertSnapshot(() =>
+        expect(page).toHaveSelector("#foobar", { timeout: 1000 })
+      )
       const duration = new Date().getTime() - start
       expect(duration).toBeLessThan(1500)
     })
