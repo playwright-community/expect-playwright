@@ -1,9 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toHaveFocus negative: target element don't have focus 1`] = `"'#bar' has no focus on it."`;
+exports[`toHaveFocus negative: target element don't have focus 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoHaveFocus[2m([22m[32mexpected[39m[2m)[22m
 
-exports[`toHaveFocus negative: target element not found 1`] = `"'#bar' could not be found on the page."`;
+Expected: element to have focus"
+`;
 
-exports[`toHaveFocus timeout should throw an error after the timeout exceeds 1`] = `"'#foobar' could not be found on the page."`;
+exports[`toHaveFocus negative: target element not found 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoHaveFocus[2m([22m[32mexpected[39m[2m)[22m
 
-exports[`toHaveFocus with 'not' usage negative: target element has focus 1`] = `"'#foobar' has focus on it."`;
+Expected: element to have focus
+Received: element was not found"
+`;
+
+exports[`toHaveFocus timeout should throw an error after the timeout exceeds 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoHaveFocus[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: element to have focus
+Received: element was not found"
+`;
+
+exports[`toHaveFocus with 'not' usage negative: target element has focus 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoHaveFocus[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: element to not have focus"
+`;
