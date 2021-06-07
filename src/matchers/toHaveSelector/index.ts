@@ -1,5 +1,4 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { quote } from "../utils"
 import { Page } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../../global"
 

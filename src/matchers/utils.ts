@@ -91,7 +91,6 @@ export const getElementText = async (
       return {
         elementHandle: (await page.$(selector)) as ElementHandle,
         expectedValue: args[2] as string,
-        selector,
       }
     }
     if (type === ExpectTypeElementHandle) {
@@ -106,7 +105,6 @@ export const getElementText = async (
       return {
         elementHandle: (await elem!.$(selector)) as ElementHandle,
         expectedValue: args[2] as string,
-        selector,
       }
     }
   }

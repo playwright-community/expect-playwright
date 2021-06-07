@@ -1,13 +1,11 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { getElementText, quote, InputArguments, getMessage } from "../utils"
+import { getElementText, getMessage, InputArguments } from "../utils"
 
 const toEqualValue: jest.CustomMatcher = async function (
   ...args: InputArguments
 ): Promise<SyncExpectationResult> {
   try {
-    const { elementHandle, selector, expectedValue } = await getElementText(
-      ...args
-    )
+    const { elementHandle, expectedValue } = await getElementText(...args)
     /* istanbul ignore next */
     const actualTextContent = await elementHandle.evaluate(
       (el) => (el as HTMLInputElement).value
