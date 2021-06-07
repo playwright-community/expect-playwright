@@ -1,5 +1,5 @@
 import toEqualValue from "."
-import { assertSnapshot, testWrapper } from "../tests/utils"
+import { assertSnapshot } from "../tests/utils"
 
 expect.extend({ toEqualValue })
 

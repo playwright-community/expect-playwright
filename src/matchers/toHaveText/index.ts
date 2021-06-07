@@ -1,30 +1,20 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { getElementText, quote, InputArguments } from "../utils"
+import { getElementText, getMessage, InputArguments } from "../utils"
 
-const toHaveText = async (
+const toHaveText: jest.CustomMatcher = async function (
   ...args: InputArguments
-): Promise<SyncExpectationResult> => {
+): Promise<SyncExpectationResult> {
   try {
-    const { elementHandle, selector, expectedValue } = await getElementText(
-      ...args
-    )
+    const { elementHandle, expectedValue } = await getElementText(...args)
     /* istanbul ignore next */
     const actualTextContent = await elementHandle.evaluate(
       (el) => el.textContent
     )
-    if (actualTextContent?.includes(expectedValue)) {
-      return {
-        pass: true,
-        message: () =>
-          `${quote(expectedValue)} is included in ${quote(actualTextContent)}.`,
-      }
-    }
+
     return {
-      pass: false,
+      pass: !!actualTextContent?.includes(expectedValue),
       message: () =>
-        `${quote(expectedValue)} is not included in ${quote(
-          actualTextContent
-        )}${selector ? " of " + quote(selector) + "." : "."}`,
+        getMessage(this, "toHaveText", expectedValue, actualTextContent),
     }
   } catch (err) {
     return {
