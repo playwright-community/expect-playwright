@@ -4,4 +4,6 @@ exports[`toHaveFocus negative: target element don't have focus 1`] = `"'#bar' ha
 
 exports[`toHaveFocus negative: target element not found 1`] = `"'#bar' could not be found on the page."`;
 
-exports[`toHaveFocus positive 1`] = `"'#foobar' has focus on it."`;
+exports[`toHaveFocus timeout should throw an error after the timeout exceeds 1`] = `"'#foobar' could not be found on the page."`;
+
+exports[`toHaveFocus with 'not' usage negative: target element has focus 1`] = `"'#foobar' has focus on it."`;

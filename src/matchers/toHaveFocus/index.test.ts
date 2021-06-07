@@ -1,6 +1,7 @@
-import { testWrapper } from "../tests/utils"
-
+import { assertSnapshot, testWrapper } from "../tests/utils"
 import toHaveFocus from "."
+
+expect.extend({ toHaveFocus })
 
 describe("toHaveFocus", () => {
   afterEach(async () => {
@@ -9,23 +10,31 @@ describe("toHaveFocus", () => {
   it("positive", async () => {
     await page.setContent(`<input id="foobar">`)
     await page.keyboard.press("Tab")
-    const result = await toHaveFocus(page, "#foobar")
-    expect(result.pass).toBe(true)
-    expect(result.message()).toMatchSnapshot()
+    await expect(page).toHaveFocus("#foobar")
   })
   it("negative: target element don't have focus", async () => {
     await page.setContent(`<input id="foo"><input id="bar">`)
     await page.keyboard.press("Tab")
-    const result = await toHaveFocus(page, "#bar")
-    expect(testWrapper(result)).toThrowErrorMatchingSnapshot()
+    await assertSnapshot(() => expect(page).toHaveFocus("#bar"))
   })
   it("negative: target element not found", async () => {
     await page.setContent(`<input id="foo">`)
     await page.keyboard.press("Tab")
-    const result = await toHaveFocus(page, "#bar", {
-      timeout: 1 * 1000,
+    await assertSnapshot(() =>
+      expect(page).toHaveFocus("#bar", { timeout: 1000 })
+    )
+  })
+  describe("with 'not' usage", () => {
+    it("positive", async () => {
+      await page.setContent('<input id="foo"><input id="bar">')
+      await page.keyboard.press("Tab")
+      await expect(page).not.toHaveFocus("#bar")
     })
-    expect(testWrapper(result)).toThrowErrorMatchingSnapshot()
+    it("negative: target element has focus", async () => {
+      await page.setContent('<input id="foobar">')
+      await page.keyboard.press("Tab")
+      await assertSnapshot(() => expect(page).not.toHaveFocus("#foobar"))
+    })
   })
   describe("timeout", () => {
     it("positive: should be able to use a custom timeout", async () => {
@@ -33,23 +42,13 @@ describe("toHaveFocus", () => {
         await page.setContent(`<input id="foobar">`)
         await page.keyboard.press("Tab")
       }, 500)
-      expect(
-        testWrapper(
-          await toHaveFocus(page, "#foobar", {
-            timeout: 1 * 1000,
-          })
-        )
-      ).toBe(true)
+      await expect(page).toHaveFocus("#foobar", { timeout: 1000 })
     })
     it("should throw an error after the timeout exceeds", async () => {
       const start = new Date().getTime()
-      expect(
-        testWrapper(
-          await toHaveFocus(page, "#foobar", {
-            timeout: 1 * 1000,
-          })
-        )
-      ).toThrowError()
+      await assertSnapshot(() =>
+        expect(page).toHaveFocus("#foobar", { timeout: 1000 })
+      )
       const duration = new Date().getTime() - start
       expect(duration).toBeLessThan(1500)
     })
