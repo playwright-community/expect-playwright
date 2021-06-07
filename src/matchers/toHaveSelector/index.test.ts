@@ -1,4 +1,4 @@
-import { assertSnapshot, testWrapper } from "../tests/utils"
+import { assertSnapshot } from "../tests/utils"
 import toHaveSelector from "."
 
 expect.extend({ toHaveSelector })
