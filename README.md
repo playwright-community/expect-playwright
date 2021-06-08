@@ -24,17 +24,29 @@ To activate it in your Jest environment you have to include it in your configura
 
 ### With [Playwright test runner](https://playwright.dev/docs/test-intro)
 
-To activate with the Playwright test runner, use `expect.extend` to add the `expect-playwright` matchers.
+To activate with the Playwright test runner, use `expect.extend` in the config to add the `expect-playwright` matchers.
 
 ```js
-// foo.spec.ts
-import { test, expect } from "@playwright/test"
+// playwright.config.ts
+import { expect } from "@playwright/test"
 import { matchers } from "expect-playwright"
 
 expect.extend(matchers)
 
+// ...
+```
+
+Inside the tests you can add the import to have TypeScript support.
+
+```js
+// foo.spec.ts
+import { test, expect } from "@playwright/test"
+import "expect-playwright"
+
 test("basic test", async ({ page }) => {
   await page.goto("https://playwright.dev/")
+  const name = await page.innerText(".navbar__title")
+  expect(name).toBe("Playwright")
   await expect(page).toHaveText(".navbar__title", "Playwright")
 })
 ```
