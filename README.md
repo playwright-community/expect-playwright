@@ -61,6 +61,7 @@ await expect(page).toHaveText("#foo", "my text")
 - [toEqualValue](#toEqualValue)
 - [toEqualUrl](#toEqualUrl)
 - [toHaveFocus](#toHaveFocus)
+- [toBeVisible](#toBeVisible)
 
 ### toHaveSelector
 
@@ -189,6 +190,27 @@ const element = await page.$("#my-element")
 await expect(element).toEqualValue("Playwright")
 ```
 
+### toBeVisible
+
+This function checks if a given element is visible. More information: [Visible](https://playwright.dev/docs/actionability#visible)
+
+You can do this via a selector or the element directly:
+
+**expect(page: [Page]).toBeVisible(selector: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
+
+```javascript
+await expect(page).toBeVisible("#my-element")
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+**expect(element: [ElementHandle]).toBeVisible(options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
+
+```javascript
+const element = await page.$("#my-element")
+await expect(element).toBeVisible("Playwright")
+```
+
 ## Examples
 
 ```typescript
@@ -199,6 +221,7 @@ describe("GitHub Playwright project", () => {
     const browser = await playwright.chromium.launch()
     const page = await browser.newPage()
     await page.goto("https://github.com/microsoft/playwright")
+    await expect(page).toBeVisible("#readme h1")
     await expect(page).toHaveText("#readme h1", "Playwright")
     // or also all of them via the not property
     await expect(page).not.toHaveText("this-is-no-anywhere", {
