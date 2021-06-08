@@ -91,4 +91,8 @@ declare global {
   namespace jest {
     interface Matchers<R> extends PlaywrightMatchers<R> {}
   }
+
+  namespace PlaywrightTest {
+    interface Matchers<R> extends PlaywrightMatchers<R> {}
+  }
 }
