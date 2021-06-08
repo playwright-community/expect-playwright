@@ -165,11 +165,16 @@ export const getMessage = (
     message
   )
 }
-
-export const getExpectedMessage = (
+/**
+Get the hint message for functions that validate true or false. i.e. toBeVisible
+* @param {jest.MatcherContext} matcherContext
+* @param {string} matcher
+* @return {string} Return the hit message 
+*/
+export const getHintMessage = (
   { isNot, promise, utils }: jest.MatcherContext,
   matcher: string,
-) => {
+): string => {
   const not = isNot ? " not" : ""
   const hint = utils.matcherHint(matcher, undefined, undefined, {
     isNot: isNot,

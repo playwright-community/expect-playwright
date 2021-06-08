@@ -1,5 +1,5 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { getElement, getExpectedMessage, InputArguments } from "../utils"
+import { getElement, getHintMessage, InputArguments } from "../utils"
 
 const toBeVisible: jest.CustomMatcher = async function (
   ...args: InputArguments
@@ -11,7 +11,7 @@ const toBeVisible: jest.CustomMatcher = async function (
     return {
       pass: actualVisibility,
       message: () =>
-        getExpectedMessage(this, 'toBeVisible'),
+      getHintMessage(this, 'toBeVisible'),
     }
   } catch (err) {
     return {
