@@ -26,6 +26,11 @@ interface getElementTextReturn {
   expectedValue: string
 }
 
+interface getElementReturn {
+  elementHandle: ElementHandle
+  selector?: string
+}
+
 export type InputArguments = [
   Page | ElementHandle,
   string?,
@@ -111,6 +116,36 @@ export const getElementText = async (
   throw new Error(`Invalid input length: ${args.length}`)
 }
 
+export const getElement = async (
+  ...args: InputArguments
+): Promise<getElementReturn> => {
+  if (args.length > 1) {
+    const type = detectExpectType(args[0])
+    if (type === ExpectTypePage) {
+      const page = args[0] as Page
+      const selector = args[1] as string
+      const selectorOptions = getSelectorOptions(args)
+      try {
+        await page.waitForSelector(selector, {state:'attached', ...selectorOptions!})
+      } catch (err) {
+        throw new Error(`Timeout exceed for element ${quote(selector)}`)
+      }
+      return {
+        elementHandle: (await page.$(selector)) as ElementHandle,
+      }
+    }
+    if (type === ExpectTypeElementHandle) {
+      const element = args[0] as ElementHandle
+      return {
+        elementHandle: element,
+      }
+    } else {
+      throw new Error(`Invalid type received: ${args[0]}`)    
+    }
+  }
+  throw new Error(`Invalid input length: ${args.length}`)
+}
+
 export const quote = (val: string | null) => (val === null ? "" : `'${val}'`)
 
 export const getMessage = (
@@ -130,3 +165,18 @@ export const getMessage = (
     message
   )
 }
+
+export const getExpectedMessage = (
+  { isNot, promise, utils }: jest.MatcherContext,
+  matcher: string,
+) => {
+  const not = isNot ? " not" : ""
+  const hint = utils.matcherHint(matcher, undefined, undefined, {
+    isNot: isNot,
+    promise: promise,
+  })
+  
+  const message = `Expected: element to${not} be visible`
+  return hint + "\n\n" + message
+}
+

@@ -61,6 +61,13 @@ export interface PlaywrightMatchers<R> {
     options?: PageWaitForSelectorOptions
   ): Promise<R>
   /**
+   * Will ensure that the element is visible.
+   */
+  toBeVisible(
+    selector?: string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
    * Will assert that N elements with the given selector are on the page and wait for it by default.
    * If its 0 elements, then it will throw since the element can't be found.
    */
