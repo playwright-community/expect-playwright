@@ -10,8 +10,8 @@ const toMatchText: jest.CustomMatcher = async function (
     const actualTextContent = await elementHandle.evaluate(
       (el) => el.textContent
     )
-    const regex = expectedValue;
-    const res = actualTextContent?.match(regex) || [];
+    const regex = expectedValue
+    const res = actualTextContent?.match(regex) || []
 
     return {
       pass: res.length > 0,

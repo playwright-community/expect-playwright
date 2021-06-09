@@ -45,7 +45,10 @@ export interface PlaywrightMatchers<R> {
   /**
    * Will check if the element's value matches the given pattern.
    */
-  toMatchText(pattern: RegExp | string, options?: PageWaitForSelectorOptions): Promise<R>
+  toMatchText(
+    pattern: RegExp | string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
   /**
    * Will compare the element's textContent on the page determined by the selector with the given text.
    */
