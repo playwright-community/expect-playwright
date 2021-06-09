@@ -96,3 +96,5 @@ declare global {
     interface Matchers<R> extends PlaywrightMatchers<R> {}
   }
 }
+
+export const matchers: any
