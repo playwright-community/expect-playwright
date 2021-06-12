@@ -22,6 +22,13 @@ To activate it in your Jest environment you have to include it in your configura
 }
 ```
 
+```js
+// some global config e.g. a globalTypes.ts
+import { matchers } from "expect-playwright"
+expect.extend(matchers)
+// ...
+
+
 ### With [Playwright test runner](https://playwright.dev/docs/test-intro)
 
 To activate with the Playwright test runner, use `expect.extend()` in the config to add the `expect-playwright` matchers.
