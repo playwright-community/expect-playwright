@@ -24,6 +24,7 @@ interface PageWaitForSelectorOptions {
 export interface PlaywrightMatchers<R> {
   /**
    * Will check if the element's textContent on the page determined by the selector includes the given text.
+   * @deprecated Use toMatchText instead
    */
   toHaveText(
     selector: string,
@@ -32,6 +33,7 @@ export interface PlaywrightMatchers<R> {
   ): Promise<R>
   /**
    * Will check if the element's value includes the given text.
+   * @deprecated Use toMatchText instead
    */
   toHaveText(value: string, options?: PageWaitForSelectorOptions): Promise<R>
   /**

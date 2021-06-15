@@ -1,6 +1,10 @@
 import { SyncExpectationResult } from "expect/build/types"
 import { getElementText, getMessage, InputArguments } from "../utils"
 
+/**
+* Will check if the element's textContent on the page determined by the selector includes the given text.
+* @deprecated Use toMatchText instead
+*/
 const toHaveText: jest.CustomMatcher = async function (
   ...args: InputArguments
 ): Promise<SyncExpectationResult> {

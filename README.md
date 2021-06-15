@@ -56,7 +56,6 @@ await expect(page).toHaveText("#foo", "my text")
 
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
-- [toHaveText](#toHaveText)
 - [toMatchText](#toMatchText)
 - [toEqualText](#toEqualText)
 - [toEqualValue](#toEqualValue)
@@ -109,35 +108,6 @@ This function checks if the count of a given selector is the same as the provide
 
 ```javascript
 await expect(page).toHaveSelectorCount(".my-element", 3)
-```
-
-### toHaveText
-
-This function checks if the `textContent` of a given element contains the provided value.
-
-You can do this via a selector on the whole page:
-
-**expect(page: [Page]).toHaveText(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
-
-```javascript
-await expect(page).toHaveText("#my-element", "MyValue")
-```
-
-Or without a selector which will use the `body` element:
-
-**expect(page: [Page]).toHaveText(value: string)**
-
-```javascript
-await expect(page).toHaveText("Playwright")
-```
-
-Or by passing a Playwright [ElementHandle]:
-
-**expect(element: [ElementHandle]).toHaveText(value: string)**
-
-```javascript
-const element = await page.$("#my-element")
-await expect(element).toHaveText("Playwright")
 ```
 
 ### toMatchText
