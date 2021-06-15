@@ -17,9 +17,17 @@ describe("toMatchText", () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
       await expect(page).toMatchText("#foobar", /[B|b]ar/)
     })
+    it("positive with string", async () => {
+      await page.setContent(`<div id="foobar">Bar</div>`)
+      await expect(page).toMatchText("#foobar", "Bar")
+    })
     it("negative", async () => {
       await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
       await assertSnapshot(() => expect(page).toMatchText("#foobar", /[b]ar/))
+    })
+    it("negative with string", async () => {
+      await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
+      await assertSnapshot(() => expect(page).toMatchText("#foobar", "bar"))
     })
     describe("with 'not' usage", () => {
       it("positive in frame", async () => {
@@ -31,10 +39,20 @@ describe("toMatchText", () => {
         await page.setContent(`<div id="foobar">Bar</div>`)
         await expect(page).not.toMatchText("#foobar", /exam.*[1|2]/)
       })
+      it("positive with string", async () => {
+        await page.setContent(`<div id="foobar">Bar</div>`)
+        await expect(page).not.toMatchText("#foobar", "foo")
+      })
       it("negative", async () => {
+        await page.setContent(`<div class="foobar">zzzBarzzz</div>`)
+        await assertSnapshot(() =>
+          expect(page).not.toMatchText(".foobar", /Bar/)
+        )
+      })
+      it("negative with string", async () => {
         await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
         await assertSnapshot(() =>
-          expect(page).toMatchText("#foobar", /not-existing/)
+          expect(page).not.toMatchText("#foobar", "Bar")
         )
       })
     })
@@ -43,12 +61,12 @@ describe("toMatchText", () => {
         setTimeout(async () => {
           await page.setContent(`<div id="foobar">Bar</div>`)
         }, 500)
-        await expect(page).toMatchText("#foobar", /[B|b]ar/)
+        await expect(page).toMatchText("#foobar", /[B|b]ar/, { timeout: 1000 })
       })
       it("should throw an error after the timeout exceeds", async () => {
         const start = new Date().getTime()
         await assertSnapshot(() =>
-          expect(page).toMatchText("#foobar", /[B|b]ar/, { timeout: 1 * 1000 })
+          expect(page).toMatchText("#foobar", /[B|b]ar/, { timeout: 1000 })
         )
         const duration = new Date().getTime() - start
         expect(duration).toBeLessThan(1500)
@@ -57,6 +75,12 @@ describe("toMatchText", () => {
   })
   describe("element", () => {
     it("positive", async () => {
+      await page.setContent(`<div id="foobar">Bar</div>`)
+      const element = await page.$("#foobar")
+      expect(element).not.toBeNull()
+      await expect(element!).toMatchText(/Bar/)
+    })
+    it("positive with string", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
       const element = await page.$("#foobar")
       expect(element).not.toBeNull()
@@ -73,6 +97,10 @@ describe("toMatchText", () => {
     it("positive", async () => {
       await page.setContent(`<body><div>Bar</div></body>`)
       await expect(page).toMatchText("Bar")
+    })
+    it("negative", async () => {
+      await page.setContent(`<body><div>zzzBarzzz</div></body>`)
+      await assertSnapshot(() => expect(page).toMatchText(/not-existing/))
     })
     it("negative", async () => {
       await page.setContent(`<body><div>zzzBarzzz</div></body>`)
