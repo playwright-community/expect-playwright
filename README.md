@@ -58,7 +58,7 @@ await expect(page).toHaveText("#foo", "my text")
 
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
-- [toHaveText](#toHaveText)
+- [toMatchText](#toMatchText)
 - [toEqualText](#toEqualText)
 - [toEqualValue](#toEqualValue)
 - [toEqualUrl](#toEqualUrl)
@@ -112,24 +112,26 @@ This function checks if the count of a given selector is the same as the provide
 await expect(page).toHaveSelectorCount(".my-element", 3)
 ```
 
-### toHaveText
+### toMatchText
 
-This function checks if the `textContent` of a given element contains the provided value.
+This function checks if the `textContent` of a given element matches the provided pattern.
 
 You can do this via a selector on the whole page:
 
-**expect(page: [Page]).toHaveText(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
+**expect(page: [Page]).toMatchText(selector: string, pattern: RegExp | string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 ```javascript
-await expect(page).toHaveText("#my-element", "MyValue")
+await expect(page).toMatchText("#my-element", "MyPattern")
+await expect(page).toMatchText("#my-element", /MyPattern/)
 ```
 
 Or without a selector which will use the `body` element:
 
-**expect(page: [Page]).toHaveText(value: string)**
+**expect(page: [Page]).toMatchText(pattern: RegExp | string)**
 
 ```javascript
-await expect(page).toHaveText("Playwright")
+await expect(page).toMatchText(/Playwright/)
+await expect(page).toMatchText("Playwright")
 ```
 
 Or by passing a Playwright [ElementHandle]:
