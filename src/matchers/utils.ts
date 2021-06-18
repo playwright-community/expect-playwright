@@ -79,9 +79,9 @@ export const getElementText = async (
           expectedValue: args[1] as string,
         }
       }
-      const handle = args[0] as Page | Frame
+      const frame = args[0] as Page | Frame
       return {
-        elementHandle: (await handle.$("body")) as ElementHandle,
+        elementHandle: (await frame.$("body")) as ElementHandle,
         expectedValue: args[1] as string,
       }
     }
@@ -91,15 +91,15 @@ export const getElementText = async (
      */
     const selector = args[1] as string
     if (type === ExpectType.Page || type === ExpectType.Frame) {
-      const handle = args[0] as Page | Frame
+      const frame = args[0] as Page | Frame
       const selectorOptions = getSelectorOptions(args)
       try {
-        await handle.waitForSelector(selector, selectorOptions!)
+        await frame.waitForSelector(selector, selectorOptions!)
       } catch (err) {
         throw new Error(`Timeout exceed for element ${quote(selector)}`)
       }
       return {
-        elementHandle: (await handle.$(selector)) as ElementHandle,
+        elementHandle: (await frame.$(selector)) as ElementHandle,
         expectedValue: args[2] as string,
       }
     }
