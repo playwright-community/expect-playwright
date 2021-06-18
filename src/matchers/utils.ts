@@ -7,7 +7,7 @@ const enum ExpectType {
   ElementHandle,
 }
 
-export type ExpectInputType = Page | ElementHandle
+export type ExpectInputType = Page | Frame | ElementHandle
 
 export const detectExpectType = (value: ExpectInputType): ExpectType => {
   const className = value.constructor.name
@@ -23,6 +23,12 @@ export const detectExpectType = (value: ExpectInputType): ExpectType => {
 
   return type
 }
+
+const isElementHandle = (value: ExpectInputType): value is ElementHandle =>
+  detectExpectType(value) === ExpectType.ElementHandle
+
+export const getFrame = (value: ExpectInputType) =>
+  isElementHandle(value) ? value.contentFrame() : value
 
 interface getElementTextReturn {
   elementHandle: ElementHandle

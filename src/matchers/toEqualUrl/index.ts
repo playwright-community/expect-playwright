@@ -1,12 +1,12 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { Page } from "playwright-core"
-import { getMessage } from "../utils"
+import { ExpectInputType, getFrame, getMessage } from "../utils"
 
 const toEqualUrl: jest.CustomMatcher = async function (
-  page: Page,
+  page: ExpectInputType,
   expectedUrl: string
 ): Promise<SyncExpectationResult> {
-  const actualUrl = page.url()
+  const frame = await getFrame(page)
+  const actualUrl = frame!.url()
 
   return {
     pass: actualUrl === expectedUrl,

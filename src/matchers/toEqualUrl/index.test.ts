@@ -26,14 +26,14 @@ describe("toEqualUrl", () => {
     await page.setContent(`<iframe src="${myUrl}"></iframe>`)
     const handle = await page.$("iframe")
     const iframe = await handle?.contentFrame()
-    expect(handle).toEqualUrl(myUrl)
-    expect(iframe).toEqualUrl(myUrl)
+    await expect(handle).toEqualUrl(myUrl)
+    await expect(iframe).toEqualUrl(myUrl)
   })
 
   it("positive", async () => {
     const myUrl = `${urlPrefix}/1.html`
     await page.goto(myUrl)
-    expect(page).toEqualUrl(myUrl)
+    await expect(page).toEqualUrl(myUrl)
   })
 
   it("negative", async () => {
@@ -47,13 +47,13 @@ describe("toEqualUrl", () => {
       await page.setContent(`<iframe src="${myUrl}"></iframe>`)
       const handle = await page.$("iframe")
       const iframe = await handle?.contentFrame()
-      expect(handle).not.toEqualUrl("foobar")
-      expect(iframe).not.toEqualUrl("foobar")
+      await expect(handle).not.toEqualUrl("foobar")
+      await expect(iframe).not.toEqualUrl("foobar")
     })
 
     it("positive", async () => {
       await page.goto(`${urlPrefix}/1.html`)
-      expect(page).not.toEqualUrl("foobar")
+      await expect(page).not.toEqualUrl("foobar")
     })
 
     it("negative", async () => {
