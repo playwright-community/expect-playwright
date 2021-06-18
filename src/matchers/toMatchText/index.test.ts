@@ -10,8 +10,10 @@ describe("toMatchText", () => {
   describe("selector", () => {
     it("positive frame", async () => {
       await page.setContent(`<iframe src="https://example.com"></iframe>`)
-      const iframe = await page.$("iframe")
-      await expect(iframe!).toMatchText("h1", /.*ample Domai.*/)
+      const handle = await page.$("iframe")
+      const iframe = await handle!.contentFrame()
+      await expect(handle).toMatchText("h1", /.*ample Domai.*/)
+      await expect(iframe).toMatchText("h1", /.*ample Domai.*/)
     })
     it("positive", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
@@ -32,8 +34,10 @@ describe("toMatchText", () => {
     describe("with 'not' usage", () => {
       it("positive in frame", async () => {
         await page.setContent(`<iframe src="https://example.com"></iframe>`)
-        const iframe = await page.$("iframe")
-        await expect(iframe!).not.toMatchText("h1", /ab+c/)
+        const handle = await page.$("iframe")
+        const iframe = await handle!.contentFrame()
+        await expect(handle).not.toMatchText("h1", /ab+c/)
+        await expect(iframe).not.toMatchText("h1", /ab+c/)
       })
       it("positive", async () => {
         await page.setContent(`<div id="foobar">Bar</div>`)
