@@ -24,7 +24,9 @@ describe("toEqualUrl", () => {
   it("positive in frame", async () => {
     const myUrl = `${urlPrefix}/1.html`
     await page.setContent(`<iframe src="${myUrl}"></iframe>`)
-    const iframe = await (await page.$("iframe"))!.contentFrame()
+    const handle = await page.$("iframe")
+    const iframe = await handle?.contentFrame()
+    expect(handle).toEqualUrl(myUrl)
     expect(iframe).toEqualUrl(myUrl)
   })
 
@@ -43,7 +45,9 @@ describe("toEqualUrl", () => {
     it("positive in frame", async () => {
       const myUrl = `${urlPrefix}/1.html`
       await page.setContent(`<iframe src="${myUrl}"></iframe>`)
-      const iframe = await (await page.$("iframe"))!.contentFrame()
+      const handle = await page.$("iframe")
+      const iframe = await handle?.contentFrame()
+      expect(handle).not.toEqualUrl("foobar")
       expect(iframe).not.toEqualUrl("foobar")
     })
 
