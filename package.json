@@ -1,6 +1,6 @@
 {
   "name": "expect-playwright",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "main": "lib/index.js",
   "types": "./global.d.ts",
   "repository": "https://github.com/playwright-community/expect-playwright",
