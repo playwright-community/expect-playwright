@@ -1,24 +1,34 @@
-import type { Page, ElementHandle } from "playwright-core"
+import type { Page, ElementHandle, Frame } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../global"
 
-const ExpectTypePage = "Page"
-const ExpectTypeElementHandle = "ElementHandle"
+const enum ExpectType {
+  Frame,
+  Page,
+  ElementHandle,
+}
 
-type ExpectType = typeof ExpectTypePage | typeof ExpectTypeElementHandle
-
-export type ExpectInputType = Page | ElementHandle
+export type ExpectInputType = Page | Frame | ElementHandle
 
 export const detectExpectType = (value: ExpectInputType): ExpectType => {
   const className = value.constructor.name
-  switch (className) {
-    case "Page":
-      return ExpectTypePage
-    case "ElementHandle":
-      return ExpectTypeElementHandle
-    default:
-      throw new Error(`could not recognize type: ${className}`)
+  const type = {
+    Page: ExpectType.Page,
+    Frame: ExpectType.Frame,
+    ElementHandle: ExpectType.ElementHandle,
+  }[className]
+
+  if (type === undefined) {
+    throw new Error(`could not recognize type: ${className}`)
   }
+
+  return type
 }
+
+const isElementHandle = (value: ExpectInputType): value is ElementHandle =>
+  detectExpectType(value) === ExpectType.ElementHandle
+
+export const getFrame = (value: ExpectInputType) =>
+  isElementHandle(value) ? value.contentFrame() : value
 
 interface getElementTextReturn {
   elementHandle: ElementHandle
@@ -60,7 +70,7 @@ export const getElementText = async (
      * - expect(element).foo("bar")
      */
     if (args.length === 2) {
-      if (type === ExpectTypeElementHandle) {
+      if (type === ExpectType.ElementHandle) {
         const iframe = await (args[0] as ElementHandle).contentFrame()
         const elem = iframe ? await iframe.$("body") : args[0]
 
@@ -69,9 +79,9 @@ export const getElementText = async (
           expectedValue: args[1] as string,
         }
       }
-      const page = args[0] as Page
+      const frame = args[0] as Page | Frame
       return {
-        elementHandle: (await page.$("body")) as ElementHandle,
+        elementHandle: (await frame.$("body")) as ElementHandle,
         expectedValue: args[1] as string,
       }
     }
@@ -80,20 +90,20 @@ export const getElementText = async (
      * - expect(page).foo("#foo", "bar")
      */
     const selector = args[1] as string
-    if (type === ExpectTypePage) {
-      const page = args[0] as Page
+    if (type === ExpectType.Page || type === ExpectType.Frame) {
+      const frame = args[0] as Page | Frame
       const selectorOptions = getSelectorOptions(args)
       try {
-        await page.waitForSelector(selector, selectorOptions!)
+        await frame.waitForSelector(selector, selectorOptions!)
       } catch (err) {
         throw new Error(`Timeout exceed for element ${quote(selector)}`)
       }
       return {
-        elementHandle: (await page.$(selector)) as ElementHandle,
+        elementHandle: (await frame.$(selector)) as ElementHandle,
         expectedValue: args[2] as string,
       }
     }
-    if (type === ExpectTypeElementHandle) {
+    if (type === ExpectType.ElementHandle) {
       const iframe = await (args[0] as ElementHandle).contentFrame()
       const elem = iframe ? await iframe.$("body") : args[0]
       const selectorOptions = getSelectorOptions(args)

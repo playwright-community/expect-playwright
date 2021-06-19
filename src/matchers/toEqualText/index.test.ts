@@ -10,8 +10,10 @@ describe("toEqualText", () => {
   describe("selector", () => {
     it("positive frame", async () => {
       await page.setContent(`<iframe src="https://example.com"></iframe>`)
-      const iframe = await page.$("iframe")
-      await expect(iframe!).toEqualText("h1", "Example Domain")
+      const handle = await page.$("iframe")
+      const iframe = await handle?.contentFrame()
+      await expect(handle).toEqualText("h1", "Example Domain")
+      await expect(iframe).toEqualText("h1", "Example Domain")
     })
     it("positive", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
@@ -24,8 +26,10 @@ describe("toEqualText", () => {
     describe("with 'not' usage", () => {
       it("positive in frame", async () => {
         await page.setContent(`<iframe src="https://example.com"></iframe>`)
-        const iframe = await page.$("iframe")
-        await expect(iframe!).not.toEqualText("h1", "Foo")
+        const handle = await page.$("iframe")
+        const iframe = await handle?.contentFrame()
+        await expect(handle).not.toEqualText("h1", "Foo")
+        await expect(iframe).not.toEqualText("h1", "Foo")
       })
       it("positive", async () => {
         await page.setContent(`<div id="foobar">Bar</div>`)
