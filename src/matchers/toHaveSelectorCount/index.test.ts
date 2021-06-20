@@ -1,7 +1,4 @@
-import toHaveSelectorCount from "."
 import { assertSnapshot } from "../tests/utils"
-
-expect.extend({ toHaveSelectorCount })
 
 describe("toHaveSelectorCount", () => {
   afterEach(async () => {
