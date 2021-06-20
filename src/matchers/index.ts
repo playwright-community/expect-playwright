@@ -5,6 +5,7 @@ import toEqualValue from "./toEqualValue"
 import toHaveSelectorCount from "./toHaveSelectorCount"
 import toEqualUrl from "./toEqualUrl"
 import toHaveFocus from "./toHaveFocus"
+import toMatchText from "./toMatchText"
 
 export default {
   toHaveText,
@@ -14,4 +15,5 @@ export default {
   toHaveSelectorCount,
   toEqualUrl,
   toHaveFocus,
+  toMatchText,
 }
