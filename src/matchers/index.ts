@@ -15,5 +15,5 @@ export default {
   toHaveSelectorCount,
   toEqualUrl,
   toHaveFocus,
-  toMatchText
+  toMatchText,
 }
