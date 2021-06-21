@@ -49,7 +49,7 @@ const textContent = await page.$eval("#foo", (el) => el.textContent)
 expect(textContent).stringContaining("my text")
 
 // after by using expect-playwright
-await expect(page).toHaveText("#foo", "my text")
+await expect(page).toMatchText("#foo", "my text")
 ```
 
 ## API documentation
@@ -136,11 +136,11 @@ await expect(page).toMatchText("Playwright")
 
 Or by passing a Playwright [ElementHandle]:
 
-**expect(element: [ElementHandle]).toHaveText(value: string)**
+**expect(element: [ElementHandle]).toMatchText(value: string)**
 
 ```javascript
 const element = await page.$("#my-element")
-await expect(element).toHaveText("Playwright")
+await expect(element).toMatchText("Playwright")
 ```
 
 ### toEqualText
@@ -203,9 +203,9 @@ describe("GitHub Playwright project", () => {
     const browser = await playwright.chromium.launch()
     const page = await browser.newPage()
     await page.goto("https://github.com/microsoft/playwright")
-    await expect(page).toHaveText("#readme h1", "Playwright")
+    await expect(page).toMatchText("#readme h1", "Playwright")
     // or also all of them via the not property
-    await expect(page).not.toHaveText("this-is-no-anywhere", {
+    await expect(page).not.toMatchText("this-is-no-anywhere", {
       timeout: 1 * 1000,
     })
     await browser.close()
