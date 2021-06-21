@@ -7,7 +7,7 @@
 This library provides utility matchers for Jest in combination with [Playwright]. All of them are exposed on the `expect` object. You can use them either directly or invert them via the `.not` property like shown in a example below.
 
 ```txt
-npm install -D expect-playwright playwright-core
+npm install -D expect-playwright
 ```
 
 ## Usage

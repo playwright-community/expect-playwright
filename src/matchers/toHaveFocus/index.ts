@@ -1,5 +1,5 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { Page } from "playwright-core"
+import type { Page } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../../global"
 
 const enum FailureReason {

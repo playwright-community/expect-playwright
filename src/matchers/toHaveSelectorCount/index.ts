@@ -1,6 +1,6 @@
 import { SyncExpectationResult } from "expect/build/types"
 import { getMessage, quote } from "../utils"
-import { Page } from "playwright-core"
+import type { Page } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../../global"
 
 const toHaveSelectorCount: jest.CustomMatcher = async function (
