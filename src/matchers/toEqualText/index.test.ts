@@ -1,7 +1,4 @@
-import toEqualText from "."
 import { assertSnapshot } from "../tests/utils"
-
-expect.extend({ toEqualText })
 
 describe("toEqualText", () => {
   afterEach(async () => {

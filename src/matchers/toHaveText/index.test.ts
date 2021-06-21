@@ -1,7 +1,4 @@
 import { assertSnapshot } from "../tests/utils"
-import toHaveText from "."
-
-expect.extend({ toHaveText })
 
 describe("toHaveText", () => {
   afterEach(async () => {

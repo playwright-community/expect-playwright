@@ -1,7 +1,4 @@
-import toMatchText from "."
 import { assertSnapshot } from "../tests/utils"
-
-expect.extend({ toMatchText })
 
 describe("toMatchText", () => {
   afterEach(async () => {

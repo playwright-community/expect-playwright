@@ -1,7 +1,4 @@
-import toEqualUrl from "."
 import { assertSnapshot } from "../tests/utils"
-
-expect.extend({ toEqualUrl })
 
 describe("toEqualUrl", () => {
   const urlPrefix = "http://i-do-not-exist.com"

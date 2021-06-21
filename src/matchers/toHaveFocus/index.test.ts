@@ -1,7 +1,4 @@
 import { assertSnapshot } from "../tests/utils"
-import toHaveFocus from "."
-
-expect.extend({ toHaveFocus })
 
 describe("toHaveFocus", () => {
   afterEach(async () => {

@@ -1,7 +1,4 @@
-import toEqualValue from "."
 import { assertSnapshot } from "../tests/utils"
-
-expect.extend({ toEqualValue })
 
 describe("toEqualValue", () => {
   afterEach(async () => {

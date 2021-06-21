@@ -6,5 +6,5 @@ module.exports = {
   transform: {
     "^.+\\.ts$": "ts-jest",
   },
-  setupFilesAfterEnv: ["<rootDir>/lib/index.js"],
+  setupFilesAfterEnv: ["<rootDir>/src/index.ts"],
 }
