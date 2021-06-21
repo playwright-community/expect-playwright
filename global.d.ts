@@ -1,4 +1,4 @@
-// copied into our codebase for autocompletion purposes
+// copied into our codebase for autocompletion purposes from 'playwright/types/types.d.ts' so we don't depend on it.
 interface PageWaitForSelectorOptions {
   /**
    * Defaults to `'visible'`. Can be either:
@@ -14,9 +14,8 @@ interface PageWaitForSelectorOptions {
   /**
    * Maximum time in milliseconds, defaults to 30 seconds, pass `0` to disable timeout. The default value can be changed by
    * using the
-   * [browserContext.setDefaultTimeout(…)](https://github.com/microsoft/playwright/blob/master/docs/api.md#browsercontextsetdefaulttimeout)
-   * or [page.setDefaultTimeout(…)](https://github.com/microsoft/playwright/blob/master/docs/api.md#pagesetdefaulttimeout)
-   * methods.
+   * [browserContext.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-timeout)
+   * or [page.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-timeout) methods.
    */
   timeout?: number
 }
