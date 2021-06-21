@@ -1,4 +1,5 @@
 import matchers from "./matchers"
+import { setPositiveDefaultTimeout, setNegativeDefaultTimeout } from './matchers/utils'
 
 // @ts-ignore
 if (typeof global.expect !== "undefined") {
@@ -6,4 +7,8 @@ if (typeof global.expect !== "undefined") {
   global.expect.extend(matchers)
 }
 
-export { matchers }
+export { 
+  matchers,
+  setNegativeDefaultTimeout,
+  setPositiveDefaultTimeout,
+}

@@ -48,7 +48,7 @@ const lastElementHasType = (
   type: "string" | "object"
 ): boolean => typeof args[args.length - 1] === type
 
-const getSelectorOptions = (args: InputArguments) => {
+const getSelectorOptions = (args: InputArguments, isNot: boolean) => {
   let selectorOptions: PageWaitForSelectorOptions | undefined = undefined
   if (args.length === 3 && lastElementHasType(args, "object")) {
     selectorOptions = args[2] as PageWaitForSelectorOptions
@@ -56,11 +56,17 @@ const getSelectorOptions = (args: InputArguments) => {
   if (args.length === 4 && lastElementHasType(args, "object")) {
     selectorOptions = args[3] as PageWaitForSelectorOptions
   }
+  if (typeof selectorOptions?.timeout === 'undefined') {
+    if (!selectorOptions)
+      selectorOptions = {}
+    selectorOptions.timeout = isNot ? negativeTimeoutHandler.get() : positiveTimeoutHandler.get()
+  }
   return selectorOptions
 }
 
 export const getElementText = async (
-  ...args: InputArguments
+  args: InputArguments,
+  isNot: boolean,
 ): Promise<getElementTextReturn> => {
   if (args.length > 1) {
     const type = detectExpectType(args[0])
@@ -92,7 +98,7 @@ export const getElementText = async (
     const selector = args[1] as string
     if (type === ExpectType.Page || type === ExpectType.Frame) {
       const frame = args[0] as Page | Frame
-      const selectorOptions = getSelectorOptions(args)
+      const selectorOptions = getSelectorOptions(args, isNot)
       try {
         await frame.waitForSelector(selector, selectorOptions!)
       } catch (err) {
@@ -106,7 +112,7 @@ export const getElementText = async (
     if (type === ExpectType.ElementHandle) {
       const iframe = await (args[0] as ElementHandle).contentFrame()
       const elem = iframe ? await iframe.$("body") : args[0]
-      const selectorOptions = getSelectorOptions(args)
+      const selectorOptions = getSelectorOptions(args, isNot)
       try {
         await elem!.waitForSelector(selector, selectorOptions!)
       } catch (err) {
@@ -140,3 +146,27 @@ export const getMessage = (
     message
   )
 }
+
+class ExpectPlaywrightDefaultTimeoutHandler {
+  private _parent: ExpectPlaywrightDefaultTimeoutHandler | undefined
+  private _value: undefined | number
+  constructor(parent?: ExpectPlaywrightDefaultTimeoutHandler) {
+    this._parent = parent;
+    this._value = undefined;
+  }
+  set(value: number) {
+    this._value = value
+  }
+  get(): number | undefined {
+    if (typeof this._value === "number")
+      return this._value
+    if (this._parent)
+      return this._parent.get()
+  }
+}
+
+const positiveTimeoutHandler = new ExpectPlaywrightDefaultTimeoutHandler();
+const negativeTimeoutHandler = new ExpectPlaywrightDefaultTimeoutHandler(positiveTimeoutHandler);
+
+export const setPositiveDefaultTimeout = positiveTimeoutHandler.set;
+export const setNegativeDefaultTimeout = negativeTimeoutHandler.set;
