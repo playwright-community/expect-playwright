@@ -16,12 +16,14 @@ describe("toHaveSelector", () => {
 
   describe("with 'not' usage", () => {
     it("positive", async () => {
-      await expect(page).not.toHaveSelector("#foobar", { timeout: 1000 })
+      await expect(page).not.toHaveSelector("#foobar")
     })
 
     it("negative", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
-      await assertSnapshot(() => expect(page).not.toHaveSelector("#foobar"))
+      await assertSnapshot(() =>
+        expect(page).not.toHaveSelector("#foobar", { timeout: 1000 })
+      )
     })
   })
 

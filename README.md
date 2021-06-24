@@ -72,10 +72,12 @@ This function waits as a maximum as the timeout exceeds for a given selector onc
 
 ```js
 await expect(page).toHaveSelector("#foobar")
-// or via not, useful to only wait 1 second instead of for the default timeout by Playwright which is 30 seconds.
-await expect(page).not.toHaveSelector("#foobar", {
-  timeout: 1 * 1000,
-})
+```
+
+When used with `not`, `toHaveSelector` will wait until the element is not visible or not attached. See the Playwright [waitForSelector](https://playwright.dev/docs/api/class-page#page-wait-for-selector) docs for more details.
+
+```js
+await expect(page).not.toHaveSelector("#foobar")
 ```
 
 ### toHaveFocus

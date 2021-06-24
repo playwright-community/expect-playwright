@@ -8,9 +8,12 @@ const toHaveSelector: jest.CustomMatcher = async function (
   options: PageWaitForSelectorOptions = {}
 ): Promise<SyncExpectationResult> {
   const pass = await page
-    .waitForSelector(selector, options)
-    .then(() => true)
-    .catch(() => false)
+    .waitForSelector(selector, {
+      state: this.isNot ? "hidden" : "visible",
+      ...options,
+    })
+    .then(() => !this.isNot)
+    .catch(() => this.isNot)
 
   return {
     pass: pass,
