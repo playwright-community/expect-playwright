@@ -22,6 +22,28 @@ interface PageWaitForSelectorOptions {
 
 export interface PlaywrightMatchers<R> {
   /**
+   * Will check if the element on the page determined by the selector is disabled.
+   */
+  toBeDisabled(
+    selector: string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
+   * Will check if the element is disabled.
+   */
+  toBeDisabled(options?: PageWaitForSelectorOptions): Promise<R>
+  /**
+   * Will check if the element on the page determined by the selector is enabled.
+   */
+  toBeEnabled(
+    selector: string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
+   * Will check if the element is enabled.
+   */
+  toBeEnabled(options?: PageWaitForSelectorOptions): Promise<R>
+  /**
    * Will check if the element's textContent on the page determined by the selector includes the given text.
    * @deprecated Use toMatchText instead
    */

@@ -56,6 +56,8 @@ await expect(page).toMatchText("#foo", "my text")
 
 ### Table of Contents
 
+- [toBeDisabled](#toBeDisabled)
+- [toBeEnabled](#toBeEnabled)
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
 - [toMatchText](#toMatchText)
@@ -63,6 +65,48 @@ await expect(page).toMatchText("#foo", "my text")
 - [toEqualValue](#toEqualValue)
 - [toEqualUrl](#toEqualUrl)
 - [toHaveFocus](#toHaveFocus)
+
+### toBeDisabled
+
+This function checks if a given element is disabled.
+
+You can do this via a selector on the whole page:
+
+**expect(page: [Page]).toBeDisabled(selector: string, options?: [PageWaitForSelectorOptions])**
+
+```javascript
+await expect(page).toBeDisabled("#my-element")
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+**expect(element: [ElementHandle]).toBeDisabled(options?: [PageWaitForSelectorOptions])**
+
+```javascript
+const element = await page.$("#my-element")
+await expect(element).toBeDisabled()
+```
+
+### toBeEnabled
+
+This function checks if a given element is enabled.
+
+You can do this via a selector on the whole page:
+
+**expect(page: [Page]).toBeEnabled(selector: string, options?: [PageWaitForSelectorOptions])**
+
+```javascript
+await expect(page).toBeEnabled("#my-element")
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+**expect(element: [ElementHandle]).toBeEnabled(options?: [PageWaitForSelectorOptions])**
+
+```javascript
+const element = await page.$("#my-element")
+await expect(element).toBeEnabled()
+```
 
 ### toHaveSelector
 
@@ -232,3 +276,4 @@ at the top of your test file or include it globally in your `tsconfig.json`.
 [elementhandle]: https://github.com/microsoft/playwright/blob/master/docs/api.md#class-elementhandle
 [page]: https://github.com/microsoft/playwright/blob/master/docs/api.md#class-page
 [playwright]: https://github.com/microsoft/Playwright
+[pagewaitforselectoroptions]: https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options
