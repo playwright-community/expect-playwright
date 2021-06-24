@@ -58,13 +58,13 @@ await expect(page).toMatchText("#foo", "my text")
 
 - [toBeDisabled](#toBeDisabled)
 - [toBeEnabled](#toBeEnabled)
+- [toEqualText](#toEqualText)
+- [toEqualUrl](#toEqualUrl)
+- [toEqualValue](#toEqualValue)
+- [toHaveFocus](#toHaveFocus)
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
 - [toMatchText](#toMatchText)
-- [toEqualText](#toEqualText)
-- [toEqualValue](#toEqualValue)
-- [toEqualUrl](#toEqualUrl)
-- [toHaveFocus](#toHaveFocus)
 
 ### toBeDisabled
 
@@ -72,15 +72,11 @@ This function checks if a given element is disabled.
 
 You can do this via a selector on the whole page:
 
-**expect(page: [Page]).toBeDisabled(selector: string, options?: [PageWaitForSelectorOptions])**
-
 ```javascript
 await expect(page).toBeDisabled("#my-element")
 ```
 
 Or by passing a Playwright [ElementHandle]:
-
-**expect(element: [ElementHandle]).toBeDisabled(options?: [PageWaitForSelectorOptions])**
 
 ```javascript
 const element = await page.$("#my-element")
@@ -93,24 +89,78 @@ This function checks if a given element is enabled.
 
 You can do this via a selector on the whole page:
 
-**expect(page: [Page]).toBeEnabled(selector: string, options?: [PageWaitForSelectorOptions])**
-
 ```javascript
 await expect(page).toBeEnabled("#my-element")
 ```
 
 Or by passing a Playwright [ElementHandle]:
 
-**expect(element: [ElementHandle]).toBeEnabled(options?: [PageWaitForSelectorOptions])**
-
 ```javascript
 const element = await page.$("#my-element")
 await expect(element).toBeEnabled()
 ```
 
-### toHaveSelector
+### toEqualText
 
-**expect(page: [Page]).toHaveSelector(selector: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
+This function checks if the `textContent` of a given element is the same as the provided value.
+
+You can do this via a selector on the whole page:
+
+```javascript
+await expect(page).toEqualText("#my-element", "Playwright")
+```
+
+Or without a selector which will use the `body` element:
+
+```javascript
+await expect(page).toEqualText("Playwright")
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+```javascript
+const element = await page.$("#my-element")
+await expect(element).toEqualText("Playwright")
+```
+
+### toEqualUrl
+
+This function checks if the given URL matches the current page's URL
+
+```javascript
+await expect(page).toEqualUrl("https://github.com")
+```
+
+### toEqualValue
+
+This function checks if the `value` of a given element is the same as the provided value.
+
+You can do this via a selector or the element directly:
+
+```javascript
+await expect(page).toEqualValue("#my-element", "Playwright")
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+```javascript
+const element = await page.$("#my-element")
+await expect(element).toEqualValue("Playwright")
+```
+
+### toHaveFocus
+
+This function checks if the given selector has focus.
+
+```js
+await expect(page).toHaveFocus("#foobar")
+// or via not, useful to only wait 1 second instead of for the default timeout by Playwright which is 30 seconds.
+await expect(page).not.toHaveFocus("#foobar", {
+  timeout: 1 * 1000,
+})
+```
+
+### toHaveSelector
 
 This function waits as a maximum as the timeout exceeds for a given selector once it appears on the page.
 
@@ -124,33 +174,7 @@ When used with `not`, `toHaveSelector` will wait until the element is not visibl
 await expect(page).not.toHaveSelector("#foobar")
 ```
 
-### toHaveFocus
-
-**expect(page: [Page]).toHaveFocus(selector: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
-
-This function checks if the given selector has focus.
-
-```js
-await expect(page).toHaveFocus("#foobar")
-// or via not, useful to only wait 1 second instead of for the default timeout by Playwright which is 30 seconds.
-await expect(page).not.toHaveFocus("#foobar", {
-  timeout: 1 * 1000,
-})
-```
-
-### toEqualUrl
-
-**expect(page: [Page]).toHaveSelector(value: string)**
-
-This function checks if the given URL matches the current page's URL
-
-```javascript
-await expect(page).toEqualUrl("https://github.com")
-```
-
 ### toHaveSelectorCount
-
-**expect(page: [Page]).toHaveSelector(selector: string, value: number, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
 
 This function checks if the count of a given selector is the same as the provided value.
 
@@ -164,16 +188,12 @@ This function checks if the `textContent` of a given element matches the provide
 
 You can do this via a selector on the whole page:
 
-**expect(page: [Page]).toMatchText(selector: string, pattern: RegExp | string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
-
 ```javascript
 await expect(page).toMatchText("#my-element", "MyPattern")
 await expect(page).toMatchText("#my-element", /MyPattern/)
 ```
 
 Or without a selector which will use the `body` element:
-
-**expect(page: [Page]).toMatchText(pattern: RegExp | string)**
 
 ```javascript
 await expect(page).toMatchText(/Playwright/)
@@ -182,61 +202,9 @@ await expect(page).toMatchText("Playwright")
 
 Or by passing a Playwright [ElementHandle]:
 
-**expect(element: [ElementHandle]).toMatchText(value: string)**
-
 ```javascript
 const element = await page.$("#my-element")
 await expect(element).toMatchText("Playwright")
-```
-
-### toEqualText
-
-This function checks if the `textContent` of a given element is the same as the provided value.
-
-You can do this via a selector on the whole page:
-
-**expect(page: [Page]).toEqualText(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
-
-```javascript
-await expect(page).toEqualText("#my-element", "Playwright")
-```
-
-Or without a selector which will use the `body` element:
-
-**expect(page: [Page]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
-
-```javascript
-await expect(page).toEqualText("Playwright")
-```
-
-Or by passing a Playwright [ElementHandle]:
-
-**expect(element: [ElementHandle]).toEqualText(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
-
-```javascript
-const element = await page.$("#my-element")
-await expect(element).toEqualText("Playwright")
-```
-
-### toEqualValue
-
-This function checks if the `value` of a given element is the same as the provided value.
-
-You can do this via a selector or the element directly:
-
-**expect(page: [Page]).toEqualValue(selector: string, value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
-
-```javascript
-await expect(page).toEqualValue("#my-element", "Playwright")
-```
-
-Or by passing a Playwright [ElementHandle]:
-
-**expect(element: [ElementHandle]).toEqualValue(value: string, options?: [PageWaitForSelectorOptions](https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options))**
-
-```javascript
-const element = await page.$("#my-element")
-await expect(element).toEqualValue("Playwright")
 ```
 
 ## Examples
