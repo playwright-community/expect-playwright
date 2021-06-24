@@ -74,7 +74,7 @@ This function waits as a maximum as the timeout exceeds for a given selector onc
 await expect(page).toHaveSelector("#foobar")
 ```
 
-When used with `not`, `toHaveSelector` will wait for the element to have the state of `hidden`.
+When used with `not`, `toHaveSelector` will wait until the element is not visible or not attached. See the Playwright [waitForSelector](https://playwright.dev/docs/api/class-page#page-wait-for-selector) docs for more details.
 
 ```js
 await expect(page).not.toHaveSelector("#foobar")
