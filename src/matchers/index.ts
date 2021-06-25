@@ -1,23 +1,25 @@
 import toBeDisabled from "./toBeDisabled"
 import toBeEnabled from "./toBeEnabled"
-import toHaveText from "./toHaveText"
 import toEqualText from "./toEqualText"
-import toHaveSelector from "./toHaveSelector"
-import toEqualValue from "./toEqualValue"
-import toHaveSelectorCount from "./toHaveSelectorCount"
 import toEqualUrl from "./toEqualUrl"
+import toEqualValue from "./toEqualValue"
 import toHaveFocus from "./toHaveFocus"
+import toHaveSelector from "./toHaveSelector"
+import toHaveSelectorCount from "./toHaveSelectorCount"
+import toHaveText from "./toHaveText"
 import toMatchText from "./toMatchText"
+import toMatchTitle from "./toMatchTitle"
 
 export default {
   toBeDisabled,
   toBeEnabled,
-  toHaveText,
   toEqualText,
-  toHaveSelector,
-  toEqualValue,
-  toHaveSelectorCount,
   toEqualUrl,
+  toEqualValue,
   toHaveFocus,
+  toHaveSelector,
+  toHaveSelectorCount,
+  toHaveText,
   toMatchText,
+  toMatchTitle,
 }
