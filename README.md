@@ -56,6 +56,7 @@ await expect(page).toMatchText("#foo", "my text")
 
 ### Table of Contents
 
+- [toBeChecked](#toBeChecked)
 - [toBeDisabled](#toBeDisabled)
 - [toBeEnabled](#toBeEnabled)
 - [toEqualText](#toEqualText)
@@ -65,6 +66,23 @@ await expect(page).toMatchText("#foo", "my text")
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
 - [toMatchText](#toMatchText)
+
+### toBeDisabled
+
+This function checks if a given element is checked.
+
+You can do this via a selector on the whole page:
+
+```javascript
+await expect(page).toBeChecked("#my-element")
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+```javascript
+const element = await page.$("#my-element")
+await expect(element).toBeChecked()
+```
 
 ### toBeDisabled
 
