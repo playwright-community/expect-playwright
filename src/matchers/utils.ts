@@ -131,9 +131,6 @@ export const getMessage = (
 ) => {
   const message = isNot
     ? `Expected: not ${utils.printExpected(expected)}`
-    : typeof expected === "boolean"
-    ? `Expected: ${utils.printExpected(expected)}\n` +
-      `Received: ${utils.printReceived(received)}`
     : utils.printDiffOrStringify(
         expected,
         received,
