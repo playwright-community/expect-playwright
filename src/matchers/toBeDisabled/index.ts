@@ -1,15 +1,11 @@
 import { SyncExpectationResult } from "expect/build/types"
-import type { Page } from "playwright-core"
-import { PageWaitForSelectorOptions } from "../../../global"
-import { getElementText, getMessage } from "../utils"
+import { getElementHandle, getMessage, InputArguments } from "../utils"
 
 const toBeDisabled: jest.CustomMatcher = async function (
-  page: Page,
-  selector: string,
-  options: PageWaitForSelectorOptions = {}
+  ...args: InputArguments
 ): Promise<SyncExpectationResult> {
   try {
-    const { elementHandle } = await getElementText(page, selector, options)
+    const [elementHandle] = await getElementHandle(args, 0)
     const isDisabled = await elementHandle.isDisabled()
 
     return {

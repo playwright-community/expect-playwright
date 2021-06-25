@@ -1,11 +1,11 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { getElementText, getMessage, InputArguments } from "../utils"
+import { getElementHandle, getMessage, InputArguments } from "../utils"
 
 const toBeChecked: jest.CustomMatcher = async function (
   ...args: InputArguments
 ): Promise<SyncExpectationResult> {
   try {
-    const { elementHandle } = await getElementText(...args)
+    const [elementHandle] = await getElementHandle(args, 0)
     const isChecked = await elementHandle.isChecked()
 
     return {
