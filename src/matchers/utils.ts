@@ -124,15 +124,23 @@ export const getElementText = async (
 export const quote = (val: string | null) => (val === null ? "" : `'${val}'`)
 
 export const getMessage = (
-  { isNot, promise, utils }: jest.MatcherContext,
+  { isNot, promise, utils, expand }: jest.MatcherContext,
   matcher: string,
   expected: boolean | string | number | null,
   received: boolean | string | number | null
 ) => {
   const message = isNot
     ? `Expected: not ${utils.printExpected(expected)}`
-    : `Expected: ${utils.printExpected(expected)}\n` +
+    : typeof expected === "boolean"
+    ? `Expected: ${utils.printExpected(expected)}\n` +
       `Received: ${utils.printReceived(received)}`
+    : utils.printDiffOrStringify(
+        expected,
+        received,
+        "Expected",
+        "Received",
+        expand
+      )
 
   return (
     utils.matcherHint(matcher, undefined, undefined, { isNot, promise }) +
