@@ -17,8 +17,8 @@ Received: [31m\\"zzzBarzzz\\"[39m"
 exports[`toEqualText selector negative 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mtoEqualText[2m([22m[32mexpected[39m[2m)[22m
 
-Expected: [32m\\"Bar\\"[39m
-Received: [31m\\"zzzBarzzz\\"[39m"
+Expected: [32m\\"Ba[7mr[27m\\"[39m
+Received: [31m\\"Ba[7mz[27m\\"[39m"
 `;
 
 exports[`toEqualText selector timeout should throw an error after the timeout exceeds 1`] = `"Error: Timeout exceed for element '#foobar'"`;
