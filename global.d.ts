@@ -84,6 +84,10 @@ export interface PlaywrightMatchers<R> {
     options?: PageWaitForSelectorOptions
   ): Promise<R>
   /**
+   * Will check if the page title matches a given string or regex.
+   */
+  toMatchTitle(pattern: RegExp | string): Promise<R>
+  /**
    * Will compare the element's textContent on the page determined by the selector with the given text.
    */
   toEqualText(

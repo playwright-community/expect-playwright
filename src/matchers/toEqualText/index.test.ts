@@ -17,7 +17,7 @@ describe("toEqualText", () => {
       await expect(page).toEqualText("#foobar", "Bar")
     })
     it("negative", async () => {
-      await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
+      await page.setContent(`<div id="foobar">Baz</div>`)
       await assertSnapshot(() => expect(page).toEqualText("#foobar", "Bar"))
     })
     describe("with 'not' usage", () => {

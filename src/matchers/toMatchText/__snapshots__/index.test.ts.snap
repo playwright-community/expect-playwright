@@ -31,8 +31,8 @@ Received: [31m\\"zzzBarzzz\\"[39m"
 exports[`toMatchText selector negative with string 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchText[2m([22m[32mexpected[39m[2m)[22m
 
-Expected: [32m\\"bar\\"[39m
-Received: [31m\\"zzzBarzzz\\"[39m"
+Expected: [32m\\"[7mb[27mar\\"[39m
+Received: [31m\\"[7mB[27mar\\"[39m"
 `;
 
 exports[`toMatchText selector timeout should throw a wrapped timeout error when the selector could not be found and an ElementHandle was given 1`] = `"Error: Timeout exceed for element '#i-do-not-exist'"`;

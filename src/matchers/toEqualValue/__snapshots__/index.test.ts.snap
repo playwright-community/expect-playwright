@@ -10,8 +10,8 @@ Received: [31m\\"bar\\"[39m"
 exports[`toEqualValue selector negative 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mtoEqualValue[2m([22m[32mexpected[39m[2m)[22m
 
-Expected: [32m\\"not-existing\\"[39m
-Received: [31m\\"bar\\"[39m"
+Expected: [32m\\"Ba[7mz[27m\\"[39m
+Received: [31m\\"Ba[7mr[27m\\"[39m"
 `;
 
 exports[`toEqualValue selector with 'not' usage negative 1`] = `

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toMatchTitle with regex argument negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchTitle[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m/Bar/[39m
+Received: [31m\\"Foobar\\"[39m"
+`;
+
+exports[`toMatchTitle with regex argument with 'not' usage negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoMatchTitle[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: not [32m/Foo/[39m"
+`;
+
+exports[`toMatchTitle with string argument negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchTitle[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m\\"Foo\\"[39m
+Received: [31m\\"Foobar\\"[39m"
+`;
+
+exports[`toMatchTitle with string argument with 'not' usage negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoMatchTitle[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: not [32m\\"Foo\\"[39m"
+`;
