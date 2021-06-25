@@ -8,14 +8,12 @@ describe("toEqualValue", () => {
   describe("selector", () => {
     it("positive", async () => {
       await page.setContent(`<input id="foobar" value="bar"/>`)
-      expect(page).toEqualValue("#foobar", "bar")
+      await expect(page).toEqualValue("#foobar", "bar")
     })
 
     it("negative", async () => {
-      await page.setContent(`<input id="foobar" value="bar"/>`)
-      await assertSnapshot(() =>
-        expect(page).toEqualValue("#foobar", "not-existing")
-      )
+      await page.setContent(`<input id="foobar" value="Bar"/>`)
+      await assertSnapshot(() => expect(page).toEqualValue("#foobar", "Baz"))
     })
 
     describe("with 'not' usage", () => {

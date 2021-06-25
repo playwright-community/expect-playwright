@@ -3,8 +3,8 @@
 exports[`toEqualUrl negative 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mtoEqualUrl[2m([22m[32mexpected[39m[2m)[22m
 
-Expected: [32m\\"http://i-do-not-exist.com/2.html\\"[39m
-Received: [31m\\"http://i-do-not-exist.com/1.html\\"[39m"
+Expected: [32m\\"http://i-do-not-exist.com/[7m2[27m.html\\"[39m
+Received: [31m\\"http://i-do-not-exist.com/[7m1[27m.html\\"[39m"
 `;
 
 exports[`toEqualUrl with 'not' usage negative 1`] = `
