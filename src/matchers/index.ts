@@ -1,3 +1,4 @@
+import toBeChecked from "./toBeChecked"
 import toBeDisabled from "./toBeDisabled"
 import toBeEnabled from "./toBeEnabled"
 import toHaveText from "./toHaveText"
@@ -10,6 +11,7 @@ import toHaveFocus from "./toHaveFocus"
 import toMatchText from "./toMatchText"
 
 export default {
+  toBeChecked,
   toBeDisabled,
   toBeEnabled,
   toHaveText,
