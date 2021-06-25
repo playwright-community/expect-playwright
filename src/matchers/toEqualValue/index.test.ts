@@ -8,7 +8,7 @@ describe("toEqualValue", () => {
   describe("selector", () => {
     it("positive", async () => {
       await page.setContent(`<input id="foobar" value="bar"/>`)
-      expect(page).toEqualValue("#foobar", "bar")
+      await expect(page).toEqualValue("#foobar", "bar")
     })
 
     it("negative", async () => {
