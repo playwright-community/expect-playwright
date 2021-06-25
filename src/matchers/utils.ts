@@ -126,8 +126,8 @@ export const quote = (val: string | null) => (val === null ? "" : `'${val}'`)
 export const getMessage = (
   { isNot, promise, utils, expand }: jest.MatcherContext,
   matcher: string,
-  expected: boolean | string | number | null,
-  received: boolean | string | number | null
+  expected: unknown,
+  received: unknown
 ) => {
   const message = isNot
     ? `Expected: not ${utils.printExpected(expected)}`
