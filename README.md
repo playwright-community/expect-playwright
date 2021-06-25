@@ -67,7 +67,7 @@ await expect(page).toMatchText("#foo", "my text")
 - [toHaveSelectorCount](#toHaveSelectorCount)
 - [toMatchText](#toMatchText)
 
-### toBeDisabled
+### toBeChecked
 
 This function checks if a given element is checked.
 
