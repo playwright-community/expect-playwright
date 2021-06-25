@@ -185,20 +185,20 @@ await expect(page).toHaveSelectorCount(".my-element", 3)
 
 ### toMatchText
 
-This function checks if the `textContent` of a given element matches the provided pattern.
+This function checks if the `textContent` of a given element matches the provided string or regex pattern.
 
 You can do this via a selector on the whole page:
 
 ```javascript
-await expect(page).toMatchText("#my-element", "MyPattern")
-await expect(page).toMatchText("#my-element", /MyPattern/)
+await expect(page).toMatchText("#my-element", "Playwright")
+await expect(page).toMatchText("#my-element", /Play.+/)
 ```
 
 Or without a selector which will use the `body` element:
 
 ```javascript
-await expect(page).toMatchText(/Playwright/)
 await expect(page).toMatchText("Playwright")
+await expect(page).toMatchText(/Play.+/)
 ```
 
 Or by passing a Playwright [ElementHandle]:
@@ -206,6 +206,7 @@ Or by passing a Playwright [ElementHandle]:
 ```javascript
 const element = await page.$("#my-element")
 await expect(element).toMatchText("Playwright")
+await expect(element).toMatchText(/Play.+/)
 ```
 
 ### toMatchTitle
