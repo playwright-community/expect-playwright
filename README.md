@@ -58,7 +58,6 @@ await expect(page).toMatchText("#foo", "my text")
 
 - [toBeDisabled](#toBeDisabled)
 - [toBeEnabled](#toBeEnabled)
-- [toEqualText](#toEqualText)
 - [toEqualUrl](#toEqualUrl)
 - [toEqualValue](#toEqualValue)
 - [toHaveFocus](#toHaveFocus)
@@ -99,29 +98,6 @@ Or by passing a Playwright [ElementHandle]:
 ```javascript
 const element = await page.$("#my-element")
 await expect(element).toBeEnabled()
-```
-
-### toEqualText
-
-This function checks if the `textContent` of a given element is the same as the provided value.
-
-You can do this via a selector on the whole page:
-
-```javascript
-await expect(page).toEqualText("#my-element", "Playwright")
-```
-
-Or without a selector which will use the `body` element:
-
-```javascript
-await expect(page).toEqualText("Playwright")
-```
-
-Or by passing a Playwright [ElementHandle]:
-
-```javascript
-const element = await page.$("#my-element")
-await expect(element).toEqualText("Playwright")
 ```
 
 ### toEqualUrl
