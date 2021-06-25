@@ -65,6 +65,7 @@ await expect(page).toMatchText("#foo", "my text")
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
 - [toMatchText](#toMatchText)
+- [toMatchTitle](#toMatchTitle)
 
 ### toBeDisabled
 
@@ -207,6 +208,15 @@ const element = await page.$("#my-element")
 await expect(element).toMatchText("Playwright")
 ```
 
+### toMatchTitle
+
+This function checks if the page or frame title matches the provided string or regex pattern.
+
+```javascript
+await expect(page).toMatchTitle("My app - page 1")
+await expect(page).toMatchTitle(/My app - page \d/)
+```
+
 ## Examples
 
 ```typescript
@@ -242,6 +252,4 @@ at the top of your test file or include it globally in your `tsconfig.json`.
 - [expect-puppeteer](https://github.com/smooth-code/jest-puppeteer/tree/master/packages/expect-puppeteer)
 
 [elementhandle]: https://github.com/microsoft/playwright/blob/master/docs/api.md#class-elementhandle
-[page]: https://github.com/microsoft/playwright/blob/master/docs/api.md#class-page
 [playwright]: https://github.com/microsoft/Playwright
-[pagewaitforselectoroptions]: https://playwright.dev/docs/api/class-page/#pagewaitforselectorselector-options
