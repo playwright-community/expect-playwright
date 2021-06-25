@@ -22,6 +22,17 @@ interface PageWaitForSelectorOptions {
 
 export interface PlaywrightMatchers<R> {
   /**
+   * Will check if the element on the page determined by the selector is checked.
+   */
+  toBeChecked(
+    selector: string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
+   * Will check if the element is checked.
+   */
+  toBeChecked(options?: PageWaitForSelectorOptions): Promise<R>
+  /**
    * Will check if the element on the page determined by the selector is disabled.
    */
   toBeDisabled(
