@@ -58,15 +58,6 @@ describe("toHaveText", () => {
       await page.setContent(`<body><div>zzzBarzzz</div></body>`)
       await assertSnapshot(() => expect(page).toHaveText("not-existing"))
     })
-    it("should be able to overwrite timeout", async () => {
-      await page.setContent(`<body><div>zzzBarzzz</div></body>`)
-      const start = new Date().getTime()
-      await assertSnapshot(() =>
-        expect(page).toHaveText("not-existing", { timeout: 2000 })
-      )
-      const duration = new Date().getTime() - start
-      expect(duration).toBeGreaterThan(2000)
-    })
   })
   describe("timeout", () => {
     it("should throw an error after the timeout exceeds", async () => {

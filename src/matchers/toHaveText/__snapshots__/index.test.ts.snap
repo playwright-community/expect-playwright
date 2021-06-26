@@ -14,8 +14,6 @@ Expected: [32m\\"not-existing\\"[39m
 Received: [31m\\"zzzBarzzz\\"[39m"
 `;
 
-exports[`toHaveText page should be able to overwrite timeout 1`] = `"Error: Timeout exceed for element 'not-existing'"`;
-
 exports[`toHaveText selector negative 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m
 
