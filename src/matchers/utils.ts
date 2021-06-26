@@ -25,9 +25,9 @@ export type InputArguments = [
   PageWaitForSelectorOptions?
 ]
 
-export const getElementHandle = async <T extends number>(
+export const getElementHandle = async (
   args: InputArguments,
-  expectedValueArgCount = 1
+  valueArgCount = 1
 ) => {
   // Pluck the options off the end first
   const options =
@@ -36,10 +36,7 @@ export const getElementHandle = async <T extends number>(
       : {}
 
   // Next, pluck the number of args required by the matcher (defaults to 1)
-  const expectedValue = args.splice(
-    args.length - expectedValueArgCount,
-    expectedValueArgCount
-  ) as string[]
+  const expectedValue = args.splice(-valueArgCount, valueArgCount) as string[]
 
   // Finally, we can find the element handle
   let elementHandle = await getFrame(args[0])
