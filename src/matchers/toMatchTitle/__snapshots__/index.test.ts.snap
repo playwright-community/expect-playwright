@@ -17,7 +17,7 @@ exports[`toMatchTitle with string argument negative 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchTitle[2m([22m[32mexpected[39m[2m)[22m
 
 Expected: [32m\\"Foo\\"[39m
-Received: [31m\\"Foobar\\"[39m"
+Received: [31m\\"Foo[7mbar[27m\\"[39m"
 `;
 
 exports[`toMatchTitle with string argument with 'not' usage negative 1`] = `
