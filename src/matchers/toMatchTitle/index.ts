@@ -1,6 +1,6 @@
 import { SyncExpectationResult } from "expect/build/types"
 import { Page, Frame } from "playwright-core"
-import { ExpectInputType, getFrame, getMessage } from "../utils"
+import { compareText, ExpectInputType, getFrame, getMessage } from "../utils"
 
 const toMatchTitle: jest.CustomMatcher = async function (
   page: ExpectInputType,
@@ -9,10 +9,7 @@ const toMatchTitle: jest.CustomMatcher = async function (
   try {
     const frame = (await getFrame(page)) as Page | Frame
     const actualValue = await frame!.title()
-    const pass =
-      typeof expectedValue === "string"
-        ? expectedValue === actualValue
-        : expectedValue.test(actualValue)
+    const pass = compareText(expectedValue, actualValue)
 
     return {
       pass,

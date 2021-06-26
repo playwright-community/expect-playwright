@@ -51,9 +51,9 @@ describe("toMatchText", () => {
         )
       })
       it("negative with string", async () => {
-        await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
+        await page.setContent(`<div id="foobar">Foo</div>`)
         await assertSnapshot(() =>
-          expect(page).not.toMatchText("#foobar", "Bar")
+          expect(page).not.toMatchText("#foobar", "Foo")
         )
       })
     })

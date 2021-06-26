@@ -46,5 +46,5 @@ Expected: not [32m/Bar/[39m"
 exports[`toMatchText selector with 'not' usage negative with string 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoMatchText[2m([22m[32mexpected[39m[2m)[22m
 
-Expected: not [32m\\"Bar\\"[39m"
+Expected: not [32m\\"Foo\\"[39m"
 `;

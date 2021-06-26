@@ -80,3 +80,12 @@ export const getMessage = (
     message
   )
 }
+
+export const compareText = (
+  expectedValue: string | RegExp,
+  actualValue: string | null
+) => {
+  return typeof expectedValue === "string"
+    ? expectedValue === actualValue
+    : expectedValue.test(actualValue ?? "")
+}

@@ -89,6 +89,7 @@ export interface PlaywrightMatchers<R> {
   toMatchTitle(pattern: RegExp | string): Promise<R>
   /**
    * Will compare the element's textContent on the page determined by the selector with the given text.
+   * @deprecated - Use `toMatchText`
    */
   toEqualText(
     selector: string,
@@ -97,6 +98,7 @@ export interface PlaywrightMatchers<R> {
   ): Promise<R>
   /**
    * Will compare the element's textContent by the given text.
+   * @deprecated - Use `toMatchText`
    */
   toEqualText(value: string, options?: PageWaitForSelectorOptions): Promise<R>
   /**
