@@ -1,6 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toBeChecked element negative: target element isn't checked 1`] = `"TypeError: Cannot read property 'constructor' of undefined"`;
+exports[`toBeChecked element negative: target element isn't checked 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoBeChecked[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32mtrue[39m
+Received: [31mfalse[39m"
+`;
 
 exports[`toBeChecked selector negative: target element isn't checked 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mtoBeChecked[2m([22m[32mexpected[39m[2m)[22m

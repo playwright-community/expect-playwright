@@ -35,8 +35,6 @@ Expected: [32m\\"[7mb[27mar\\"[39m
 Received: [31m\\"[7mB[27mar\\"[39m"
 `;
 
-exports[`toMatchText selector timeout should throw a wrapped timeout error when the selector could not be found and an ElementHandle was given 1`] = `"Error: Timeout exceed for element '#i-do-not-exist'"`;
-
 exports[`toMatchText selector timeout should throw an error after the timeout exceeds 1`] = `"Error: Timeout exceed for element '#foobar'"`;
 
 exports[`toMatchText selector with 'not' usage negative 1`] = `
