@@ -15,6 +15,9 @@ export const getFrame = async (value: ExpectInputType) => {
   return value
 }
 
+const isObject = (value: unknown) =>
+  typeof value === "object" && !(value instanceof RegExp)
+
 export type InputArguments = [
   Page | ElementHandle,
   string?,
@@ -28,8 +31,8 @@ export const getElementHandle = async <T extends number>(
 ) => {
   // Pluck the options off the end first
   const options =
-    typeof args[args.length - 1] === "object"
-      ? (args.splice(-1, 1)[0] as PageWaitForSelectorOptions)
+    args.length > 1 && isObject(args[args.length - 1])
+      ? (args.pop() as PageWaitForSelectorOptions)
       : {}
 
   // Next, pluck the number of args required by the matcher (defaults to 1)
