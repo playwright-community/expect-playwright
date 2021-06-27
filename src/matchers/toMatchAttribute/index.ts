@@ -19,7 +19,13 @@ const toMatchAttribute: jest.CustomMatcher = async function (
     return {
       pass: compareText(expectedValue, actualValue),
       message: () =>
-        getMessage(this, "toMatchAttribute", expectedValue, actualValue),
+        getMessage(
+          this,
+          "toMatchAttribute",
+          expectedValue,
+          actualValue,
+          `"${attribute}", expected`
+        ),
     }
   } catch (err) {
     return {
