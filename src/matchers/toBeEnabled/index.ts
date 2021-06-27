@@ -10,7 +10,7 @@ const toBeEnabled: jest.CustomMatcher = async function (
 
     return {
       pass: isEnabled,
-      message: () => getMessage(this, "toBeEnabled", true, isEnabled),
+      message: () => getMessage(this, "toBeEnabled", true, isEnabled, ""),
     }
   } catch (err) {
     return {
