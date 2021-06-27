@@ -74,7 +74,7 @@ export interface PlaywrightMatchers<R> {
   toMatchAttribute(
     selector: string,
     attribute: string,
-    value: string,
+    value: RegExp | string,
     options?: PageWaitForSelectorOptions
   ): Promise<R>
   /**
@@ -82,7 +82,7 @@ export interface PlaywrightMatchers<R> {
    */
   toMatchAttribute(
     attribute: string,
-    value: string,
+    value: RegExp | string,
     options?: PageWaitForSelectorOptions
   ): Promise<R>
   /**

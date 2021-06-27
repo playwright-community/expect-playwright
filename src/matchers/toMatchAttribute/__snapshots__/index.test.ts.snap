@@ -7,10 +7,24 @@ Expected: [32m\\"http[7ms[27m://[7mwww.[27mgoogle.com\\"[39m
 Received: [31m\\"http://google.com\\"[39m"
 `;
 
+exports[`toMatchAttribute element negative 2`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchAttribute[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m/\\\\.org$/[39m
+Received: [31m\\"http://google.com\\"[39m"
+`;
+
 exports[`toMatchAttribute selector negative 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchAttribute[2m([22m[32mexpected[39m[2m)[22m
 
 Expected: [32m\\"http[7ms[27m://[7mwww.[27mgoogle.com\\"[39m
+Received: [31m\\"http://google.com\\"[39m"
+`;
+
+exports[`toMatchAttribute selector negative 2`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchAttribute[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m/\\\\.org$/[39m
 Received: [31m\\"http://google.com\\"[39m"
 `;
 
