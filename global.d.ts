@@ -69,6 +69,23 @@ export interface PlaywrightMatchers<R> {
    */
   toHaveText(value: string, options?: PageWaitForSelectorOptions): Promise<R>
   /**
+   * Will check if an element's attribute on the page determined by the selector matches the given pattern.
+   */
+  toMatchAttribute(
+    selector: string,
+    attribute: string,
+    value: string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
+   * Will check if an element's attribute matches the given pattern.
+   */
+  toMatchAttribute(
+    attribute: string,
+    value: string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
    * Will check if the element's textContent on the page determined by the selector matches the given pattern.
    */
   toMatchText(

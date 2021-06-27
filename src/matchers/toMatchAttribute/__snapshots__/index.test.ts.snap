@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toMatchAttribute element negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchAttribute[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m\\"http[7ms[27m://[7mwww.[27mgoogle.com\\"[39m
+Received: [31m\\"http://google.com\\"[39m"
+`;
+
+exports[`toMatchAttribute selector negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchAttribute[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m\\"http[7ms[27m://[7mwww.[27mgoogle.com\\"[39m
+Received: [31m\\"http://google.com\\"[39m"
+`;
+
+exports[`toMatchAttribute selector negative: target element not found 1`] = `"Error: Timeout exceed for element 'a'"`;
+
+exports[`toMatchAttribute timeout should throw an error after the timeout exceeds 1`] = `"Error: Timeout exceed for element 'a'"`;
+
+exports[`toMatchAttribute with 'not' usage negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoMatchAttribute[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: not [32m\\"http://google.com\\"[39m"
+`;
