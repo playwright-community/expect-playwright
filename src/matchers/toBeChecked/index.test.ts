@@ -1,5 +1,7 @@
 import { assertSnapshot } from "../tests/utils"
 
+const iframeSrc = `<iframe src="https://interactive-examples.mdn.mozilla.net/pages/tabbed/input-checkbox.html">`
+
 describe("toBeChecked", () => {
   afterEach(() => page.setContent(""))
 
@@ -7,6 +9,14 @@ describe("toBeChecked", () => {
     it("positive", async () => {
       await page.setContent('<input type="checkbox" checked>')
       await expect(page).toBeChecked("input")
+    })
+
+    it("positive in frame", async () => {
+      await page.setContent(iframeSrc)
+      const handle = await page.$("iframe")
+      const iframe = await handle?.contentFrame()
+      await expect(handle).toBeChecked("#scales")
+      await expect(iframe).toBeChecked("#scales")
     })
 
     it("negative: target element isn't checked", async () => {
@@ -39,6 +49,14 @@ describe("toBeChecked", () => {
     it("positive", async () => {
       await page.setContent('<input type="checkbox">')
       await expect(page).not.toBeChecked("input")
+    })
+
+    it("positive in frame", async () => {
+      await page.setContent(iframeSrc)
+      const handle = await page.$("iframe")
+      const iframe = await handle?.contentFrame()
+      await expect(handle).not.toBeChecked("#horns")
+      await expect(iframe).not.toBeChecked("#horns")
     })
 
     it("negative", async () => {
