@@ -1,5 +1,10 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { getElementHandle, getMessage, InputArguments } from "../utils"
+import {
+  compareText,
+  getElementHandle,
+  getMessage,
+  InputArguments,
+} from "../utils"
 
 const toMatchAttribute: jest.CustomMatcher = async function (
   ...args: InputArguments
@@ -12,7 +17,7 @@ const toMatchAttribute: jest.CustomMatcher = async function (
     const actualValue = await elementHandle.getAttribute(attribute)
 
     return {
-      pass: expectedValue === actualValue,
+      pass: compareText(expectedValue, actualValue),
       message: () =>
         getMessage(this, "toMatchAttribute", expectedValue, actualValue),
     }
