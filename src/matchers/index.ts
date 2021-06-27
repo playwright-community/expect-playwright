@@ -8,6 +8,7 @@ import toHaveFocus from "./toHaveFocus"
 import toHaveSelector from "./toHaveSelector"
 import toHaveSelectorCount from "./toHaveSelectorCount"
 import toHaveText from "./toHaveText"
+import toMatchAttribute from "./toMatchAttribute"
 import toMatchText from "./toMatchText"
 import toMatchTitle from "./toMatchTitle"
 
@@ -22,6 +23,7 @@ export default {
   toHaveSelector,
   toHaveSelectorCount,
   toHaveText,
+  toMatchAttribute,
   toMatchText,
   toMatchTitle,
 }

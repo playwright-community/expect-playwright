@@ -62,7 +62,8 @@ export const getMessage = (
   { isNot, promise, utils, expand }: jest.MatcherContext,
   matcher: string,
   expected: unknown,
-  received: unknown
+  received: unknown,
+  expectedHint: string | undefined = undefined
 ) => {
   const message = isNot
     ? `Expected: not ${utils.printExpected(expected)}`
@@ -75,7 +76,7 @@ export const getMessage = (
       )
 
   return (
-    utils.matcherHint(matcher, undefined, undefined, { isNot, promise }) +
+    utils.matcherHint(matcher, undefined, expectedHint, { isNot, promise }) +
     "\n\n" +
     message
   )
