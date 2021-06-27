@@ -1,16 +1,16 @@
 import { SyncExpectationResult } from "expect/build/types"
 import { getElementHandle, getMessage, InputArguments } from "../utils"
 
-const toBeDisabled: jest.CustomMatcher = async function (
+const toBeChecked: jest.CustomMatcher = async function (
   ...args: InputArguments
 ): Promise<SyncExpectationResult> {
   try {
     const [elementHandle] = await getElementHandle(args, 0)
-    const isDisabled = await elementHandle.isDisabled()
+    const isChecked = await elementHandle.isChecked()
 
     return {
-      pass: isDisabled,
-      message: () => getMessage(this, "toBeDisabled", true, isDisabled),
+      pass: isChecked,
+      message: () => getMessage(this, "toBeChecked", true, isChecked),
     }
   } catch (err) {
     return {
@@ -20,4 +20,4 @@ const toBeDisabled: jest.CustomMatcher = async function (
   }
 }
 
-export default toBeDisabled
+export default toBeChecked

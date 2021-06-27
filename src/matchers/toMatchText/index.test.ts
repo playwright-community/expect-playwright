@@ -72,15 +72,6 @@ describe("toMatchText", () => {
         const duration = new Date().getTime() - start
         expect(duration).toBeLessThan(1500)
       })
-      it("should throw a wrapped timeout error when the selector could not be found and an ElementHandle was given", async () => {
-        await assertSnapshot(async () =>
-          expect(await page.$("body")).toMatchText(
-            "#i-do-not-exist",
-            "the-text",
-            { timeout: 1000 }
-          )
-        )
-      })
     })
   })
   describe("element", () => {
