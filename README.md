@@ -52,6 +52,18 @@ expect(textContent).stringContaining("my text")
 await expect(page).toMatchText("#foo", "my text")
 ```
 
+But that's not all! Our matchers also work inside of iframes and accept an [ElementHandle] which targets an `iframe` element or a [Frame] obtained by calling `element.contentFrame()`. Not only that, but if you pass a promise, we will automatically resolve it for you!
+
+```javascript
+// before
+const element = await page.$("iframe")
+const frame = await element.contentFrame()
+await expect(frame).toBeChecked("#foo")
+
+// after
+await expect(page.$("iframe")).toBeChecked("#foo")
+```
+
 ## API documentation
 
 ### Table of Contents
