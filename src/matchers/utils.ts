@@ -1,21 +1,23 @@
 import type { Page, ElementHandle, Frame } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../global"
 
-export type ExpectInputType = Page | Frame | ElementHandle
+type Handle = Page | Frame | ElementHandle
+export type ExpectInputType = Handle | Promise<Handle>
 
-const isElementHandle = (value: ExpectInputType): value is ElementHandle => {
+const isElementHandle = (value: Handle): value is ElementHandle => {
   return value.constructor.name === "ElementHandle"
 }
 
 export const getFrame = async (value: ExpectInputType) => {
-  return isElementHandle(value) ? value.contentFrame() : value
+  const resolved = await value
+  return isElementHandle(resolved) ? resolved.contentFrame() : resolved
 }
 
 const isObject = (value: unknown) =>
   typeof value === "object" && !(value instanceof RegExp)
 
 export type InputArguments = [
-  Page | ElementHandle,
+  ExpectInputType,
   string?,
   (string | PageWaitForSelectorOptions)?,
   PageWaitForSelectorOptions?
@@ -35,7 +37,8 @@ export const getElementHandle = async (
   const expectedValue = args.splice(-valueArgCount, valueArgCount) as string[]
 
   // Finally, we can find the element handle
-  let elementHandle = (await getFrame(args[0])) ?? args[0]
+  const handle = await args[0]
+  let elementHandle = (await getFrame(handle)) ?? handle
 
   // If the user provided a page or iframe, we need to locate the provided
   // selector or the `body` element if none was provided.
