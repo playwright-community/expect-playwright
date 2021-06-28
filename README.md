@@ -12,16 +12,6 @@ npm install -D expect-playwright
 
 ## Usage
 
-### With Jest
-
-To activate it in your Jest environment you have to include it in your configuration.
-
-```json
-{
-  "setupFilesAfterEnv": ["expect-playwright"]
-}
-```
-
 ### With [Playwright test runner](https://playwright.dev/docs/test-intro)
 
 To activate with the Playwright test runner, use `expect.extend()` in the config to add the `expect-playwright` matchers.
@@ -34,6 +24,16 @@ import { matchers } from "expect-playwright"
 expect.extend(matchers)
 
 // ...
+```
+
+### With Jest
+
+To activate it in your Jest environment you have to include it in your configuration.
+
+```json
+{
+  "setupFilesAfterEnv": ["expect-playwright"]
+}
 ```
 
 ## Why do I need it
@@ -50,6 +50,18 @@ expect(textContent).stringContaining("my text")
 
 // after by using expect-playwright
 await expect(page).toMatchText("#foo", "my text")
+```
+
+But that's not all! Our matchers also work inside of iframes and accept an [ElementHandle] which targets an `iframe` element or a [Frame] obtained by calling `element.contentFrame()`. Not only that, but if you pass a promise, we will automatically resolve it for you!
+
+```javascript
+// before
+const element = await page.$("iframe")
+const frame = await element.contentFrame()
+await expect(frame).toBeChecked("#foo")
+
+// after
+await expect(page.$("iframe")).toBeChecked("#foo")
 ```
 
 ## API documentation
