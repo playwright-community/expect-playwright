@@ -74,6 +74,7 @@ await expect(page.$("iframe")).toBeChecked("#foo")
 - [toHaveFocus](#toHaveFocus)
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
+- [toMatchAttribute](#toMatchAttribute)
 - [toMatchText](#toMatchText)
 - [toMatchTitle](#toMatchTitle)
 - [toMatchURL](#toMatchURL)
@@ -162,6 +163,25 @@ This function checks if the count of a given selector is the same as the provide
 
 ```javascript
 await expect(page).toHaveSelectorCount(".my-element", 3)
+```
+
+### toMatchAttribute
+
+This function checks if an element's attribute matches the provided string or regex pattern.
+
+You can do this via a selector on the whole page:
+
+```javascript
+await expect(page).toMatchAttribute("#foo", "href", "https://playwright.dev")
+await expect(page).toMatchAttribute("#foo", "href", /playwright/)
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+```javascript
+const element = await page.$("#foo")
+await expect(element).toMatchAttribute("href", "https://playwright.dev")
+await expect(element).toMatchAttribute("href", /playwright/)
 ```
 
 ### toMatchText
