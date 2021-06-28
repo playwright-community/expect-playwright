@@ -59,13 +59,13 @@ await expect(page).toMatchText("#foo", "my text")
 - [toBeChecked](#toBeChecked)
 - [toBeDisabled](#toBeDisabled)
 - [toBeEnabled](#toBeEnabled)
-- [toEqualUrl](#toEqualUrl)
-- [toEqualValue](#toEqualValue)
 - [toHaveFocus](#toHaveFocus)
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
 - [toMatchText](#toMatchText)
 - [toMatchTitle](#toMatchTitle)
+- [toMatchURL](#toMatchURL)
+- [toMatchValue](#toMatchValue)
 
 ### toBeChecked
 
@@ -116,31 +116,6 @@ Or by passing a Playwright [ElementHandle]:
 ```javascript
 const element = await page.$("#my-element")
 await expect(element).toBeEnabled()
-```
-
-### toEqualUrl
-
-This function checks if the given URL matches the current page's URL
-
-```javascript
-await expect(page).toEqualUrl("https://github.com")
-```
-
-### toEqualValue
-
-This function checks if the `value` of a given element is the same as the provided value.
-
-You can do this via a selector or the element directly:
-
-```javascript
-await expect(page).toEqualValue("#my-element", "Playwright")
-```
-
-Or by passing a Playwright [ElementHandle]:
-
-```javascript
-const element = await page.$("#my-element")
-await expect(element).toEqualValue("Playwright")
 ```
 
 ### toHaveFocus
@@ -210,6 +185,34 @@ This function checks if the page or frame title matches the provided string or r
 ```javascript
 await expect(page).toMatchTitle("My app - page 1")
 await expect(page).toMatchTitle(/My app - page \d/)
+```
+
+### toMatchURL
+
+This function checks if the current page's URL matches the provided string or regex pattern.
+
+```javascript
+await expect(page).toMatchURL("https://github.com")
+await expect(page).toMatchURL(/github\.com/)
+```
+
+### toMatchValue
+
+This function checks if the `value` of a given element is the same as the provided string or regex pattern.
+
+You can do this via a selector or the element directly:
+
+```javascript
+await expect(page).toMatchValue("#my-element", "Playwright")
+await expect(page).toMatchValue("#my-element", /Play.+/)
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+```javascript
+const element = await page.$("#my-element")
+await expect(element).toMatchValue("Playwright")
+await expect(element).toMatchValue(/Play.+/)
 ```
 
 ## Examples
