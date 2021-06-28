@@ -1,15 +1,15 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { ExpectInputType, getFrame, getMessage } from "../utils"
+import { compareText, ExpectInputType, getFrame, getMessage } from "../utils"
 
 const toMatchUrl: jest.CustomMatcher = async function (
   page: ExpectInputType,
-  expectedUrl: string
+  expectedUrl: RegExp | string
 ): Promise<SyncExpectationResult> {
   const frame = await getFrame(page)
   const actualUrl = frame!.url()
 
   return {
-    pass: actualUrl === expectedUrl,
+    pass: compareText(expectedUrl, actualUrl),
     message: () => getMessage(this, "toMatchUrl", expectedUrl, actualUrl),
   }
 }
