@@ -1,7 +1,9 @@
 import { assertSnapshot } from "../tests/utils"
 
 describe("toMatchTitle", () => {
-  afterEach(() => page.setContent(""))
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
+  })
 
   describe("with string argument", () => {
     it("positive", async () => {

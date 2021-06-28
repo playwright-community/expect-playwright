@@ -3,8 +3,8 @@ import { assertSnapshot } from "../tests/utils"
 const iframeSrc = `<iframe src="https://interactive-examples.mdn.mozilla.net/pages/tabbed/input-text.html">`
 
 describe("toMatchValue", () => {
-  afterEach(async () => {
-    await page.setContent("")
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
   })
 
   describe("selector", () => {

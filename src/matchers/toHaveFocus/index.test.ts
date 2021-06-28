@@ -1,8 +1,8 @@
 import { assertSnapshot } from "../tests/utils"
 
 describe("toHaveFocus", () => {
-  afterEach(async () => {
-    await page.setContent("")
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
   })
   it("positive", async () => {
     await page.setContent(`<input id="foobar">`)

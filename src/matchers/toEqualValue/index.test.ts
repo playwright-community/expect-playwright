@@ -1,8 +1,8 @@
 import { assertSnapshot } from "../tests/utils"
 
 describe("toEqualValue", () => {
-  afterEach(async () => {
-    await page.setContent("")
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
   })
 
   describe("selector", () => {

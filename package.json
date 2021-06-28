@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc --watch",
-    "test": "jest"
+    "test": "jest --maxWorkers=4"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",

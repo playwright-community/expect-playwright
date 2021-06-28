@@ -1,8 +1,8 @@
 import { assertSnapshot } from "../tests/utils"
 
 describe("toBeEnabled", () => {
-  afterEach(async () => {
-    await page.setContent("")
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
   })
 
   describe("selector", () => {
