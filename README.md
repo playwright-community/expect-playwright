@@ -12,16 +12,6 @@ npm install -D expect-playwright
 
 ## Usage
 
-### With Jest
-
-To activate it in your Jest environment you have to include it in your configuration.
-
-```json
-{
-  "setupFilesAfterEnv": ["expect-playwright"]
-}
-```
-
 ### With [Playwright test runner](https://playwright.dev/docs/test-intro)
 
 To activate with the Playwright test runner, use `expect.extend()` in the config to add the `expect-playwright` matchers.
@@ -34,6 +24,16 @@ import { matchers } from "expect-playwright"
 expect.extend(matchers)
 
 // ...
+```
+
+### With Jest
+
+To activate it in your Jest environment you have to include it in your configuration.
+
+```json
+{
+  "setupFilesAfterEnv": ["expect-playwright"]
+}
 ```
 
 ## Why do I need it
