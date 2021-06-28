@@ -64,7 +64,7 @@ await expect(page).toMatchText("#foo", "my text")
 - [toHaveSelectorCount](#toHaveSelectorCount)
 - [toMatchText](#toMatchText)
 - [toMatchTitle](#toMatchTitle)
-- [toMatchUrl](#toMatchUrl)
+- [toMatchURL](#toMatchURL)
 - [toMatchValue](#toMatchValue)
 
 ### toBeChecked
@@ -187,13 +187,13 @@ await expect(page).toMatchTitle("My app - page 1")
 await expect(page).toMatchTitle(/My app - page \d/)
 ```
 
-### toMatchUrl
+### toMatchURL
 
 This function checks if the current page's URL matches the provided string or regex pattern.
 
 ```javascript
-await expect(page).toMatchUrl("https://github.com")
-await expect(page).toMatchUrl(/github\.com/)
+await expect(page).toMatchURL("https://github.com")
+await expect(page).toMatchURL(/github\.com/)
 ```
 
 ### toMatchValue

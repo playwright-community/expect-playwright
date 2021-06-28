@@ -107,7 +107,7 @@ export interface PlaywrightMatchers<R> {
   /**
    * Will check if the page URL matches the given pattern.
    */
-  toMatchUrl(value: RegExp | string): Promise<R>
+  toMatchURL(value: RegExp | string): Promise<R>
   /**
    * Will check an element's value on the page determined by the selector matches the given pattern.
    */
@@ -176,7 +176,7 @@ export interface PlaywrightMatchers<R> {
   toEqualValue(value: string, options?: PageWaitForSelectorOptions): Promise<R>
   /**
    * Will assert the given URL with the page's URL
-   * @deprecated - use `toMatchUrl` instead
+   * @deprecated - use `toMatchURL` instead
    */
   toEqualUrl(value: string): Promise<R>
 }

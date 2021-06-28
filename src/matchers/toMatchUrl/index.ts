@@ -1,7 +1,7 @@
 import { SyncExpectationResult } from "expect/build/types"
 import { compareText, ExpectInputType, getFrame, getMessage } from "../utils"
 
-const toMatchUrl: jest.CustomMatcher = async function (
+const toMatchURL: jest.CustomMatcher = async function (
   page: ExpectInputType,
   expectedUrl: RegExp | string
 ): Promise<SyncExpectationResult> {
@@ -10,8 +10,8 @@ const toMatchUrl: jest.CustomMatcher = async function (
 
   return {
     pass: compareText(expectedUrl, actualUrl),
-    message: () => getMessage(this, "toMatchUrl", expectedUrl, actualUrl),
+    message: () => getMessage(this, "toMatchURL", expectedUrl, actualUrl),
   }
 }
 
-export default toMatchUrl
+export default toMatchURL

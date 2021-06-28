@@ -11,7 +11,7 @@ import toHaveText from "./toHaveText"
 import toMatchAttribute from "./toMatchAttribute"
 import toMatchText from "./toMatchText"
 import toMatchTitle from "./toMatchTitle"
-import toMatchUrl from "./toMatchUrl"
+import toMatchURL from "./toMatchURL"
 import toMatchValue from "./toMatchValue"
 
 export default {
@@ -28,6 +28,6 @@ export default {
   toMatchAttribute,
   toMatchText,
   toMatchTitle,
-  toMatchUrl,
+  toMatchURL,
   toMatchValue,
 }
