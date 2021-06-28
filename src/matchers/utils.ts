@@ -8,11 +8,7 @@ const isElementHandle = (value: ExpectInputType): value is ElementHandle => {
 }
 
 export const getFrame = async (value: ExpectInputType) => {
-  if (isElementHandle(value)) {
-    return (await value.contentFrame()) ?? value
-  }
-
-  return value
+  return isElementHandle(value) ? value.contentFrame() : value
 }
 
 const isObject = (value: unknown) =>
@@ -39,7 +35,7 @@ export const getElementHandle = async (
   const expectedValue = args.splice(-valueArgCount, valueArgCount) as string[]
 
   // Finally, we can find the element handle
-  let elementHandle = await getFrame(args[0])
+  let elementHandle = (await getFrame(args[0])) ?? args[0]
 
   // If the user provided a page or iframe, we need to locate the provided
   // selector or the `body` element if none was provided.
