@@ -261,5 +261,6 @@ at the top of your test file or include it globally in your `tsconfig.json`.
 
 - [expect-puppeteer](https://github.com/smooth-code/jest-puppeteer/tree/master/packages/expect-puppeteer)
 
-[elementhandle]: https://github.com/microsoft/playwright/blob/master/docs/api.md#class-elementhandle
-[playwright]: https://github.com/microsoft/Playwright
+[elementhandle]: https://playwright.dev/docs/api/class-elementhandle/
+[frame]: https://playwright.dev/docs/api/class-frame/
+[playwright]: https://playwright.dev
