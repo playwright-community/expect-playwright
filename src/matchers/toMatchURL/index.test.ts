@@ -21,10 +21,14 @@ describe("toMatchURL", () => {
   it("positive in frame", async () => {
     const myUrl = `${urlPrefix}/1.html`
     await page.setContent(`<iframe src="${myUrl}"></iframe>`)
-    const handle = await page.$("iframe")
-    const iframe = await handle?.contentFrame()
+
+    const handle = page.$("iframe")
     await expect(handle).toMatchURL(myUrl)
+    await expect(await handle).toMatchURL(myUrl)
+
+    const iframe = (await handle)?.contentFrame()
     await expect(iframe).toMatchURL(/\d\.html$/)
+    await expect(await iframe).toMatchURL(/\d\.html$/)
   })
 
   it("positive", async () => {
@@ -43,10 +47,14 @@ describe("toMatchURL", () => {
     it("positive in frame", async () => {
       const myUrl = `${urlPrefix}/1.html`
       await page.setContent(`<iframe src="${myUrl}"></iframe>`)
-      const handle = await page.$("iframe")
-      const iframe = await handle?.contentFrame()
+
+      const handle = page.$("iframe")
       await expect(handle).not.toMatchURL("foobar")
+      await expect(await handle).not.toMatchURL("foobar")
+
+      const iframe = (await handle)?.contentFrame()
       await expect(iframe).not.toMatchURL(/foo/)
+      await expect(await iframe).not.toMatchURL(/foo/)
     })
 
     it("positive", async () => {
