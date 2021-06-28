@@ -162,6 +162,7 @@ export interface PlaywrightMatchers<R> {
   ): Promise<R>
   /**
    * Will compare the element's value on the page determined by the selector with the given value.
+   * @deprecated - use `toMatchValue` instead
    */
   toEqualValue(
     selector: string,
@@ -170,10 +171,12 @@ export interface PlaywrightMatchers<R> {
   ): Promise<R>
   /**
    * Will compare element's value with the given value.
+   * @deprecated - use `toMatchValue` instead
    */
   toEqualValue(value: string, options?: PageWaitForSelectorOptions): Promise<R>
   /**
    * Will assert the given URL with the page's URL
+   * @deprecated - use `toMatchUrl` instead
    */
   toEqualUrl(value: string): Promise<R>
 }
