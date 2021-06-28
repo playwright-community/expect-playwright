@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toMatchValue element negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchValue[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m\\"not-existing\\"[39m
+Received: [31m\\"bar\\"[39m"
+`;
+
+exports[`toMatchValue element negative 2`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchValue[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m/not-existing/[39m
+Received: [31m\\"bar\\"[39m"
+`;
+
+exports[`toMatchValue selector negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchValue[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m\\"Ba[7mz[27m\\"[39m
+Received: [31m\\"Ba[7mr[27m\\"[39m"
+`;
+
+exports[`toMatchValue selector negative 2`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoMatchValue[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: [32m/az$/[39m
+Received: [31m\\"Bar\\"[39m"
+`;
+
+exports[`toMatchValue selector with 'not' usage negative 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoMatchValue[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: not [32m\\"bar\\"[39m"
+`;
+
+exports[`toMatchValue selector with 'not' usage negative 2`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoMatchValue[2m([22m[32mexpected[39m[2m)[22m
+
+Expected: not [32m/ba/[39m"
+`;
+
+exports[`toMatchValue timeout should throw an error after the timeout exceeds 1`] = `"Error: Timeout exceed for element '#foobar'"`;
