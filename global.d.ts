@@ -105,6 +105,25 @@ export interface PlaywrightMatchers<R> {
    */
   toMatchTitle(pattern: RegExp | string): Promise<R>
   /**
+   * Will check if the page URL matches the given pattern.
+   */
+  toMatchUrl(value: RegExp | string): Promise<R>
+  /**
+   * Will check an element's value on the page determined by the selector matches the given pattern.
+   */
+  toMatchValue(
+    selector: string,
+    value: RegExp | string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
+   * Will check an element's value matches the given pattern.
+   */
+  toMatchValue(
+    value: RegExp | string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
    * Will compare the element's textContent on the page determined by the selector with the given text.
    * @deprecated - Use `toMatchText`
    */
