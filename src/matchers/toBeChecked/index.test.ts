@@ -34,8 +34,9 @@ describe("toBeChecked", () => {
   describe("element", () => {
     it("positive", async () => {
       await page.setContent('<input type="radio" checked>')
-      const input = await page.$("input")
+      const input = page.$("input")
       await expect(input).toBeChecked()
+      await expect(await input).toBeChecked()
     })
 
     it("negative: target element isn't checked", async () => {

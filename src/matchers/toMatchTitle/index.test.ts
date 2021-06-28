@@ -53,9 +53,13 @@ describe("toMatchTitle", () => {
 
   it("should work in frames", async () => {
     await page.setContent('<iframe src="https://example.com"></iframe>')
-    const handle = await page.$("iframe")
-    const iframe = await handle?.contentFrame()
+
+    const handle = page.$("iframe")
     await expect(handle).toMatchTitle("Example Domain")
+    await expect(await handle).toMatchTitle("Example Domain")
+
+    const iframe = (await handle)?.contentFrame()
     await expect(iframe).toMatchTitle(/example domain/i)
+    await expect(await iframe).toMatchTitle(/example domain/i)
   })
 })

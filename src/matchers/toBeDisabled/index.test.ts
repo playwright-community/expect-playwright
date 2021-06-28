@@ -5,21 +5,38 @@ describe("toBeDisabled", () => {
     await page.setContent("")
   })
 
-  it("positive", async () => {
-    await page.setContent('<button id="foo" disabled>')
-    await expect(page).toBeDisabled("#foo")
+  describe("selector", () => {
+    it("positive", async () => {
+      await page.setContent('<button id="foo" disabled>')
+      await expect(page).toBeDisabled("#foo")
+    })
+
+    it("negative: target element isn't enabled", async () => {
+      await page.setContent('<button id="foo">')
+      await assertSnapshot(() => expect(page).toBeDisabled("#foo"))
+    })
+
+    it("negative: target element not found", async () => {
+      await page.setContent('<button id="foo">')
+      await assertSnapshot(() =>
+        expect(page).toBeDisabled("#bar", { timeout: 1000 })
+      )
+    })
   })
 
-  it("negative: target element isn't enabled", async () => {
-    await page.setContent('<button id="foo">')
-    await assertSnapshot(() => expect(page).toBeDisabled("#foo"))
-  })
+  describe("element", () => {
+    it("positive", async () => {
+      await page.setContent('<button id="foo" disabled>')
+      const button = page.$("#foo")
+      await expect(button).toBeDisabled()
+      await expect(await button).toBeDisabled()
+    })
 
-  it("negative: target element not found", async () => {
-    await page.setContent('<button id="foo">')
-    await assertSnapshot(() =>
-      expect(page).toBeDisabled("#bar", { timeout: 1000 })
-    )
+    it("negative: target element isn't enabled", async () => {
+      await page.setContent('<button id="foo">')
+      const button = await page.$("#foo")
+      await assertSnapshot(() => expect(button).toBeDisabled())
+    })
   })
 
   describe("with 'not' usage", () => {

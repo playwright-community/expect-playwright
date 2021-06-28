@@ -42,9 +42,9 @@ describe("toMatchAttribute", () => {
   describe("element", () => {
     it("positive", async () => {
       await page.setContent('<a href="https://google.com">Hi</a>')
-      const anchor = await page.$("a")
+      const anchor = page.$("a")
       await expect(anchor).toMatchAttribute("href", url)
-      await expect(anchor).toMatchAttribute("href", /\.com$/)
+      await expect(await anchor).toMatchAttribute("href", /\.com$/)
     })
 
     it("negative", async () => {

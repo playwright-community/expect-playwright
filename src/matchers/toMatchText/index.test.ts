@@ -77,15 +77,9 @@ describe("toMatchText", () => {
   describe("element", () => {
     it("positive", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
-      const element = await page.$("#foobar")
-      expect(element).not.toBeNull()
-      await expect(element!).toMatchText(/Bar/)
-    })
-    it("positive with string", async () => {
-      await page.setContent(`<div id="foobar">Bar</div>`)
-      const element = await page.$("#foobar")
-      expect(element).not.toBeNull()
-      await expect(element!).toMatchText("Bar")
+      const element = page.$("#foobar")
+      await expect(element).toMatchText("Bar")
+      await expect(await element).toMatchText(/Bar/)
     })
     it("negative", async () => {
       await page.setContent(`<div id="foobar">zzzBarzzz</div>`)
