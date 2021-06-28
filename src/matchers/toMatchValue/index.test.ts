@@ -60,9 +60,9 @@ describe("toMatchValue", () => {
   describe("element", () => {
     it("positive", async () => {
       await page.setContent(`<input id="foobar" value="bar"/>`)
-      const element = await page.$("#foobar")
+      const element = page.$("#foobar")
       await expect(element).toMatchValue("bar")
-      await expect(element).toMatchValue(/ba/)
+      await expect(await element).toMatchValue(/ba/)
     })
 
     it("negative", async () => {

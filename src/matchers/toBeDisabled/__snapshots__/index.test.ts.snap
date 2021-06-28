@@ -1,13 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toBeDisabled negative: target element isn't enabled 1`] = `
+exports[`toBeDisabled element negative: target element isn't enabled 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).[22mtoBeDisabled[2m()[22m
 
 Expected: [32mtrue[39m
 Received: [31mfalse[39m"
 `;
 
-exports[`toBeDisabled negative: target element not found 1`] = `"Error: Timeout exceed for element '#bar'"`;
+exports[`toBeDisabled selector negative: target element isn't enabled 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).[22mtoBeDisabled[2m()[22m
+
+Expected: [32mtrue[39m
+Received: [31mfalse[39m"
+`;
+
+exports[`toBeDisabled selector negative: target element not found 1`] = `"Error: Timeout exceed for element '#bar'"`;
 
 exports[`toBeDisabled timeout should throw an error after the timeout exceeds 1`] = `"Error: Timeout exceed for element '#foo'"`;
 

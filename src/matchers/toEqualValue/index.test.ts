@@ -34,8 +34,9 @@ describe("toEqualValue", () => {
   describe("element", () => {
     it("positive", async () => {
       await page.setContent(`<input id="foobar" value="bar"/>`)
-      const element = await page.$("#foobar")
+      const element = page.$("#foobar")
       await expect(element).toEqualValue("bar")
+      await expect(await element).toEqualValue("bar")
     })
 
     it("negative", async () => {
