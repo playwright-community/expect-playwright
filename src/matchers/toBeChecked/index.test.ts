@@ -3,7 +3,9 @@ import { assertSnapshot } from "../tests/utils"
 const iframeSrc = `<iframe src="https://interactive-examples.mdn.mozilla.net/pages/tabbed/input-checkbox.html">`
 
 describe("toBeChecked", () => {
-  afterEach(() => page.setContent(""))
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
+  })
 
   describe("selector", () => {
     it("positive", async () => {

@@ -5,7 +5,9 @@ const longUrl = "https://www.google.com"
 const frameUrl = "https://www.iana.org/domains/example"
 
 describe("toMatchAttribute", () => {
-  afterEach(() => page.setContent(""))
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
+  })
 
   describe("selector", () => {
     it("positive", async () => {

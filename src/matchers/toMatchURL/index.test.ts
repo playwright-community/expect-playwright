@@ -3,7 +3,8 @@ import { assertSnapshot } from "../tests/utils"
 describe("toMatchURL", () => {
   const urlPrefix = "http://i-do-not-exist.com"
 
-  beforeAll(async () => {
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
     await page.route("**/1.html", (route) => {
       route.fulfill({
         body: "123",
@@ -12,10 +13,6 @@ describe("toMatchURL", () => {
         },
       })
     })
-  })
-
-  afterEach(async () => {
-    await page.setContent("")
   })
 
   it("positive in frame", async () => {

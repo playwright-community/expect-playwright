@@ -1,8 +1,8 @@
 import { assertSnapshot } from "../tests/utils"
 
 describe("toMatchText", () => {
-  afterEach(async () => {
-    await page.setContent("")
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
   })
   describe("selector", () => {
     it("positive frame", async () => {

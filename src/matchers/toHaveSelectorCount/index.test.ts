@@ -1,8 +1,8 @@
 import { assertSnapshot } from "../tests/utils"
 
 describe("toHaveSelectorCount", () => {
-  afterEach(async () => {
-    await page.setContent("")
+  beforeEach(async () => {
+    await jestPlaywright.resetContext()
   })
   describe("selector", () => {
     it("positive", async () => {
