@@ -1,5 +1,7 @@
 import { assertSnapshot } from "../tests/utils"
 
+const iframeSrc = `<iframe src="https://interactive-examples.mdn.mozilla.net/pages/tabbed/input-text.html">`
+
 describe("toMatchValue", () => {
   afterEach(async () => {
     await page.setContent("")
@@ -10,6 +12,15 @@ describe("toMatchValue", () => {
       await page.setContent(`<input id="foobar" value="bar"/>`)
       await expect(page).toMatchValue("#foobar", "bar")
       await expect(page).toMatchValue("#foobar", /ba/)
+    })
+
+    it("positive in frame", async () => {
+      await page.setContent(iframeSrc)
+      const handle = await page.$("iframe")
+      const iframe = await handle?.contentFrame()
+      await iframe?.fill("input", "bar")
+      await expect(handle).toMatchValue("#name", "bar")
+      await expect(iframe).toMatchValue("#name", /ar/)
     })
 
     it("negative", async () => {
@@ -23,6 +34,15 @@ describe("toMatchValue", () => {
         await page.setContent(`<input id="foobar" value="bar"/>`)
         expect(page).not.toMatchValue("#foobar", "not-existing")
         expect(page).not.toMatchValue("#foobar", /not-existing/)
+      })
+
+      it("positive in frame", async () => {
+        await page.setContent(iframeSrc)
+        const handle = await page.$("iframe")
+        const iframe = await handle?.contentFrame()
+        await iframe?.fill("input", "bar")
+        await expect(handle).toMatchValue("#name", "bar")
+        await expect(iframe).toMatchValue("#name", /ar/)
       })
 
       it("negative", async () => {
