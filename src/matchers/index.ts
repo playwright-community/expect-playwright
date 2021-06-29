@@ -4,7 +4,7 @@ import toBeEnabled from "./toBeEnabled"
 import toEqualText from "./toEqualText"
 import toEqualUrl from "./toEqualUrl"
 import toEqualValue from "./toEqualValue"
-import toHaveComputedStyle from "./toHaveComputedStyle"
+import toMatchComputedStyle from "./toMatchComputedStyle"
 import toHaveFocus from "./toHaveFocus"
 import toHaveSelector from "./toHaveSelector"
 import toHaveSelectorCount from "./toHaveSelectorCount"
@@ -22,7 +22,7 @@ export default {
   toEqualText,
   toEqualUrl,
   toEqualValue,
-  toHaveComputedStyle,
+  toMatchComputedStyle,
   toHaveFocus,
   toHaveSelector,
   toHaveSelectorCount,

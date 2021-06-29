@@ -163,7 +163,7 @@ export interface PlaywrightMatchers<R> {
   /**
    * Will check if an element's computed style property on the page determined by the selector matches the given string.
    */
-  toHaveComputedStyle(
+  toMatchComputedStyle(
     selector: string,
     property: keyof CSSStyleDeclaration,
     value: string,
@@ -172,7 +172,7 @@ export interface PlaywrightMatchers<R> {
   /**
    * Will check if an element's computed style property matches the given string.
    */
-  toHaveComputedStyle(
+  toMatchComputedStyle(
     property: keyof CSSStyleDeclaration,
     value: string,
     options?: PageWaitForSelectorOptions

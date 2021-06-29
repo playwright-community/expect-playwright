@@ -71,7 +71,7 @@ await expect(page.$("iframe")).toBeChecked("#foo")
 - [toBeChecked](#toBeChecked)
 - [toBeDisabled](#toBeDisabled)
 - [toBeEnabled](#toBeEnabled)
-- [toHaveComputedStyle](#toHaveComputedStyle)
+- [toMatchComputedStyle](#toMatchComputedStyle)
 - [toHaveFocus](#toHaveFocus)
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
@@ -132,14 +132,14 @@ const element = await page.$("#my-element")
 await expect(element).toBeEnabled()
 ```
 
-### toHaveComputedStyle
+### toMatchComputedStyle
 
 This function checks if an element's computed style property matches the provided string.
 
 You can do this via a selector on the whole page:
 
 ```javascript
-await expect(page).toHaveComputedStyle(
+await expect(page).toMatchComputedStyle(
   "#my-element",
   "backgroundColor",
   "rgb(0, 0, 0)"
@@ -150,7 +150,7 @@ Or by passing a Playwright [ElementHandle]:
 
 ```javascript
 const element = await page.$("#my-element")
-await expect(element).toHaveComputedStyle("backgroundColor", "rgb(0, 0, 0)")
+await expect(element).toMatchComputedStyle("backgroundColor", "rgb(0, 0, 0)")
 ```
 
 ### toHaveFocus
