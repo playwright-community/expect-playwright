@@ -1,13 +1,14 @@
 import { SyncExpectationResult } from "expect/build/types"
-import type { Page } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../../global"
+import { ExpectInputType, getFrame } from "../utils"
 
 const toHaveSelector: jest.CustomMatcher = async function (
-  page: Page,
+  arg: ExpectInputType,
   selector: string,
   options: PageWaitForSelectorOptions = {}
 ): Promise<SyncExpectationResult> {
-  const pass = await page
+  const frame = await getFrame(arg)
+  const pass = await frame!
     .waitForSelector(selector, {
       state: this.isNot ? "hidden" : "visible",
       ...options,
