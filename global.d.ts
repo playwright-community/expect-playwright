@@ -162,12 +162,16 @@ export interface PlaywrightMatchers<R> {
     options?: PageWaitForSelectorOptions
   ): Promise<R>
   /**
-   * Will ensure that the element has focus.
+   * Will check that an element on the page determined by the selector has focus.
    */
   toHaveFocus(
     selector: string,
     options?: PageWaitForSelectorOptions
   ): Promise<R>
+  /**
+   * Will check that an element has focus.
+   */
+  toHaveFocus(options?: PageWaitForSelectorOptions): Promise<R>
   /**
    * Will assert that N elements with the given selector are on the page and wait for it by default.
    * If its 0 elements, then it will throw since the element can't be found.

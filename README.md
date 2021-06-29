@@ -134,14 +134,19 @@ await expect(element).toBeEnabled()
 
 ### toHaveFocus
 
-This function checks if the given selector has focus.
+This function checks if a given element is focused.
+
+You can do this via a selector on the whole page:
 
 ```js
 await expect(page).toHaveFocus("#foobar")
-// or via not, useful to only wait 1 second instead of for the default timeout by Playwright which is 30 seconds.
-await expect(page).not.toHaveFocus("#foobar", {
-  timeout: 1 * 1000,
-})
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+```javascript
+const element = await page.$("#foobar")
+await expect(element).toHaveFocus()
 ```
 
 ### toHaveSelector
