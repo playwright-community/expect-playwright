@@ -1,18 +1,18 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { getMessage, quote } from "../utils"
-import type { Page } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../../global"
+import { ExpectInputType, getFrame, getMessage, quote } from "../utils"
 
 const toHaveSelectorCount: jest.CustomMatcher = async function (
-  page: Page,
+  arg: ExpectInputType,
   selector: string,
   expectedValue: number,
   options: PageWaitForSelectorOptions = {}
 ): Promise<SyncExpectationResult> {
   try {
-    await page.waitForSelector(selector, { state: "attached", ...options })
+    const frame = (await getFrame(arg))!
+    await frame.waitForSelector(selector, { state: "attached", ...options })
     /* istanbul ignore next */
-    const actualCount = await page.$$eval(selector, (el) => el.length)
+    const actualCount = await frame.$$eval(selector, (el) => el.length)
 
     return {
       pass: actualCount === expectedValue,
