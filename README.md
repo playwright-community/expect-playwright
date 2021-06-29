@@ -192,6 +192,7 @@ This function checks if an element's computed style property matches the provide
 You can do this via a selector on the whole page:
 
 ```javascript
+await expect(page).toMatchComputedStyle("#my-element", "backgroundColor", /rgb/)
 await expect(page).toMatchComputedStyle(
   "#my-element",
   "backgroundColor",
@@ -203,6 +204,7 @@ Or by passing a Playwright [ElementHandle]:
 
 ```javascript
 const element = await page.$("#my-element")
+await expect(element).toMatchComputedStyle("backgroundColor", /rgb/)
 await expect(element).toMatchComputedStyle("backgroundColor", "rgb(0, 0, 0)")
 ```
 
