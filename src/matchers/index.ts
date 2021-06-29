@@ -4,12 +4,12 @@ import toBeEnabled from "./toBeEnabled"
 import toEqualText from "./toEqualText"
 import toEqualUrl from "./toEqualUrl"
 import toEqualValue from "./toEqualValue"
-import toMatchComputedStyle from "./toMatchComputedStyle"
 import toHaveFocus from "./toHaveFocus"
 import toHaveSelector from "./toHaveSelector"
 import toHaveSelectorCount from "./toHaveSelectorCount"
 import toHaveText from "./toHaveText"
 import toMatchAttribute from "./toMatchAttribute"
+import toMatchComputedStyle from "./toMatchComputedStyle"
 import toMatchText from "./toMatchText"
 import toMatchTitle from "./toMatchTitle"
 import toMatchURL from "./toMatchURL"
@@ -22,12 +22,12 @@ export default {
   toEqualText,
   toEqualUrl,
   toEqualValue,
-  toMatchComputedStyle,
   toHaveFocus,
   toHaveSelector,
   toHaveSelectorCount,
   toHaveText,
   toMatchAttribute,
+  toMatchComputedStyle,
   toMatchText,
   toMatchTitle,
   toMatchURL,
