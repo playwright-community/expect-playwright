@@ -161,6 +161,23 @@ export interface PlaywrightMatchers<R> {
     options?: PageWaitForSelectorOptions
   ): Promise<R>
   /**
+   * Will check if an element's computed style property on the page determined by the selector matches the given string.
+   */
+  toHaveComputedStyle(
+    selector: string,
+    property: keyof CSSStyleDeclaration,
+    value: string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
+   * Will check if an element's computed style property matches the given string.
+   */
+  toHaveComputedStyle(
+    property: keyof CSSStyleDeclaration,
+    value: string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
    * Will compare the element's value on the page determined by the selector with the given value.
    * @deprecated - use `toMatchValue` instead
    */
