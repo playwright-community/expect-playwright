@@ -1,5 +1,10 @@
 import { SyncExpectationResult } from "expect/build/types"
-import { getElementHandle, getMessage, InputArguments } from "../utils"
+import {
+  compareText,
+  getElementHandle,
+  getMessage,
+  InputArguments,
+} from "../utils"
 
 const toMatchComputedStyle: jest.CustomMatcher = async function (
   ...args: InputArguments
@@ -16,7 +21,7 @@ const toMatchComputedStyle: jest.CustomMatcher = async function (
     )
 
     return {
-      pass: expectedValue === actualValue,
+      pass: compareText(expectedValue, actualValue),
       message: () =>
         getMessage(this, "toMatchComputedStyle", expectedValue, actualValue),
     }

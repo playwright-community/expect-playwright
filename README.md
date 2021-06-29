@@ -71,11 +71,11 @@ await expect(page.$("iframe")).toBeChecked("#foo")
 - [toBeChecked](#toBeChecked)
 - [toBeDisabled](#toBeDisabled)
 - [toBeEnabled](#toBeEnabled)
-- [toMatchComputedStyle](#toMatchComputedStyle)
 - [toHaveFocus](#toHaveFocus)
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
 - [toMatchAttribute](#toMatchAttribute)
+- [toMatchComputedStyle](#toMatchComputedStyle)
 - [toMatchText](#toMatchText)
 - [toMatchTitle](#toMatchTitle)
 - [toMatchURL](#toMatchURL)
@@ -132,27 +132,6 @@ const element = await page.$("#my-element")
 await expect(element).toBeEnabled()
 ```
 
-### toMatchComputedStyle
-
-This function checks if an element's computed style property matches the provided string.
-
-You can do this via a selector on the whole page:
-
-```javascript
-await expect(page).toMatchComputedStyle(
-  "#my-element",
-  "backgroundColor",
-  "rgb(0, 0, 0)"
-)
-```
-
-Or by passing a Playwright [ElementHandle]:
-
-```javascript
-const element = await page.$("#my-element")
-await expect(element).toMatchComputedStyle("backgroundColor", "rgb(0, 0, 0)")
-```
-
 ### toHaveFocus
 
 This function checks if the given selector has focus.
@@ -204,6 +183,27 @@ Or by passing a Playwright [ElementHandle]:
 const element = await page.$("#foo")
 await expect(element).toMatchAttribute("href", "https://playwright.dev")
 await expect(element).toMatchAttribute("href", /playwright/)
+```
+
+### toMatchComputedStyle
+
+This function checks if an element's computed style property matches the provided string.
+
+You can do this via a selector on the whole page:
+
+```javascript
+await expect(page).toMatchComputedStyle(
+  "#my-element",
+  "backgroundColor",
+  "rgb(0, 0, 0)"
+)
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+```javascript
+const element = await page.$("#my-element")
+await expect(element).toMatchComputedStyle("backgroundColor", "rgb(0, 0, 0)")
 ```
 
 ### toMatchText

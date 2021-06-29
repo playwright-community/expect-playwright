@@ -13,6 +13,7 @@ describe("toMatchComputedStyle", () => {
     it("positive", async () => {
       await page.setContent(content)
       await expect(page).toMatchComputedStyle("#foo", "backgroundColor", black)
+      await expect(page).toMatchComputedStyle("#foo", "backgroundColor", /rgb/)
     })
 
     it("positive in frame", async () => {
@@ -39,6 +40,7 @@ describe("toMatchComputedStyle", () => {
       it("positive", async () => {
         await page.setContent(content)
         expect(page).not.toMatchComputedStyle("#foo", "color", "white")
+        expect(page).not.toMatchComputedStyle("#foo", "color", /rgba/)
       })
 
       it("positive in frame", async () => {
@@ -68,7 +70,7 @@ describe("toMatchComputedStyle", () => {
       await page.setContent(content)
       const element = page.$("#foo")
       await expect(element).toMatchComputedStyle("color", black)
-      await expect(await element).toMatchComputedStyle("color", black)
+      await expect(await element).toMatchComputedStyle("color", /rgb/)
     })
 
     it("negative", async () => {
