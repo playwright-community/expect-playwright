@@ -12,13 +12,13 @@ describe("toMatchComputedStyle", () => {
   describe("selector", () => {
     it("positive", async () => {
       await page.setContent(content)
-      await expect(page).toMatchComputedStyle("#foo", "backgroundColor", black)
-      await expect(page).toMatchComputedStyle("#foo", "backgroundColor", /rgb/)
+      await expect(page).toMatchComputedStyle("#foo", "background-color", black)
+      await expect(page).toMatchComputedStyle("#foo", "background-color", /rgb/)
     })
 
     it("positive in frame", async () => {
       await page.setContent('<iframe src="https://example.com">')
-      const args = ["body", "backgroundColor", "rgb(240, 240, 242)"] as const
+      const args = ["body", "background-color", "rgb(240, 240, 242)"] as const
 
       const handle = page.$("iframe")
       await expect(handle).toMatchComputedStyle(...args)
@@ -45,7 +45,7 @@ describe("toMatchComputedStyle", () => {
 
       it("positive in frame", async () => {
         await page.setContent('<iframe src="https://example.com">')
-        const args = ["body", "backgroundColor", "white"] as const
+        const args = ["body", "background-color", "white"] as const
 
         const handle = page.$("iframe")
         await expect(handle).not.toMatchComputedStyle(...args)
@@ -77,7 +77,7 @@ describe("toMatchComputedStyle", () => {
       await page.setContent(content)
       const element = await page.$("#foo")
       await assertSnapshot(() =>
-        expect(element).toMatchComputedStyle("backgroundColor", "white")
+        expect(element).toMatchComputedStyle("background-color", "white")
       )
     })
   })

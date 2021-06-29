@@ -16,8 +16,8 @@ const toMatchComputedStyle: jest.CustomMatcher = async function (
     )
     /* istanbul ignore next */
     const actualValue = await elementHandle.evaluate(
-      (el, property) => getComputedStyle(el as HTMLElement)[property],
-      property as keyof CSSStyleDeclaration
+      (el, prop) => getComputedStyle(el as HTMLElement).getPropertyValue(prop),
+      property
     )
 
     return {

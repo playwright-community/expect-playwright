@@ -90,7 +90,7 @@ export interface PlaywrightMatchers<R> {
    */
   toMatchComputedStyle(
     selector: string,
-    property: keyof CSSStyleDeclaration,
+    property: string,
     value: RegExp | string,
     options?: PageWaitForSelectorOptions
   ): Promise<R>
@@ -98,7 +98,7 @@ export interface PlaywrightMatchers<R> {
    * Will check if an element's computed style property matches the given string.
    */
   toMatchComputedStyle(
-    property: keyof CSSStyleDeclaration,
+    property: string,
     value: RegExp | string,
     options?: PageWaitForSelectorOptions
   ): Promise<R>
