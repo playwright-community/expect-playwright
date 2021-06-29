@@ -86,6 +86,23 @@ export interface PlaywrightMatchers<R> {
     options?: PageWaitForSelectorOptions
   ): Promise<R>
   /**
+   * Will check if an element's computed style property on the page determined by the selector matches the given string.
+   */
+  toMatchComputedStyle(
+    selector: string,
+    property: string,
+    value: RegExp | string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
+   * Will check if an element's computed style property matches the given string.
+   */
+  toMatchComputedStyle(
+    property: string,
+    value: RegExp | string,
+    options?: PageWaitForSelectorOptions
+  ): Promise<R>
+  /**
    * Will check if the element's textContent on the page determined by the selector matches the given pattern.
    */
   toMatchText(

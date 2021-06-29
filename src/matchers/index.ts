@@ -9,6 +9,7 @@ import toHaveSelector from "./toHaveSelector"
 import toHaveSelectorCount from "./toHaveSelectorCount"
 import toHaveText from "./toHaveText"
 import toMatchAttribute from "./toMatchAttribute"
+import toMatchComputedStyle from "./toMatchComputedStyle"
 import toMatchText from "./toMatchText"
 import toMatchTitle from "./toMatchTitle"
 import toMatchURL from "./toMatchURL"
@@ -26,6 +27,7 @@ export default {
   toHaveSelectorCount,
   toHaveText,
   toMatchAttribute,
+  toMatchComputedStyle,
   toMatchText,
   toMatchTitle,
   toMatchURL,

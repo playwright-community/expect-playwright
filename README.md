@@ -75,6 +75,7 @@ await expect(page.$("iframe")).toBeChecked("#foo")
 - [toHaveSelector](#toHaveSelector)
 - [toHaveSelectorCount](#toHaveSelectorCount)
 - [toMatchAttribute](#toMatchAttribute)
+- [toMatchComputedStyle](#toMatchComputedStyle)
 - [toMatchText](#toMatchText)
 - [toMatchTitle](#toMatchTitle)
 - [toMatchURL](#toMatchURL)
@@ -182,6 +183,25 @@ Or by passing a Playwright [ElementHandle]:
 const element = await page.$("#foo")
 await expect(element).toMatchAttribute("href", "https://playwright.dev")
 await expect(element).toMatchAttribute("href", /playwright/)
+```
+
+### toMatchComputedStyle
+
+This function checks if an element's computed style property matches the provided string or regex pattern.
+
+You can do this via a selector on the whole page:
+
+```javascript
+await expect(page).toMatchComputedStyle("#my-element", "color", "rgb(0, 0, 0)")
+await expect(page).toMatchComputedStyle("#my-element", "color", /rgb/)
+```
+
+Or by passing a Playwright [ElementHandle]:
+
+```javascript
+const element = await page.$("#my-element")
+await expect(element).toMatchComputedStyle("color", "rgb(0, 0, 0)")
+await expect(element).toMatchComputedStyle("color", /rgb/)
 ```
 
 ### toMatchText
