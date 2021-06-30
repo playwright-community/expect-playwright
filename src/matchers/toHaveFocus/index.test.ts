@@ -1,7 +1,5 @@
 import { assertSnapshot } from "../tests/utils"
 
-const iframeSrc = `<iframe src="https://interactive-examples.mdn.mozilla.net/pages/tabbed/input-text.html">`
-
 describe("toHaveFocus", () => {
   beforeEach(async () => {
     await jestPlaywright.resetContext()
@@ -15,16 +13,16 @@ describe("toHaveFocus", () => {
     })
 
     it("positive in frame", async () => {
-      await page.setContent('<iframe src="https://example.com">')
+      await page.setContent('<iframe src="http://localhost:8080">')
       await page.keyboard.press("Tab")
 
       const handle = page.$("iframe")
-      await expect(handle).toHaveFocus("a")
-      await expect(await handle).toHaveFocus("a")
+      await expect(handle).toHaveFocus("#checkbox-checked")
+      await expect(await handle).toHaveFocus("#checkbox-checked")
 
       const frame = (await handle)?.contentFrame()
-      await expect(frame).toHaveFocus("a")
-      await expect(await frame).toHaveFocus("a")
+      await expect(frame).toHaveFocus("#checkbox-checked")
+      await expect(await frame).toHaveFocus("#checkbox-checked")
     })
 
     it("negative", async () => {
@@ -58,15 +56,15 @@ describe("toHaveFocus", () => {
     })
 
     it("positive in frame", async () => {
-      await page.setContent('<iframe src="https://example.com">')
+      await page.setContent('<iframe src="http://localhost:8080">')
 
       const handle = page.$("iframe")
-      await expect(handle).not.toHaveFocus("a")
-      await expect(await handle).not.toHaveFocus("a")
+      await expect(handle).not.toHaveFocus("#checkbox-checked")
+      await expect(await handle).not.toHaveFocus("#checkbox-checked")
 
       const frame = (await handle)?.contentFrame()
-      await expect(frame).not.toHaveFocus("a")
-      await expect(await frame).not.toHaveFocus("a")
+      await expect(frame).not.toHaveFocus("#checkbox-checked")
+      await expect(await frame).not.toHaveFocus("#checkbox-checked")
     })
 
     it("negative", async () => {
