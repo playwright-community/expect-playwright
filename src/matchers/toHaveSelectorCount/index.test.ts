@@ -14,12 +14,12 @@ describe("toHaveSelectorCount", () => {
     it("positive in frame", async () => {
       await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
       const handle = page.$("iframe")
-      await expect(handle).toHaveSelectorCount("p", 2)
-      await expect(await handle).toHaveSelectorCount("p", 2)
+      await expect(handle).toHaveSelectorCount(".count", 2)
+      await expect(await handle).toHaveSelectorCount(".count", 2)
 
       const frame = (await handle)?.contentFrame()
-      await expect(frame).toHaveSelectorCount("p", 2)
-      await expect(await frame).toHaveSelectorCount("p", 2)
+      await expect(frame).toHaveSelectorCount(".count", 2)
+      await expect(await frame).toHaveSelectorCount(".count", 2)
     })
     it("negative", async () => {
       await page.setContent(`<div class="foobar">Bar</div>`)

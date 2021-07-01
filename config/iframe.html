@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
     <title>Testing Playground</title>
+    <style>
+      .foo {
+        color: red;
+      }
+    </style>
   </head>
   <body>
     <h1><code>expect-playwright</code> Testing Playground</h1>
@@ -26,6 +31,17 @@
     <section>
       <h1>Attributes</h1>
       <p id="attr" aria-label="foobar">Hi</p>
+    </section>
+
+    <section>
+      <h1>Styles</h1>
+      <p id="styles" class="foo">I'm red!</p>
+    </section>
+
+    <section>
+      <h1>Count</h1>
+      <p class="count">Number 1</p>
+      <p class="count">Number 2</p>
     </section>
   </body>
 </html>

@@ -18,7 +18,7 @@ describe("toMatchComputedStyle", () => {
 
     it("positive in frame", async () => {
       await page.setContent('<iframe src="http://localhost:8080">')
-      const args = ["body", "background-color", "rgb(240, 240, 242)"] as const
+      const args = ["#styles", "color", "rgb(255, 0, 0)"] as const
 
       const handle = page.$("iframe")
       await expect(handle).toMatchComputedStyle(...args)
@@ -45,7 +45,7 @@ describe("toMatchComputedStyle", () => {
 
       it("positive in frame", async () => {
         await page.setContent('<iframe src="http://localhost:8080">')
-        const args = ["body", "background-color", "white"] as const
+        const args = ["#styles", "color", "rgb(0, 0, 0)"] as const
 
         const handle = page.$("iframe")
         await expect(handle).not.toMatchComputedStyle(...args)
