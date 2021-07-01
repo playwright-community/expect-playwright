@@ -1,4 +1,6 @@
 src/
+lib/config/
+tests/
 coverage/
 jest.config.js
 tsconfig.json
