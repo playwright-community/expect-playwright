@@ -12,7 +12,7 @@ describe("toHaveSelectorCount", () => {
       await expect(page).toHaveSelectorCount(".foobar", 2)
     })
     it("positive in frame", async () => {
-      await page.setContent(`<iframe src="https://example.com"></iframe>`)
+      await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
       const handle = page.$("iframe")
       await expect(handle).toHaveSelectorCount("p", 2)
       await expect(await handle).toHaveSelectorCount("p", 2)

@@ -6,7 +6,7 @@ describe("toMatchText", () => {
   })
   describe("selector", () => {
     it("positive frame", async () => {
-      await page.setContent(`<iframe src="https://example.com"></iframe>`)
+      await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
       const handle = await page.$("iframe")
       const iframe = await handle!.contentFrame()
       await expect(handle).toMatchText("h1", /.*ample Domai.*/)
@@ -30,7 +30,7 @@ describe("toMatchText", () => {
     })
     describe("with 'not' usage", () => {
       it("positive in frame", async () => {
-        await page.setContent(`<iframe src="https://example.com"></iframe>`)
+        await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
         const handle = await page.$("iframe")
         const iframe = await handle!.contentFrame()
         await expect(handle).not.toMatchText("h1", /ab+c/)

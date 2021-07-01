@@ -9,7 +9,7 @@ describe("toHaveSelector", () => {
     await expect(page).toHaveSelector("#foobar")
   })
   it("positive in frame", async () => {
-    await page.setContent(`<iframe src="https://example.com"></iframe>`)
+    await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
     const selector = "a:text-is('More information...')"
 
     const handle = page.$("iframe")

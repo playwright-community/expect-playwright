@@ -2,7 +2,6 @@ import { assertSnapshot } from "../tests/utils"
 
 const url = "https://google.com"
 const longUrl = "https://www.google.com"
-const frameUrl = "https://www.iana.org/domains/example"
 
 describe("toMatchAttribute", () => {
   beforeEach(async () => {
@@ -17,11 +16,11 @@ describe("toMatchAttribute", () => {
     })
 
     it("positive in frame", async () => {
-      await page.setContent('<iframe src="http://example.com">')
+      await page.setContent('<iframe src="http://localhost:8080">')
       const handle = await page.$("iframe")
       const frame = handle?.contentFrame()
-      await expect(handle).toMatchAttribute("a", "href", frameUrl)
-      await expect(frame).toMatchAttribute("a", "href", /example$/)
+      await expect(handle).toMatchAttribute("#attr", "aria-label", "foobar")
+      await expect(frame).toMatchAttribute("#attr", "aria-label", /bar$/)
     })
 
     it("negative", async () => {
@@ -69,11 +68,11 @@ describe("toMatchAttribute", () => {
     })
 
     it("positive in frame", async () => {
-      await page.setContent('<iframe src="http://example.com">')
+      await page.setContent('<iframe src="http://localhost:8080">')
       const handle = await page.$("iframe")
       const frame = handle?.contentFrame()
-      await expect(handle).not.toMatchAttribute("a", "href", "foo")
-      await expect(frame).not.toMatchAttribute("a", "href", /foo/)
+      await expect(handle).not.toMatchAttribute("#attr", "aria-label", "bar")
+      await expect(frame).not.toMatchAttribute("#attr", "aria-label", /baz$/)
     })
 
     it("negative", async () => {
