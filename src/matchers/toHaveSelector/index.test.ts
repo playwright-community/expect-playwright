@@ -10,15 +10,13 @@ describe("toHaveSelector", () => {
   })
   it("positive in frame", async () => {
     await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
-    const selector = "a:text-is('More information...')"
-
     const handle = page.$("iframe")
-    await expect(handle).toHaveSelector(selector)
-    await expect(await handle).toHaveSelector(selector)
+    await expect(handle).toHaveSelector("#attr")
+    await expect(await handle).toHaveSelector("#attr")
 
     const frame = (await handle)?.contentFrame()
-    await expect(frame).toHaveSelector(selector)
-    await expect(await frame).toHaveSelector(selector)
+    await expect(frame).toHaveSelector("#attr")
+    await expect(await frame).toHaveSelector("#attr")
   })
   it("negative", async () => {
     await assertSnapshot(() =>
