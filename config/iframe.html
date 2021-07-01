@@ -4,29 +4,28 @@
     <title>Testing Playground</title>
   </head>
   <body>
+    <h1><code>expect-playwright</code> Testing Playground</h1>
+
     <section>
-      <h1>toBeChecked</h1>
+      <h1>Inputs</h1>
       <input id="checkbox-checked" type="checkbox" checked />
       <label for="checkbox-checked">Checked</label>
 
       <input id="checkbox-unchecked" type="checkbox" />
       <label for="checkbox-unchecked">Unchecked</label>
+
+      <input id="input-empty" type="text" />
+      <input id="input-filled" type="text" value="bar" />
     </section>
 
     <section>
-      <h1>toEqualText</h1>
+      <h1>Text</h1>
       <p id="text">Foobar</p>
     </section>
 
     <section>
-      <h1>toMatchAttribute</h1>
+      <h1>Attributes</h1>
       <p id="attr" aria-label="foobar">Hi</p>
-    </section>
-
-    <section>
-      <h1>toMatchValue</h1>
-      <input id="input-empty" type="text" />
-      <input id="input-filled" type="text" value="bar" />
     </section>
   </body>
 </html>
