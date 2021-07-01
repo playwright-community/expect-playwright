@@ -1,7 +1,5 @@
 import { assertSnapshot } from "../tests/utils"
 
-const iframeSrc = `<iframe src="https://interactive-examples.mdn.mozilla.net/pages/tabbed/input-text.html">`
-
 describe("toMatchValue", () => {
   beforeEach(async () => {
     await jestPlaywright.resetContext()
@@ -15,12 +13,11 @@ describe("toMatchValue", () => {
     })
 
     it("positive in frame", async () => {
-      await page.setContent(iframeSrc)
+      await page.setContent(`<iframe src="http://localhost:8080">`)
       const handle = await page.$("iframe")
       const iframe = await handle?.contentFrame()
-      await iframe?.fill("input", "bar")
-      await expect(handle).toMatchValue("#name", "bar")
-      await expect(iframe).toMatchValue("#name", /ar/)
+      await expect(handle).toMatchValue("#input-filled", "bar")
+      await expect(iframe).toMatchValue("#input-filled", /ar/)
     })
 
     it("negative", async () => {
@@ -37,12 +34,11 @@ describe("toMatchValue", () => {
       })
 
       it("positive in frame", async () => {
-        await page.setContent(iframeSrc)
+        await page.setContent(`<iframe src="http://localhost:8080">`)
         const handle = await page.$("iframe")
         const iframe = await handle?.contentFrame()
-        await iframe?.fill("input", "bar")
-        await expect(handle).toMatchValue("#name", "bar")
-        await expect(iframe).toMatchValue("#name", /ar/)
+        await expect(handle).not.toMatchValue("#input-empty", "bar")
+        await expect(iframe).not.toMatchValue("#input-empty", /ar/)
       })
 
       it("negative", async () => {

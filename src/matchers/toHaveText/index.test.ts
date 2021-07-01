@@ -6,11 +6,11 @@ describe("toHaveText", () => {
   })
   describe("selector", () => {
     it("positive frame", async () => {
-      await page.setContent(`<iframe src="https://example.com"></iframe>`)
+      await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
       const handle = await page.$("iframe")
       const iframe = await handle?.contentFrame()
-      await expect(handle).toHaveText("Example")
-      await expect(iframe).toHaveText("Example")
+      await expect(handle).toHaveText("expect-playwright")
+      await expect(iframe).toHaveText("expect-playwright")
     })
     it("empty positive with page element", async () => {
       await page.setContent(`<div id="foobar"></div>`)

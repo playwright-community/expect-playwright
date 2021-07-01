@@ -1,7 +1,5 @@
 import { assertSnapshot } from "../tests/utils"
 
-const iframeSrc = `<iframe src="https://interactive-examples.mdn.mozilla.net/pages/tabbed/input-checkbox.html">`
-
 describe("toBeChecked", () => {
   beforeEach(async () => {
     await jestPlaywright.resetContext()
@@ -14,11 +12,11 @@ describe("toBeChecked", () => {
     })
 
     it("positive in frame", async () => {
-      await page.setContent(iframeSrc)
+      await page.setContent(`<iframe src="http://localhost:8080">`)
       const handle = await page.$("iframe")
       const iframe = await handle?.contentFrame()
-      await expect(handle).toBeChecked("#scales")
-      await expect(iframe).toBeChecked("#scales")
+      await expect(handle).toBeChecked("#checkbox-checked")
+      await expect(iframe).toBeChecked("#checkbox-checked")
     })
 
     it("negative: target element isn't checked", async () => {
@@ -55,11 +53,11 @@ describe("toBeChecked", () => {
     })
 
     it("positive in frame", async () => {
-      await page.setContent(iframeSrc)
+      await page.setContent(`<iframe src="http://localhost:8080">`)
       const handle = await page.$("iframe")
       const iframe = await handle?.contentFrame()
-      await expect(handle).not.toBeChecked("#horns")
-      await expect(iframe).not.toBeChecked("#horns")
+      await expect(handle).not.toBeChecked("#checkbox-unchecked")
+      await expect(iframe).not.toBeChecked("#checkbox-unchecked")
     })
 
     it("negative", async () => {
