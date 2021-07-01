@@ -1,6 +1,6 @@
 module.exports = {
-  globalSetup: "./config/global-setup.js",
-  globalTeardown: "./config/global-teardown.js",
+  globalSetup: "./config/global-setup.ts",
+  globalTeardown: "./config/global-teardown.ts",
   preset: "jest-playwright-preset",
   testMatch: ["**/src/**/*.test.ts"],
   collectCoverage: true,
