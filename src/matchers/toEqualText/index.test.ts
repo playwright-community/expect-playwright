@@ -9,8 +9,8 @@ describe("toEqualText", () => {
       await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
       const handle = await page.$("iframe")
       const iframe = await handle?.contentFrame()
-      await expect(handle).toEqualText("h1", "Example Domain")
-      await expect(iframe).toEqualText("h1", "Example Domain")
+      await expect(handle).toEqualText("#text", "Foobar")
+      await expect(iframe).toEqualText("#text", "Foobar")
     })
     it("positive", async () => {
       await page.setContent(`<div id="foobar">Bar</div>`)
@@ -25,8 +25,8 @@ describe("toEqualText", () => {
         await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
         const handle = await page.$("iframe")
         const iframe = await handle?.contentFrame()
-        await expect(handle).not.toEqualText("h1", "Foo")
-        await expect(iframe).not.toEqualText("h1", "Foo")
+        await expect(handle).not.toEqualText("#text", "Foo")
+        await expect(iframe).not.toEqualText("#text", "Foo")
       })
       it("positive", async () => {
         await page.setContent(`<div id="foobar">Bar</div>`)
