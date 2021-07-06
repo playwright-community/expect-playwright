@@ -9,10 +9,10 @@ describe("toHaveSelector", () => {
     await expect(page).toHaveSelector("#foobar")
   })
   it("positive with an element handle", async () => {
-    await page.setContent(`<div id="foobar">Bar</div>`)
-    const handle = await page.$("#foobar")
+    await page.setContent(`<div id="foo"><div id="bar">Baz</div></div>`)
+    const handle = await page.$("#foo")
     expect(handle).toBeTruthy()
-    await expect(handle).toHaveSelector("#foobar")
+    await expect(handle).toHaveSelector("#bar")
   })
   it("positive in frame", async () => {
     await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
