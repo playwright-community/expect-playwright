@@ -11,6 +11,19 @@ describe("toHaveSelectorCount", () => {
       )
       await expect(page).toHaveSelectorCount(".foobar", 2)
     })
+    it("positive with an element handle", async () => {
+      await page.setContent(`
+        <div id="parent">
+          <div class="foobar">Bar</div>
+          <div class="foobar">Bar</div>
+          <div class="foobar">Bar</div>
+          <div class="foobar">Bar</div>
+        </div>
+      `)
+      const handle = await page.$("#parent")
+      expect(handle).toBeTruthy()
+      await expect(handle).toHaveSelectorCount(".foobar", 4)
+    })
     it("positive in frame", async () => {
       await page.setContent(`<iframe src="http://localhost:8080"></iframe>`)
       const handle = page.$("iframe")
