@@ -1,6 +1,6 @@
 import { SyncExpectationResult } from "expect/build/types"
 import { PageWaitForSelectorOptions } from "../../../global"
-import { ExpectInputType, getFrame, getMessage, quote } from "../utils"
+import { ExpectInputType, getElementHandle, getMessage, quote } from "../utils"
 
 const toHaveSelectorCount: jest.CustomMatcher = async function (
   arg: ExpectInputType,
@@ -9,10 +9,13 @@ const toHaveSelectorCount: jest.CustomMatcher = async function (
   options: PageWaitForSelectorOptions = {}
 ): Promise<SyncExpectationResult> {
   try {
-    const frame = (await getFrame(arg))!
-    await frame.waitForSelector(selector, { state: "attached", ...options })
+    const [elementHandle] = await getElementHandle([arg, selector], 1)
+    await elementHandle.waitForSelector(selector, {
+      state: "attached",
+      ...options,
+    })
     /* istanbul ignore next */
-    const actualCount = await frame.$$eval(selector, (el) => el.length)
+    const actualCount = await elementHandle.$$eval(selector, (el) => el.length)
 
     return {
       pass: actualCount === expectedValue,

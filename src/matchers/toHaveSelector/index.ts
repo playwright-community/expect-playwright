@@ -1,18 +1,23 @@
 import { SyncExpectationResult } from "expect/build/types"
 import { PageWaitForSelectorOptions } from "../../../global"
-import { ExpectInputType, getFrame } from "../utils"
+import { ExpectInputType, getElementHandle } from "../utils"
 
 const toHaveSelector: jest.CustomMatcher = async function (
   arg: ExpectInputType,
   selector: string,
   options: PageWaitForSelectorOptions = {}
 ): Promise<SyncExpectationResult> {
-  const frame = await getFrame(arg)
-  const pass = await frame!
-    .waitForSelector(selector, {
-      state: this.isNot ? "hidden" : "visible",
-      ...options,
-    })
+  const pass = await getElementHandle(
+    [
+      arg,
+      selector,
+      {
+        state: this.isNot ? "hidden" : "visible",
+        ...options,
+      },
+    ],
+    0
+  )
     .then(() => !this.isNot)
     .catch(() => this.isNot)
 
