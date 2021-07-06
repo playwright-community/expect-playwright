@@ -10,7 +10,7 @@ const isElementHandle = (value: Handle): value is ElementHandle => {
 
 export const getFrame = async (value: ExpectInputType) => {
   const resolved = await value
-  return isElementHandle(resolved) ? await resolved.contentFrame() : resolved
+  return isElementHandle(resolved) ? resolved.contentFrame() : resolved
 }
 
 const isObject = (value: unknown) =>
