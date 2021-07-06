@@ -9,7 +9,7 @@ const toHaveSelectorCount: jest.CustomMatcher = async function (
   options: PageWaitForSelectorOptions = {}
 ): Promise<SyncExpectationResult> {
   try {
-    const [elementHandle] = await getElementHandle([arg, selector], 1)
+    const [elementHandle] = await getElementHandle([arg, selector, options], 1)
     await elementHandle.waitForSelector(selector, {
       state: "attached",
       ...options,
