@@ -1,11 +1,15 @@
-import type { Page, ElementHandle, Frame } from "playwright-core"
+import type { Page, ElementHandle, Frame, Locator } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../global"
 
-type Handle = Page | Frame | ElementHandle
+type Handle = Page | Frame | ElementHandle | Locator
 export type ExpectInputType = Handle | Promise<Handle>
 
 const isElementHandle = (value: Handle): value is ElementHandle => {
   return value.constructor.name === "ElementHandle"
+}
+
+const isLocator = (value: Handle): value is Locator => {
+  return value.constructor.name === "Locator"
 }
 
 export const getFrame = async (value: ExpectInputType) => {
@@ -42,7 +46,7 @@ export const getElementHandle = async (
 
   // If the user provided a page or iframe, we need to locate the provided
   // selector or the `body` element if none was provided.
-  if (!isElementHandle(elementHandle)) {
+  if (!isElementHandle(elementHandle) && !isLocator(elementHandle)) {
     const selector = args[1] ?? "body"
 
     try {

@@ -46,6 +46,14 @@ describe("toBeChecked", () => {
     })
   })
 
+  describe("locator", () => {
+    it("positive", async () => {
+      await page.setContent('<input type="radio" checked>')
+      const input = page.locator("input")
+      await expect(input).toBeChecked()
+    })
+  })
+
   describe("with 'not' usage", () => {
     it("positive", async () => {
       await page.setContent('<input type="checkbox">')
