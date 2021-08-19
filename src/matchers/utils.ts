@@ -1,16 +1,23 @@
-import type { Page, ElementHandle, Frame } from "playwright-core"
+import type { Page, ElementHandle, Frame, Locator } from "playwright-core"
 import { PageWaitForSelectorOptions } from "../../global"
 
-type Handle = Page | Frame | ElementHandle
+type Handle = Page | Frame | ElementHandle | Locator
 export type ExpectInputType = Handle | Promise<Handle>
 
 const isElementHandle = (value: Handle): value is ElementHandle => {
   return value.constructor.name === "ElementHandle"
 }
 
+const isLocator = (value: Handle): value is Locator => {
+  return value.constructor.name === "Locator"
+}
+
 export const getFrame = async (value: ExpectInputType) => {
   const resolved = await value
-  return isElementHandle(resolved) ? resolved.contentFrame() : resolved
+
+  return isElementHandle(resolved)
+    ? resolved.contentFrame()
+    : (resolved as Page | Frame)
 }
 
 const isObject = (value: unknown) =>
@@ -37,22 +44,25 @@ export const getElementHandle = async (
   const expectedValue = args.splice(-valueArgCount, valueArgCount) as string[]
 
   // Finally, we can find the element handle
-  const handle = await args[0]
-  let elementHandle = (await getFrame(handle)) ?? handle
+  let handle = await args[0]
+  handle = (await getFrame(handle)) ?? handle
 
+  if (isLocator(handle)) {
+    handle = (await handle.elementHandle())!
+  }
   // If the user provided a page or iframe, we need to locate the provided
   // selector or the `body` element if none was provided.
-  if (!isElementHandle(elementHandle)) {
+  else if (!isElementHandle(handle)) {
     const selector = args[1] ?? "body"
 
     try {
-      elementHandle = (await elementHandle.waitForSelector(selector, options))!
+      handle = (await handle.waitForSelector(selector, options))!
     } catch (err) {
       throw new Error(`Timeout exceed for element ${quote(selector)}`)
     }
   }
 
-  return [elementHandle, expectedValue] as const
+  return [handle, expectedValue] as const
 }
 
 export const quote = (val: string | null) => (val === null ? "" : `'${val}'`)
