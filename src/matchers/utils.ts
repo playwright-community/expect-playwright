@@ -14,7 +14,10 @@ const isLocator = (value: Handle): value is Locator => {
 
 export const getFrame = async (value: ExpectInputType) => {
   const resolved = await value
-  return isElementHandle(resolved) ? resolved.contentFrame() : resolved
+
+  return isElementHandle(resolved)
+    ? resolved.contentFrame()
+    : (resolved as Page | Frame)
 }
 
 const isObject = (value: unknown) =>
