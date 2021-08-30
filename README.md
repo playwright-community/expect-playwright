@@ -4,6 +4,12 @@
 [![codecov](https://codecov.io/gh/playwright-community/expect-playwright/branch/master/graph/badge.svg?token=Eay491HC49)](https://codecov.io/gh/playwright-community/expect-playwright)
 [![NPM](https://img.shields.io/npm/v/expect-playwright)](https://www.npmjs.com/package/expect-playwright)
 
+⚠️ We recommend the official [Playwright test runner](https://playwright.dev/docs/intro#first-test) ⚠️
+
+The Playwright test runner includes all the matchers in this repo plus many more to make testing your projects easy. This doesn't mean, that we stop with maintaining this package.
+
+---
+
 This library provides utility matchers for Jest in combination with [Playwright]. All of them are exposed on the `expect` object. You can use them either directly or invert them via the `.not` property like shown in a example below.
 
 ```txt
